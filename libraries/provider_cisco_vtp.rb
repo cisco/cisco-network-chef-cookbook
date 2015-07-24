@@ -48,7 +48,7 @@ class Chef
         return if whyrun_mode?
         @vtp.enable
       end
-      @vtp = Cisco::Vtp.new(@name) if @vtp.nil?
+      @vtp = Cisco::Vtp.new if @vtp.nil?
 
       props = [:domain, :filename, :version, :password]
       Cisco::ChefUtils.generic_prop_set(self, "@vtp", props)
