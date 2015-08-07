@@ -47,19 +47,11 @@ class Chef
       end
 
       def auto_cost(arg=nil)
-        set_or_return(:auto_cost, arg, :kind_of => Fixnum, :callbacks => {
-          "auto_cost must be 'default' or a valid integer" => lambda {
-            |cost| cost == 'default' or cost > 0
-          }
-        })
+        set_or_return(:auto_cost, arg, :kind_of => Fixnum)
       end
 
       def default_metric(arg=nil)
-        set_or_return(:default_metric, arg, :kind_of => Fixnum, :callbacks => {
-          "default_metric must be 'default' or a valid integer" => lambda {
-            |default| default == 'default' or default >= 0
-          }
-        })
+        set_or_return(:default_metric, arg, :kind_of => Fixnum)
       end
 
       def log_adjacency(arg=nil)
@@ -73,63 +65,33 @@ class Chef
       def router_id(arg=nil)
         set_or_return(:router_id, arg, :kind_of => String, :callbacks => {
           "must be a valid IPv4 address" => lambda {
-            |addr| addr == 'default' or IPAddress.valid_ipv4? addr
+            |addr| IPAddress.valid_ipv4? addr
           }
         })
       end
 
       def timer_throttle_lsa_start(arg=nil)
-        set_or_return(:timer_throttle_lsa_start, arg, :kind_of => Fixnum,
-                      :callbacks => {
-          "must be 'default' or a valid integer" => lambda {
-             |val| val == 'default' or val >= 0
-          }
-        })
+        set_or_return(:timer_throttle_lsa_start, arg, :kind_of => Fixnum)
       end
 
       def timer_throttle_lsa_hold(arg=nil)
-        set_or_return(:timer_throttle_lsa_hold, arg, :kind_of => Fixnum,
-                      :callbacks => {
-          "must be 'default' or a valid integer" => lambda {
-            |val| val == 'default' or val >= 0
-          }
-        })
+        set_or_return(:timer_throttle_lsa_hold, arg, :kind_of => Fixnum)
       end
 
       def timer_throttle_lsa_max(arg=nil)
-        set_or_return(:timer_throttle_lsa_max, arg, :kind_of => Fixnum,
-                      :callbacks => {
-          "must be 'default' or a valid integer" => lambda {
-            |val| val == 'default' or val >= 0
-          }
-        })
+        set_or_return(:timer_throttle_lsa_max, arg, :kind_of => Fixnum)
       end
 
       def timer_throttle_spf_start(arg=nil)
-        set_or_return(:timer_throttle_spf_start, arg, :kind_of => Fixnum,
-                      :callbacks => {
-          "must be 'default' or a valid integer" => lambda {
-             |val| val == 'default' or val >= 0
-          }
-        })
+        set_or_return(:timer_throttle_spf_start, arg, :kind_of => Fixnum)
       end
 
       def timer_throttle_spf_hold(arg=nil)
-        set_or_return(:timer_throttle_spf_hold, arg, :kind_of => Fixnum,
-                      :callbacks => {
-          "must be 'default' or a valid integer" => lambda {
-            |val| val == 'default' or val >= 0
-          }
-        })
+        set_or_return(:timer_throttle_spf_hold, arg, :kind_of => Fixnum)
       end
 
       def timer_throttle_spf_max(arg=nil)
-        set_or_return(:timer_throttle_spf_max, arg, :kind_of => Fixnum,
-                      :callbacks => {
-          "must be 'default' or a valid integer" => lambda {
-            |val| val == 'default' or val >= 0
-          }
-        })
+        set_or_return(:timer_throttle_spf_max, arg, :kind_of => Fixnum)
       end
     end
   end
