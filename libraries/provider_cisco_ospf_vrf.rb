@@ -17,7 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift *Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)]
+$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -49,7 +49,7 @@ class Chef
         new_resource.vrf.nil?
 
       if @ospf_vrf.nil?
-        converge_by ("create ospf vrf '#{@new_resource.ospf} " +
+        converge_by("create ospf vrf '#{@new_resource.ospf} " +
                                      "#{@new_resource.vrf}'") {} 
         return if whyrun_mode?
       end

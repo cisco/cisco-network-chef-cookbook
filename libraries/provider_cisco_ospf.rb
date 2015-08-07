@@ -17,7 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift *Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)]
+$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -41,7 +41,7 @@ class Chef
         if id == @new_resource.name
           @current_resource.exists = true
           @ospf = ospfs[id]
-          return
+          return @ospf
         end
       end
       @current_resource.exists = false

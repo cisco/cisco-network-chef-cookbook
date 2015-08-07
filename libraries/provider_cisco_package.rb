@@ -31,7 +31,7 @@
 #     itself. Use either "package" or "yum_package" for local package handling
 #     within Guestshell.
 
-$:.unshift *Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)]
+$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -165,6 +165,7 @@ class Chef
           else
             installed_ver = Cisco::Yum.query(@pkg_nm)
           end
+          installed_ver
         end
 
       end # class CiscoPackage
