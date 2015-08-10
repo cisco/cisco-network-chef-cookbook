@@ -43,9 +43,13 @@ class Chef
     end
 
     def action_create
-      Chef::Log.error "must specify OSPF name for #{@new_resource.name}" if
+      # These can't fail at present because the title_patterns in the
+      # resource definition will fail before we get here. But if it's
+      # extended to permit descriptive titles with explicit ospf/vrf settings,
+      # this will be needed. Meanwhile it's harmless.
+      fail "must specify OSPF name for #{@new_resource.name}" if
         new_resource.ospf.nil?
-      Chef::Log.error "must specify VRF name for #{@new_resource.name}" if
+      fail "must specify VRF name for #{@new_resource.name}" if
         new_resource.vrf.nil?
 
       if @ospf_vrf.nil?

@@ -36,8 +36,7 @@ class Chef
       super(new_resource, run_context)
 
       if new_resource.name.empty?
-        Chef::Log.error "Interface name cannot be empty"
-        raise ArgumentError
+        fail "Interface name cannot be empty"
       end
 
       @interface = nil

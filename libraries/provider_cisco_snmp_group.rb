@@ -41,10 +41,8 @@ class Chef
 
     def action_create
       if @snmp_group.nil?
-        converge_by("create snmp group with name #{@new_resource.name}") do
-          Chef::Log.error "Snmp group creation not supported. " +
-                          "Group #{@new_resource.name} not created."
-        end
+        fail "Snmp group creation not supported. " \
+          "Group #{@new_resource.name} not created."
       else
         Chef::Log.info "SnmpGroup #{@new_resource.name} already exists"
       end
@@ -54,9 +52,7 @@ class Chef
       if @snmp_group.nil?
         Chef::Log.info "SnmpGroup #{@new_resource.name} already destroyed"
       else
-        converge_by("destroy snmp group with name #{@new_resource.name}") do
-          Chef::Log.info "Snmp group deletion not supported. "
-        end
+        fail 'Snmp group deletion not supported.'
       end
     end
   end

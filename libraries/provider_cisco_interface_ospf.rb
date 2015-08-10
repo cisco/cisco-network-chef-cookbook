@@ -30,7 +30,7 @@ class Chef
       super(new_resource, run_context)
 
       if new_resource.name.empty?
-        Chef::Log.error "interface name cannot be empty"
+        fail 'interface name cannot be empty'
       end
 
       new_resource.name.downcase!
@@ -47,9 +47,9 @@ class Chef
 
     def action_create
       # ospf and area are required for create action
-      Chef::Log.error "must specify ospf for #{@new_resource.name}" if
+      fail "must specify ospf for #{@new_resource.name}" if
         new_resource.ospf.nil?
-      Chef::Log.error "must specify area for #{@new_resource.name}" if
+      fail "must specify area for #{@new_resource.name}" if
         new_resource.area.nil?
 
       # remove old OSPF config if changed process or area
@@ -91,9 +91,9 @@ class Chef
              @new_resource.message_digest_encryption_type.nil? and
              @new_resource.message_digest_password.nil?
 
-        Chef::Log.error "must supply message_digest_password" if
+        fail 'must supply message_digest_password' if
           @new_resource.message_digest_password.nil?
-        Chef::Log.error "must supply message_digest_key_id" if
+        fail 'must supply message_digest_key_id' if
           @new_resource.message_digest_key_id.nil?
 
         # supply defaults
