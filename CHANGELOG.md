@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Several cases where providers would log an error message on receiving invalid input but would not actually raise an exception.
-
+- Ospf router-id default processing.
 ## [0.9.0] - 2015-06-22
 ### Added
 - Initial release of cisco-cookbook for chef, supporting Cisco NX-OS software release 7.0(3)I2(1) on Cisco Nexus switch platforms: N95xx, N93xx, N30xx and N31xx.

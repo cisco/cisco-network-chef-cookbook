@@ -67,6 +67,8 @@ class Chef
       # set defaults
       @new_resource.auto_cost(cost_to_mbps(@ospf_vrf.default_auto_cost)) if
         @new_resource.auto_cost.nil?
+      @new_resource.router_id(@ospf_vrf.default_router_id.to_s) if
+        @new_resource.router_id.nil?
       @new_resource.log_adjacency(@ospf_vrf.default_log_adjacency.to_s) if
         @new_resource.log_adjacency.nil?
       @new_resource.timer_throttle_lsa_start(
@@ -97,10 +99,8 @@ class Chef
             Cisco::RouterOspfVrf::OSPF_AUTO_COST[:mbps])
         end
       end
-      # default router_id doesn't make sense
-      unless @new_resource.router_id.nil? or
-        @ospf_vrf.router_id == @new_resource.router_id
 
+      unless @ospf_vrf.router_id == @new_resource.router_id
         converge_by "update router_id #{@ospf_vrf.router_id} => " +
           @new_resource.router_id do
 
