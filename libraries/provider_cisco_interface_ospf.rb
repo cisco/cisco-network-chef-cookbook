@@ -47,9 +47,9 @@ class Chef
 
     def action_create
       # ospf and area are required for create action
-      fail "must specify ospf for #{@new_resource.name}" if
+      fail "[#{@new_resource.name}] Required property 'ospf' is missing" if
         new_resource.ospf.nil?
-      fail "must specify area for #{@new_resource.name}" if
+      fail "[#{@new_resource.name}] Required property 'area' is missing" if
         new_resource.area.nil?
 
       # remove old OSPF config if changed process or area
