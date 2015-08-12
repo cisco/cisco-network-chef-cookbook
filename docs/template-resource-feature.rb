@@ -20,7 +20,7 @@ class Chef
     class Resource::Cisco__CLASS_NAME__ < Resource
       attr_accessor :exists, :cisco___RESOURCE_NAME__
 
-      def initialize(name, run_context=nil)
+      def initialize(name, run_context = nil)
         super
         @resource_name = :cisco___RESOURCE_NAME__
         @name = name
@@ -31,7 +31,6 @@ class Chef
         # List supported actions
         @allowed_actions = [:enable, :disable]
       end
-
     end
   end   # class Resource
 end     # class Chef

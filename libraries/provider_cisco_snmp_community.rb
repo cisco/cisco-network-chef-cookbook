@@ -48,7 +48,7 @@ class Chef
     def action_create
       if @snmp_community.nil?
         instantiate = whyrun_mode? ? false : true
-        @snmp_community = Cisco::SnmpCommunity.new(@name,new_group, instantiate)
+        @snmp_community = Cisco::SnmpCommunity.new(@name, new_group, instantiate)
       end
       @new_resource.group(@snmp_community.default_group) if
         @new_resource.group.nil?

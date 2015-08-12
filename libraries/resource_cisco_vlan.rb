@@ -19,12 +19,10 @@
 
 class Chef
   class Resource
-
     class Resource::CiscoVlan < Chef::Resource
-
       attr_accessor :exists
 
-      def initialize(name, run_context=nil)
+      def initialize(name, run_context = nil)
         super
         @resource_name = :cisco_vlan
         @action = :create
@@ -41,16 +39,16 @@ class Chef
         @shutdown = nil
       end
 
-      def vlan_name(arg=nil)
+      def vlan_name(arg = nil)
         set_or_return(:vlan_name, arg, :kind_of => String)
       end
 
-      def state(arg=nil)
-        set_or_return(:state, arg, :kind_of=> String)
+      def state(arg = nil)
+        set_or_return(:state, arg, :kind_of => String)
       end
 
-      def shutdown(arg=nil)
-        set_or_return(:shutdown, arg, :kind_of=>[TrueClass, FalseClass])
+      def shutdown(arg = nil)
+        set_or_return(:shutdown, arg, :kind_of => [TrueClass, FalseClass])
       end
     end
   end

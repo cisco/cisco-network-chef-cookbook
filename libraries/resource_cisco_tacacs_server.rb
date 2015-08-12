@@ -19,36 +19,36 @@
 class Chef
   class Resource
     class Resource::CiscoTacacsServer < Resource
-      attr_accessor   :exists, :cisco_tacacs_server
+      attr_accessor :exists, :cisco_tacacs_server
 
-      def initialize(name, run_context=nil)
+      def initialize(name, run_context = nil)
         super
         @resource_name = :cisco_tacacs_server
         @action = :update
         @allowed_actions = [:update, :create, :destroy]
       end
 
-      def timeout(arg=nil)
+      def timeout(arg = nil)
         set_or_return(:timeout, arg, :kind_of => Fixnum)
       end
 
-      def deadtime(arg=nil)
+      def deadtime(arg = nil)
         set_or_return(:deadtime, arg, :kind_of => Fixnum)
       end
 
-      def directed_request(arg=nil)
+      def directed_request(arg = nil)
         set_or_return(:directed_request, arg, :equal_to => [true, false])
       end
 
-      def source_interface(arg=nil)
+      def source_interface(arg = nil)
         set_or_return(:source_interface, arg, :kind_of => String)
       end
 
-      def encryption_type(arg=nil)
+      def encryption_type(arg = nil)
         set_or_return(:encryption_type, arg, :equal_to => ['default', 'clear', 'encrypted', 'none'])
       end
 
-      def encryption_password(arg=nil)
+      def encryption_password(arg = nil)
         set_or_return(:encryption_password, arg, :kind_of => String)
       end
     end

@@ -18,9 +18,9 @@
 class Chef
   class Resource
     class Resource::Cisco__CLASS_NAME__ < Resource
-      attr_accessor     :cisco___RESOURCE_NAME__
+      attr_accessor :cisco___RESOURCE_NAME__
 
-      def initialize(name, run_context=nil)
+      def initialize(name, run_context = nil)
         super
         @resource_name = :cisco___RESOURCE_NAME__
         @name = name
@@ -32,14 +32,13 @@ class Chef
         @allowed_actions = [:create, :destroy]
       end
 
-      def __PROPERTY_INT__(arg=nil)
-        set_or_return(:__PROPERTY_INT__, arg, :kind_of=> Fixnum)
+      def __PROPERTY_INT__(arg = nil)
+        set_or_return(:__PROPERTY_INT__, arg, :kind_of => Fixnum)
       end
 
-      def __PROPERTY_BOOL__(arg=nil)
-        set_or_return(:__PROPERTY_BOOL__, arg, :kind_of=>[TrueClass, FalseClass])
+      def __PROPERTY_BOOL__(arg = nil)
+        set_or_return(:__PROPERTY_BOOL__, arg, :kind_of => [TrueClass, FalseClass])
       end
-
     end
   end
 end

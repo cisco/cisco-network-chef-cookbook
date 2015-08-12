@@ -64,6 +64,5 @@ class Chef
         Chef::Log.debug "feature vtp already disabled"
       end
     end
-
   end
 end

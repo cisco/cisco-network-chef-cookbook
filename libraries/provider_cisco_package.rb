@@ -39,7 +39,6 @@ class Chef
   class Provider
     class Package
       class CiscoPackage < Chef::Provider::Package::Yum
-
         provides :cisco_package, os: "linux"
 
         # ex: chef-12.0.0alpha.2+20150319.git.1.b6f-1.el5.x86_64.rpm
@@ -167,9 +166,7 @@ class Chef
           end
           installed_ver
         end
-
       end # class CiscoPackage
     end # class Package
   end # class Provider
 end # class Chef
-

@@ -95,6 +95,5 @@ class Chef
           unless e.previous.empty?
         raise
     end
-
   end   # class Provider::CiscoCommandConfig
 end     # class Chef

@@ -51,6 +51,5 @@ class Chef
         end
       end
     end
-
   end   # class Provider::Cisco__CLASS_NAME__
 end     # class Chef

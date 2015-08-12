@@ -41,7 +41,7 @@ class Chef
     def load_current_resource
       @current_resource = Chef::Resource::CiscoSnmpUser.new(@new_resource.name)
 
-      @user = Cisco::SnmpUser.users.select{ |_index, user|
+      @user = Cisco::SnmpUser.users.select { |_index, user|
         user.name == @new_resource.user and user.engine_id == @new_resource.engine_id
       }.values.first
 
@@ -62,7 +62,7 @@ class Chef
         # if this user doesn't exist yet, @curr_resource will just display nothing
         converge_by("user: #{@new_resource.user}, " +
         (@new_resource.engine_id.empty? ? "" : "engine id: #{@new_resource.engine_id}, ") +
-	"update the following:\n" +
+  "update the following:\n" +
           "groups " +
           "#{@current_resource.groups} => #{@new_resource.groups}\n" +
           "auth_protocol " +
@@ -75,7 +75,6 @@ class Chef
           "#{@current_resource.priv_password} => #{@new_resource.priv_password}\n" +
           "localized_key " +
           "#{@current_resource.localized_key} => #{@new_resource.localized_key}\n") do
-
           # snmp user must be configured in a single command
           @user = Cisco::SnmpUser.new(@new_resource.user,
                                       @new_resource.groups,
@@ -85,8 +84,8 @@ class Chef
                                       @new_resource.priv_password,
                                       @new_resource.localized_key,
                                       @new_resource.engine_id)
-        end #converge
-      end #if
+        end # converge
+      end # if
     end
 
     def set_defaults
@@ -109,9 +108,9 @@ class Chef
         @new_resource.priv_password.nil?
       if @new_resource.engine_id.empty?
         @new_resource.groups(Cisco::SnmpUser.default_groups) if
-	   @new_resource.groups.nil?
+     @new_resource.groups.nil?
       else
-	@new_resource.groups([])
+        @new_resource.groups([])
       end
 
       @new_resource.localized_key(false) if
@@ -126,9 +125,9 @@ class Chef
       return true if @new_resource.engine_id != @current_resource.engine_id
       # auth/priv passwords can only be compared, not retrieved
       return true unless @user.auth_password_equal?(@new_resource.auth_password,
-        @new_resource.localized_key)
+                                                    @new_resource.localized_key)
       return true unless @user.priv_password_equal?(@new_resource.priv_password,
-        @new_resource.localized_key)
+                                                    @new_resource.localized_key)
 
       return false
     end
@@ -148,4 +147,3 @@ class Chef
     end
   end
 end
-
