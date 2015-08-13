@@ -1,5 +1,5 @@
 #
-# Cisco__CLASS_NAME__ resource for Chef
+# CiscoX__CLASS_NAME__X resource for Chef
 #
 # Copyright (c) 2014-2015 Cisco and/or its affiliates.
 #
@@ -17,12 +17,12 @@
 
 class Chef
   class Resource
-    class Resource::Cisco__CLASS_NAME__ < Resource
-      attr_accessor :exists, :cisco___RESOURCE_NAME__
+    class Resource::CiscoX__CLASS_NAME__X < Resource
+      attr_accessor :exists, :cisco_X__RESOURCE_NAME__X
 
       def initialize(name, run_context=nil)
         super
-        @resource_name = :cisco___RESOURCE_NAME__
+        @resource_name = :cisco_X__RESOURCE_NAME__X
         @name = name
 
         # Define the default action

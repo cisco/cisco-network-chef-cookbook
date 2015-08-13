@@ -1,5 +1,5 @@
 #
-# Cisco__CLASS_NAME__ provider for Chef
+# CiscoX__CLASS_NAME__X provider for Chef
 #
 # Copyright (c) 2015 Cisco and/or its affiliates.
 #
@@ -20,8 +20,8 @@ $:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FIL
 require 'cisco_node_utils'
 
 class Chef
-  class Provider::Cisco__CLASS_NAME__ < Provider
-    provides :cisco___RESOURCE_NAME__
+  class Provider::CiscoX__CLASS_NAME__X < Provider
+    provides :cisco_X__RESOURCE_NAME__X
 
     def initialize(new_resource, run_context)
       super(new_resource, run_context)
@@ -35,7 +35,7 @@ class Chef
 
     # Find specific router instance with this name
     def load_current_resource
-      @router = Cisco::__CLASS_NAME__.routers[@name]
+      @router = Cisco::X__CLASS_NAME__X.routers[@name]
     end
 
     def action_create
@@ -43,7 +43,7 @@ class Chef
         converge_by("create router '#{@name}'") {}
       end
       instantiate = whyrun_mode? ? false : true
-      @router = Cisco::__CLASS_NAME__.new(@name, instantiate) if @router.nil?
+      @router = Cisco::X__CLASS_NAME__X.new(@name, instantiate) if @router.nil?
 
       set_simple_properties
       set_complex_properties
@@ -52,7 +52,7 @@ class Chef
     # Simple properties: Most properties fit this category. Add new property
     # symbols to the array, generic_prop_set will call dynamic setter methods
     def set_simple_properties
-      prop_set([:__PROPERTY_INT__, :__PROPERTY_BOOL__])
+      prop_set([:X__PROPERTY_INT__X, :X__PROPERTY_BOOL__X])
     end
 
     # Helper method to set properties

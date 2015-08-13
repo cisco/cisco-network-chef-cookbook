@@ -70,9 +70,9 @@ cp  docs/template-resource-feature.rb  libraries/resource_cisco_bash_shell.rb
 * Edit `resource_cisco_bash_shell.rb` and substitute the placeholder text as shown here:
 
 ```bash
-/__CLASS_NAME__/BashShell/
+/X__CLASS_NAME__X/BashShell/
 
-/__RESOURCE_NAME__/bash_shell/
+/X__RESOURCE_NAME__X/bash_shell/
 ```
 
 Note. There may be additional instructions within the template.
@@ -131,11 +131,11 @@ cp  docs/template-provider-feature.rb  libraries/provider_cisco_bash_shell.rb
 * Edit `provider_cisco_bash_shell.rb` and substitute the placeholder text as shown here:
 
 ```bash
-/__CLASS_NAME__/BashShell/
+/X__CLASS_NAME__X/BashShell/
 
-/__RESOURCE_NAME__/bash_shell/
+/X__RESOURCE_NAME__X/bash_shell/
 
-/__CLI_NAME__/bash-shell/
+/X__CLI_NAME__X/bash-shell/
 ```
 
 #### Example: provider_cisco_bash_shell.rb
@@ -362,13 +362,13 @@ cp  docs/template-resource-router.rb  libraries/resource_cisco_router_eigrp.rb
 * Edit `resource_cisco_router_eigrp.rb` and substitute the placeholder text as shown here:
 
 ```bash
-/__CLASS_NAME__/RouterEigrp/
+/X__CLASS_NAME__X/RouterEigrp/
 
-/__RESOURCE_NAME__/router_eigrp/
+/X__RESOURCE_NAME__X/router_eigrp/
 
-/__PROPERTY_INT__/maximum_paths/
+/X__PROPERTY_INT__X/maximum_paths/
 
-/__PROPERTY_BOOL__/shutdown/
+/X__PROPERTY_BOOL__X/shutdown/
 ```
 
 Note: There may be additional steps to follow in the template.
@@ -433,13 +433,13 @@ cp  docs/template-provider-router.rb  libraries/provider_cisco_router_eigrp.rb
 * Edit `provider_cisco_router_eigrp.rb` and substitute the placeholder text as shown here:
 
 ```bash
-/__CLASS_NAME__/RouterEigrp/
+/X__CLASS_NAME__X/RouterEigrp/
 
-/__RESOURCE_NAME__/router_eigrp/
+/X__RESOURCE_NAME__X/router_eigrp/
 
-/__PROPERTY_INT__/maximum_paths/
+/X__PROPERTY_INT__X/maximum_paths/
 
-/__PROPERTY_BOOL__/shutdown/
+/X__PROPERTY_BOOL__X/shutdown/
 ```
 
 Note: There may be additional steps to follow in the template.

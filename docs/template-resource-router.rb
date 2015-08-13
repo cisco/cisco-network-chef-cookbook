@@ -1,5 +1,5 @@
 #
-# Cisco__CLASS_NAME__ resource for Chef
+# CiscoX__CLASS_NAME__X resource for Chef
 #
 # Copyright (c) 2015 Cisco and/or its affiliates.
 #
@@ -17,12 +17,12 @@
 
 class Chef
   class Resource
-    class Resource::Cisco__CLASS_NAME__ < Resource
-      attr_accessor     :cisco___RESOURCE_NAME__
+    class Resource::CiscoX__CLASS_NAME__X < Resource
+      attr_accessor     :cisco_X__RESOURCE_NAME__X
 
       def initialize(name, run_context=nil)
         super
-        @resource_name = :cisco___RESOURCE_NAME__
+        @resource_name = :cisco_X__RESOURCE_NAME__X
         @name = name
 
         # Define default action
@@ -32,12 +32,12 @@ class Chef
         @allowed_actions = [:create, :destroy]
       end
 
-      def __PROPERTY_INT__(arg=nil)
-        set_or_return(:__PROPERTY_INT__, arg, :kind_of=> Fixnum)
+      def X__PROPERTY_INT__X(arg=nil)
+        set_or_return(:X__PROPERTY_INT__X, arg, :kind_of=> Fixnum)
       end
 
-      def __PROPERTY_BOOL__(arg=nil)
-        set_or_return(:__PROPERTY_BOOL__, arg, :kind_of=>[TrueClass, FalseClass])
+      def X__PROPERTY_BOOL__X(arg=nil)
+        set_or_return(:X__PROPERTY_BOOL__X, arg, :kind_of=>[TrueClass, FalseClass])
       end
 
     end

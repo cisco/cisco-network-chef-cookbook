@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Several cases where providers would log an error message on receiving invalid input but would not actually raise an exception.
 - Ospf router-id default processing.
 - Added dotted-decimal munging for area in resource_cisco_interface_ospf
+- Modified template placeholder names to meet lint reqs
 
 ## [0.9.0] - 2015-06-22
 ### Added
