@@ -1,0 +1,35 @@
+AllCops:
+  Exclude:
+    - 'Guardfile'
+    - 'files/default/vendor/**/*'
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Style/FileName:
+  Enabled: false
+
+Style/AlignParameters:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/Encoding:
+  Enabled: false
+
