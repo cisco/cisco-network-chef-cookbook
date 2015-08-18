@@ -94,7 +94,7 @@ class Chef
 
       if @interface.switchport_mode.to_s != @new_resource.switchport_mode
         converge_by("update switchport_mode #{@interface.switchport_mode} => " +
-          @new_resource.switchport_mode) do
+                    @new_resource.switchport_mode) do
           @interface.switchport_mode = @new_resource.switchport_mode.to_sym
         end
       end
@@ -123,8 +123,8 @@ class Chef
       if @interface.ipv4_address != @new_resource.ipv4_address ||
          @interface.ipv4_netmask_length != @new_resource.ipv4_netmask_length
         converge_by("update ipv4_address/netmask '#{@interface.ipv4_address}/" +
-          "#{@interface.ipv4_netmask_length}' => #{@new_resource.ipv4_address}/" +
-          @new_resource.ipv4_netmask_length.to_s) do
+                    "#{@interface.ipv4_netmask_length}' => #{@new_resource.ipv4_address}/" +
+                    @new_resource.ipv4_netmask_length.to_s) do
           @interface.ipv4_addr_mask_set(@new_resource.ipv4_address,
                                         @new_resource.ipv4_netmask_length)
         end

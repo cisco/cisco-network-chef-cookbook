@@ -39,7 +39,7 @@ class Chef
       # will return nil if no matching OSPF + VRF exists
       ospf_vrfs = Cisco::RouterOspfVrf.vrfs[new_resource.ospf]
       @ospf_vrf = ospf_vrfs.nil? ? nil :
-        ospf_vrfs[new_resource.vrf]
+                    ospf_vrfs[new_resource.vrf]
     end
 
     def action_create
@@ -54,7 +54,7 @@ class Chef
 
       if @ospf_vrf.nil?
         converge_by("create ospf vrf '#{@new_resource.ospf} " +
-                                     "#{@new_resource.vrf}'") {}
+                    "#{@new_resource.vrf}'") {}
         return if whyrun_mode?
       end
       @ospf_vrf = Cisco::RouterOspfVrf.new(@new_resource.ospf,

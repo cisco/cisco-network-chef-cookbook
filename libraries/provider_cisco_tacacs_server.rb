@@ -135,7 +135,7 @@ class Chef
           new_resource_type_value = Cisco::TACACS_SERVER_ENC_NONE
         else
           new_resource_type_value =
-          TS_ENCRYPTION_TYPE_HASH[@new_resource.encryption_type]
+            TS_ENCRYPTION_TYPE_HASH[@new_resource.encryption_type]
         end
 
         if @new_resource.encryption_type == "none"

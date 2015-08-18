@@ -75,14 +75,14 @@ class Chef
         @new_resource.encryption_type("none")
       else
         @new_resource.encryption_type(def_type_s) if
-           @new_resource.encryption_type.nil?
+          @new_resource.encryption_type.nil?
         @new_resource.encryption_password(
           Cisco::TacacsServerHost.default_encryption_password) if
-           @new_resource.encryption_password.nil?
+          @new_resource.encryption_password.nil?
       end
 
       encryption_type = @new_resource.encryption_type == "default" ?
-      def_type_s : @new_resource.encryption_type
+                          def_type_s : @new_resource.encryption_type
       if type_s != encryption_type ||
          @host.encryption_password != @new_resource.encryption_password
 

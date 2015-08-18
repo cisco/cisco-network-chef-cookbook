@@ -90,10 +90,10 @@ class Chef
           @@node.config(@min_config_str)
         end
       end
-      rescue Cisco::CliError => e
-        Chef::Log.info "Successfully updated:\n#{e.previous.join("\n")}" \
-          unless e.previous.empty?
-        raise
+    rescue Cisco::CliError => e
+      Chef::Log.info "Successfully updated:\n#{e.previous.join("\n")}" \
+                     unless e.previous.empty?
+      raise
     end
-  end   # class Provider::CiscoCommandConfig
-end     # class Chef
+  end
+end

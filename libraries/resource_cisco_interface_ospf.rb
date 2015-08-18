@@ -54,13 +54,13 @@ class Chef
       def message_digest_algorithm_type(arg = nil)
         set_or_return(:message_digest_algorithm_type, arg, :kind_of => String,
                                                            :callbacks => { "must be one of:[#{@@alg_types.join(' ')}]" =>
-            lambda { |alg| @@alg_types.include? alg } })
+                                      lambda { |alg| @@alg_types.include? alg } })
       end
 
       def message_digest_encryption_type(arg = nil)
         set_or_return(:message_digest_encryption_type, arg, :kind_of => String,
                                                             :callbacks => { "must be one of:[#{@@enc_types.join(' ')}]" =>
-            lambda { |enc| @@enc_types.include? enc } })
+                                      lambda { |enc| @@enc_types.include? enc } })
       end
 
       def message_digest_password(arg = nil)
@@ -81,7 +81,7 @@ class Chef
 
       def passive_interface(arg = nil)
         set_or_return(:passive_interface, arg, :kind_of =>
-          [TrueClass, FalseClass])
+                                               [TrueClass, FalseClass])
       end
     end
   end

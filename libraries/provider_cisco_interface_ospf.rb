@@ -77,7 +77,7 @@ class Chef
       end
 
       @new_resource.message_digest(@interface_ospf.default_message_digest) if
-  @new_resource.message_digest.nil?
+        @new_resource.message_digest.nil?
 
       unless @new_resource.message_digest == @interface_ospf.message_digest
         converge_by "config authentication message_digest to " +
