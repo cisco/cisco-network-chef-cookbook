@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: cisco-cookbook 
+# Cookbook Name:: cisco-cookbook
 # Recipe:: demo_install
 #
 # Copyright (c) 2014-2015 Cisco and/or its affiliates.
@@ -16,28 +16,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# In our recipes, due to the number of different parameters, we prefer to align
+# the arguments in a single column rather than following rubocop's style.
+# rubocop:disable Style/SingleSpaceBeforeFirstArg
 Chef::Log.info('Install cisco package:')
 
 cookbook_file '/bootflash/n9000_sample-1.0.0-7.0.3.x86_64.rpm' do
-  owner 'root'
-  group 'root'
-  mode '0775'
+  owner  'root'
+  group  'root'
+  mode   '0775'
   source 'rpm-store/n9000_sample-1.0.0-7.0.3.x86_64.rpm'
 end
 
 cisco_package 'n9000_sample' do
   action :install
-  #action :remove
-  #package_settings {'target' => 'host'}
+  # action :remove
+  # package_settings {'target' => 'host'}
   source '/bootflash/n9000_sample-1.0.0-7.0.3.x86_64.rpm'
 end
 
 Chef::Log.info('Install third party package:')
 
 cookbook_file '/bootflash/demo-one-1.0-1.x86_64.rpm' do
-  owner 'root'
-  group 'root'
-  mode '0775'
+  owner  'root'
+  group  'root'
+  mode   '0775'
   source 'rpm-store/demo-one-1.0-1.x86_64.rpm'
 end
 
@@ -53,13 +56,13 @@ end
 Chef::Log.info('Install and start a service:')
 
 # TODO: Add platform check to distinguish between native and guestshell
+# cookbook_file '/usr/lib/systemd/system/demo-one.service' do
 cookbook_file '/etc/init.d/demo-one' do
-#cookbook_file '/usr/lib/systemd/system/demo-one.service' do
-  owner 'root'
-  group 'root'
-  mode '0775'
+  owner  'root'
+  group  'root'
+  mode   '0775'
   source 'demo-one.initd'
-  #source 'demo-one.service'
+  # source 'demo-one.service'
 end
 
 service 'demo-one' do
@@ -79,11 +82,11 @@ cisco_command_config 'loop42' do
 end
 
 cisco_command_config 'system-switchport-default' do
-  command  'no system default switchport'
+  command 'no system default switchport'
 end
 
 cisco_command_config 'feature_bgp' do
-  command  ' feature bgp'
+  command ' feature bgp'
 end
 
 cisco_command_config 'router_bgp_42' do
@@ -117,7 +120,7 @@ cisco_interface 'Ethernet1/2' do
 end
 
 cisco_interface 'Vlan22' do
-  svi_autostate false
+  svi_autostate  false
   svi_management true
 end
 
@@ -137,18 +140,18 @@ cisco_ospf 'Sample' do
 end
 
 cisco_interface_ospf 'Ethernet1/2' do
-  action :create
-  ospf 'Sample'
-  area 200
-  cost 200
-  hello_interval 200
-  dead_interval 200
-  message_digest true
-  message_digest_key_id 7
-  message_digest_encryption_type   'cisco_type_7'
-  message_digest_algorithm_type         'md5'
-  message_digest_password          '046E1803362E595C260E0B240619050A2D'
-  passive_interface true
+  action                         :create
+  ospf                           'Sample'
+  area                           200
+  cost                           200
+  hello_interval                 200
+  dead_interval                  200
+  message_digest                 true
+  message_digest_key_id          7
+  message_digest_encryption_type 'cisco_type_7'
+  message_digest_algorithm_type  'md5'
+  message_digest_password        '046E1803362E595C260E0B240619050A2D'
+  passive_interface              true
 end
 
 cisco_ospf_vrf 'dark_blue default' do
@@ -178,7 +181,7 @@ end
 Chef::Log.info('Demo cisco_tacacs providers')
 
 cisco_tacacs_server 'test' do
-  action    :create
+  action              :create
   timeout             10
   directed_request    true
   deadtime            20
@@ -188,10 +191,10 @@ cisco_tacacs_server 'test' do
 end
 
 cisco_tacacs_server_host 'testhost' do
-  action :create
-  port 66
-  timeout 33
-  encryption_type 'clear'
+  action              :create
+  port                66
+  timeout             33
+  encryption_type     'clear'
   encryption_password 'foobarpassword'
 end
 
@@ -208,17 +211,17 @@ end
 Chef::Log.info('Demo cisco_snmp providers')
 
 cisco_snmp_server 'default' do
-    contact                'user1'
-    location               'rtp'
-    packet_size             2500
-    aaa_user_cache_timeout  1000
-    tcp_session_auth        false
-    protocol                false
-    global_enforce_priv     true
+  contact                'user1'
+  location               'rtp'
+  packet_size             2500
+  aaa_user_cache_timeout  1000
+  tcp_session_auth        false
+  protocol                false
+  global_enforce_priv     true
 end
 
 cisco_snmp_group 'network-admin' do
-  action    :create
+  action :create
 end
 
 cisco_snmp_community 'setcom' do
@@ -228,5 +231,6 @@ cisco_snmp_community 'setcom' do
 end
 
 cisco_snmp_user 'v3test' do
-  groups        ['network-admin']
+  groups ['network-admin']
 end
+# rubocop:enable Style/SingleSpaceBeforeFirstArg

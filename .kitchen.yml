@@ -1,0 +1,17 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: packer-wrl-x86_64
+  driver_config:
+    box: packer-wrl-x86_64
+    box_url: /Users/rkailas/packer/packer-wrl.box
+suites:
+  - name: default
+    run_list:
+      - recipe[ciscolib_nxos::cisco_package_test_all]
+    attributes:

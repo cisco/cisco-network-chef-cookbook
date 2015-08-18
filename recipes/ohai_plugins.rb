@@ -22,7 +22,6 @@ reload_ohai = false
 # This is done during the compile phase so new plugins can be used in
 # resources later in the run.
 node['ohai']['plugins'].each_pair do |source_cookbook, path|
-
   rd = remote_directory "#{node['ohai']['plugin_path']} for cookbook #{source_cookbook}" do
     path Ohai::Config[:plugin_path].first # use system default plugin path
     cookbook source_cookbook

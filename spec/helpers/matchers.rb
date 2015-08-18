@@ -8,7 +8,6 @@ if defined?(ChefSpec)
 
   define_method.call :cisco_package
 
-
   def create_cisco_package(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new('cisco_package', :install, resource_name)
   end

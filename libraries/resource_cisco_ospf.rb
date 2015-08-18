@@ -22,7 +22,7 @@ class Chef
     class Resource::CiscoOspf < Resource
       attr_accessor :exists, :cisco_ospf
 
-      def initialize(name, run_context=nil)
+      def initialize(name, run_context = nil)
         super
         @resource_name = :cisco_ospf
         @action = :create
@@ -36,4 +36,3 @@ class Chef
     end
   end   # class Resource
 end     # class Chef
-

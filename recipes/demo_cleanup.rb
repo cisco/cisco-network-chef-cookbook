@@ -19,7 +19,7 @@
 # This is just a cleanup for the demo_install recipe.
 # ----------------------------------------------------
 
-Chef::Log.info( 'Case 1. Package Mgmt: Cisco RPM, Cisco RPM Patch');
+Chef::Log.info('Case 1. Package Mgmt: Cisco RPM, Cisco RPM Patch');
 cisco_package 'bgp-dev' do
   action :remove
 end
@@ -30,7 +30,7 @@ end
 
 # ----------------------------------------------------
 
-Chef::Log.info( 'Case 2. Package Mgmt: 3rd Party RPM');
+Chef::Log.info('Case 2. Package Mgmt: 3rd Party RPM');
 
 service 'demo-one' do
   action :stop
@@ -42,7 +42,7 @@ end
 
 # ----------------------------------------------------
 
-Chef::Log.info( 'Case 3. Cisco Command Config');
+Chef::Log.info('Case 3. Cisco Command Config');
 
 cisco_command_config 'cleanup-all' do
   action :update
@@ -54,7 +54,7 @@ end
 
 # ----------------------------------------------------
 
-Chef::Log.info( 'Case 4. Current Cisco Resource & Providers');
+Chef::Log.info('Case 4. Current Cisco Resource & Providers');
 
 cisco_interface_ospf 'loopback2' do
   action :destroy
@@ -77,7 +77,7 @@ cisco_interface 'Vlan37' do
 end
 
 cisco_vlan '220' do
-  action    :destroy
+  action :destroy
 end
 
 cisco_ospf 'SAMPLE' do
@@ -89,11 +89,11 @@ cisco_tacacs_server_host 'testhost' do
 end
 
 cisco_tacacs_server 'test' do
-  action    :destroy
+  action :destroy
 end
 
 cisco_vtp 'default' do
-  action      :destroy
+  action :destroy
 end
 
 cisco_snmp_server 'server' do
@@ -101,9 +101,9 @@ cisco_snmp_server 'server' do
 end
 
 cisco_snmp_group 'network-admin' do
-  action    :destroy
+  action :destroy
 end
 
 cisco_snmp_community 'setcom' do
-  action    :destroy
+  action :destroy
 end

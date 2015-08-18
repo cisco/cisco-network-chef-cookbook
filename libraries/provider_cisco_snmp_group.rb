@@ -42,7 +42,7 @@ class Chef
     def action_create
       if @snmp_group.nil?
         fail "Snmp group creation not supported. " \
-          "Group #{@new_resource.name} not created."
+             "Group #{@new_resource.name} not created."
       else
         Chef::Log.info "SnmpGroup #{@new_resource.name} already exists"
       end
@@ -57,4 +57,3 @@ class Chef
     end
   end
 end
-

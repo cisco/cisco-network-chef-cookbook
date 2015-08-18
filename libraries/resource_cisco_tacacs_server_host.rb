@@ -19,9 +19,9 @@
 class Chef
   class Resource
     class Resource::CiscoTacacsServerHost < Resource
-      attr_accessor   :cisco_tacacs_server_host
+      attr_accessor :cisco_tacacs_server_host
 
-      def initialize(name, run_context=nil)
+      def initialize(name, run_context = nil)
         super
         @resource_name = :cisco_tacacs_server_host
         @action = :create
@@ -29,20 +29,20 @@ class Chef
         @provider = Chef::Provider::CiscoTacacsServerHost
       end
 
-      def port(arg=nil)
+      def port(arg = nil)
         set_or_return(:port, arg, :kind_of => Fixnum)
       end
 
-      def encryption_type(arg=nil)
+      def encryption_type(arg = nil)
         set_or_return(:encryption_type, arg,
-          :equal_to => ['none', 'clear', 'encrypted', 'default'])
+                      :equal_to => ['none', 'clear', 'encrypted', 'default'])
       end
 
-      def encryption_password(arg=nil)
+      def encryption_password(arg = nil)
         set_or_return(:encryption_password, arg, :kind_of => String)
       end
 
-      def timeout(arg=nil)
+      def timeout(arg = nil)
         set_or_return(:timeout, arg, :kind_of => Fixnum)
       end
     end

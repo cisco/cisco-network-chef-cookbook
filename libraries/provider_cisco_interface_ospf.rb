@@ -54,8 +54,8 @@ class Chef
 
       # remove old OSPF config if changed process or area
       if @interface_ospf &&
-          (@interface_ospf.area != @new_resource.area.to_s ||
-           @interface_ospf.ospf_name != @new_resource.ospf)
+         (@interface_ospf.area != @new_resource.area.to_s ||
+          @interface_ospf.ospf_name != @new_resource.ospf)
         converge_by("OSPF process name and/or area has changed " +
                     "(#{@interface_ospf.ospf_name}, #{@interface_ospf.area}) " +
                     "=> (#{@new_resource.ospf}, #{@new_resource.area}), " +
@@ -77,13 +77,13 @@ class Chef
       end
 
       @new_resource.message_digest(@interface_ospf.default_message_digest) if
-	@new_resource.message_digest.nil?
+        @new_resource.message_digest.nil?
 
       unless @new_resource.message_digest == @interface_ospf.message_digest
-	converge_by "config authentication message_digest to " +
-		    @new_resource.message_digest.to_s do
-	    @interface_ospf.message_digest = @new_resource.message_digest
-	end
+        converge_by "config authentication message_digest to " +
+          @new_resource.message_digest.to_s do
+          @interface_ospf.message_digest = @new_resource.message_digest
+        end
       end
 
       unless @new_resource.message_digest_key_id.nil? and
@@ -107,20 +107,19 @@ class Chef
         # if any properties differ, reconfigure message_digest attrs
         # (not idempotent for cleartext passwords)
         unless @new_resource.message_digest_key_id ==
-                 @interface_ospf.message_digest_key_id and
+               @interface_ospf.message_digest_key_id and
                @new_resource.message_digest_algorithm_type ==
-                 @interface_ospf.message_digest_algorithm_type and
+               @interface_ospf.message_digest_algorithm_type and
                @new_resource.message_digest_encryption_type ==
-                 @interface_ospf.message_digest_encryption_type and
+               @interface_ospf.message_digest_encryption_type and
                @new_resource.message_digest_password ==
-                 @interface_ospf.message_digest_password
+               @interface_ospf.message_digest_password
 
           converge_by "configure message_digest " +
             "#{@new_resource.message_digest_key_id} " +
             "#{@new_resource.message_digest_algorithm_type} " +
             "#{@new_resource.message_digest_encryption_type} " +
             "#{@new_resource.message_digest_password} " do
-
             @interface_ospf.message_digest_key_set(
               @new_resource.message_digest_key_id,
               @new_resource.message_digest_algorithm_type,

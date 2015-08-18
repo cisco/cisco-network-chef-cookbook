@@ -20,12 +20,12 @@
 class Chef
   class Resource
     class Resource::CiscoInterface < Resource
-      attr_accessor     :cisco_interface
+      attr_accessor :cisco_interface
 
       @@sw_mode_choices =
         ['disabled', 'access', 'tunnel', 'fex_fabric', 'trunk', 'default']
 
-      def initialize(interface_name, run_context=nil)
+      def initialize(interface_name, run_context = nil)
         super
         @resource_name = :cisco_interface
         @action = :create
@@ -33,78 +33,77 @@ class Chef
         @name = interface_name.downcase
       end
 
-      def access_vlan(arg=nil)
+      def access_vlan(arg = nil)
         set_or_return(:access_vlan, arg, :kind_of => Fixnum)
       end
 
-      def description(arg=nil)
+      def description(arg = nil)
         set_or_return(:description, arg, :kind_of => String)
       end
 
-      def shutdown(arg=nil)
+      def shutdown(arg = nil)
         set_or_return(:shutdown, arg,
                       :kind_of => [TrueClass, FalseClass])
       end
 
-      def ipv4_proxy_arp(arg=nil)
+      def ipv4_proxy_arp(arg = nil)
         set_or_return(:ipv4_proxy_arp, arg,
                       :kind_of => [TrueClass, FalseClass])
       end
 
-      def ipv4_redirects(arg=nil)
+      def ipv4_redirects(arg = nil)
         set_or_return(:ipv4_redirects, arg,
                       :kind_of => [TrueClass, FalseClass])
       end
 
-      def negotiate_auto(arg=nil)
+      def negotiate_auto(arg = nil)
         set_or_return(:negotiate_auto, arg,
                       :kind_of => [TrueClass, FalseClass])
       end
 
-      def switchport_autostate_exclude(arg=nil)
+      def switchport_autostate_exclude(arg = nil)
         set_or_return(:switchport_autostate_exclude, arg,
                       :kind_of => [TrueClass, FalseClass])
       end
 
-      def switchport_vtp(arg=nil)
+      def switchport_vtp(arg = nil)
         set_or_return(:switchport_vtp, arg,
                       :kind_of => [TrueClass, FalseClass])
       end
 
-      def svi_autostate(arg=nil)
+      def svi_autostate(arg = nil)
         set_or_return(:svi_autostate, arg,
                       :kind_of => [TrueClass, FalseClass])
       end
 
-      def svi_management(arg=nil)
+      def svi_management(arg = nil)
         set_or_return(:svi_management, arg,
                       :kind_of => [TrueClass, FalseClass])
       end
 
-      def ipv4_address(arg=nil)
+      def ipv4_address(arg = nil)
         set_or_return(:ipv4_address, arg, :kind_of => String, :callbacks => {
-          "must be a valid ipv4 address" => lambda {
-            |addr| addr == 'default' or IPAddress.valid_ipv4? addr
-          }
-        })
+                        "must be a valid ipv4 address" => lambda {
+                          |addr| addr == 'default' or IPAddress.valid_ipv4? addr
+                        }
+                      })
       end
 
-      def ipv4_netmask_length(arg=nil)
+      def ipv4_netmask_length(arg = nil)
         set_or_return(:ipv4_netmask_length, arg, :kind_of => Fixnum, :callbacks => {
-          "netmask length must be between 0 and 32" => lambda {
-            |mask| mask == 'default' or mask.between?(0, 32)
-          }
-        })
+                        "netmask length must be between 0 and 32" => lambda {
+                          |mask| mask == 'default' or mask.between?(0, 32)
+                        }
+                      })
       end
 
-      def switchport_mode(arg=nil)
+      def switchport_mode(arg = nil)
         set_or_return(:switchport_mode, arg, :kind_of => String, :callbacks => {
-          "must be one of: [#{@@sw_mode_choices.join(' ')}]" => lambda {
-            |mode| @@sw_mode_choices.include? mode.downcase
-          }
-        })
+                        "must be one of: [#{@@sw_mode_choices.join(' ')}]" => lambda {
+                          |mode| @@sw_mode_choices.include? mode.downcase
+                        }
+                      })
       end
-
     end
   end
 end

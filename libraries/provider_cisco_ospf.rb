@@ -69,4 +69,3 @@ class Chef
     end
   end   # class Provider::CiscoOspf
 end     # class Chef
-
