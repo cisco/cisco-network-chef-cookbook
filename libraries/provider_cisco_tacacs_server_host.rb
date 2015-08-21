@@ -60,7 +60,7 @@ class Chef
         @new_resource.timeout.nil?
       if @host.timeout != @new_resource.timeout
         converge_by "update timeout #{@host.timeout} => " +
-          @new_resource.timeout.to_s do
+                    @new_resource.timeout.to_s do
           @host.timeout = @new_resource.timeout
         end
       end
@@ -72,7 +72,7 @@ class Chef
       # If neither encryption nor type specifed, treat it as no key configure;
       # otherwise, use default
       if @new_resource.encryption_type.nil? and @new_resource.encryption_password.nil?
-        @new_resource.encryption_type("none")
+        @new_resource.encryption_type('none')
       else
         @new_resource.encryption_type(def_type_s) if
           @new_resource.encryption_type.nil?
@@ -81,16 +81,16 @@ class Chef
           @new_resource.encryption_password.nil?
       end
 
-      encryption_type = @new_resource.encryption_type == "default" ?
+      encryption_type = @new_resource.encryption_type == 'default' ?
                           def_type_s : @new_resource.encryption_type
       if type_s != encryption_type ||
          @host.encryption_password != @new_resource.encryption_password
 
         type_v = ENC_TYPE[encryption_type]
-        if @new_resource.encryption_type == "none"
-          cb_msg = "remove encryption key and password"
+        if @new_resource.encryption_type == 'none'
+          cb_msg = 'remove encryption key and password'
         else
-          cb_msg = "update encryption_type and password " +
+          cb_msg = 'update encryption_type and password ' +
                    "'#{@host.encryption_type} #{@host.encryption_password}' => " +
                    "'#{type_v} #{@new_resource.encryption_password}'"
         end
@@ -103,7 +103,7 @@ class Chef
 
     def action_destroy
       unless @host.nil?
-        converge_by("remove tacacs server host instance") do
+        converge_by('remove tacacs server host instance') do
           @host.destroy
           @host = nil
         end

@@ -63,7 +63,7 @@ class Chef
 
       def router_id(arg = nil)
         set_or_return(:router_id, arg, :kind_of => String, :callbacks => {
-                        "must be a valid IPv4 address" => lambda {
+                        'must be a valid IPv4 address' => lambda {
                           |addr| addr.empty? or IPAddress.valid_ipv4? addr
                         }
                       })

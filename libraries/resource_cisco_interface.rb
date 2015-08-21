@@ -83,7 +83,7 @@ class Chef
 
       def ipv4_address(arg = nil)
         set_or_return(:ipv4_address, arg, :kind_of => String, :callbacks => {
-                        "must be a valid ipv4 address" => lambda {
+                        'must be a valid ipv4 address' => lambda {
                           |addr| addr == 'default' or IPAddress.valid_ipv4? addr
                         }
                       })
@@ -91,7 +91,7 @@ class Chef
 
       def ipv4_netmask_length(arg = nil)
         set_or_return(:ipv4_netmask_length, arg, :kind_of => Fixnum, :callbacks => {
-                        "netmask length must be between 0 and 32" => lambda {
+                        'netmask length must be between 0 and 32' => lambda {
                           |mask| mask == 'default' or mask.between?(0, 32)
                         }
                       })

@@ -62,19 +62,19 @@ class Chef
 
         # if this user doesn't exist yet, @curr_resource will just display nothing
         converge_by("user: #{@new_resource.user}, " +
-                    (@new_resource.engine_id.empty? ? "" : "engine id: #{@new_resource.engine_id}, ") +
+                    (@new_resource.engine_id.empty? ? '' : "engine id: #{@new_resource.engine_id}, ") +
                     "update the following:\n" +
-                    "groups " +
+                    'groups ' +
                     "#{@current_resource.groups} => #{@new_resource.groups}\n" +
-                    "auth_protocol " +
+                    'auth_protocol ' +
                     "#{@current_resource.auth_protocol} => #{@new_resource.auth_protocol}\n" +
-                    "auth_password " +
+                    'auth_password ' +
                     "#{@current_resource.auth_password} => #{@new_resource.auth_password}\n" +
-                    "priv_protocol " +
+                    'priv_protocol ' +
                     "#{@current_resource.priv_protocol} => #{@new_resource.priv_protocol}\n" +
-                    "priv_password " +
+                    'priv_password ' +
                     "#{@current_resource.priv_password} => #{@new_resource.priv_password}\n" +
-                    "localized_key " +
+                    'localized_key ' +
                     "#{@current_resource.localized_key} => #{@new_resource.localized_key}\n") do
           # snmp user must be configured in a single command
           @user = Cisco::SnmpUser.new(@new_resource.user,
@@ -136,7 +136,7 @@ class Chef
     def action_destroy
       unless @user.nil?
         converge_by("remove snmp user instance with name #{@user.name} " +
-                    (@user.engine_id.empty? ? "" : "engine id #{@user.engine_id}")) do
+                    (@user.engine_id.empty? ? '' : "engine id #{@user.engine_id}")) do
           @user.destroy
           @user = nil
         end
