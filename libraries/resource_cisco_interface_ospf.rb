@@ -40,7 +40,7 @@ class Chef
       def area(arg = nil)
         # Coerce numeric area to the expected dot-decimal format.
         arg = IPAddr.new(arg.to_i, Socket::AF_INET).to_s unless
-          arg.nil? or arg.match(/\./)
+          arg.nil? or arg.to_s.match(/\./)
         set_or_return(:area, arg, :kind_of => String)
       end
 

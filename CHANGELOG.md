@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Ospf router-id default processing.
 - Added dotted-decimal munging for area in resource_cisco_interface_ospf
 - Modified template placeholder names to meet lint reqs
+- cisco_ospf fix for area property when Fixnum is used
 
 ## [0.9.0] - 2015-06-22
 ### Added
