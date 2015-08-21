@@ -100,9 +100,8 @@ cisco_snmp_server 'server' do
   # Implicit defaults will reset all properties
 end
 
-cisco_snmp_group 'network-admin' do
-  action :destroy
-end
+# SNMP groups cannot be created or destroyed, only inspected
+# cisco_snmp_group 'network-admin' ...
 
 cisco_snmp_community 'setcom' do
   action :destroy
