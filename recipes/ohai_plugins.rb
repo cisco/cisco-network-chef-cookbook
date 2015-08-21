@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: ciscolib_nxos
+# Cookbook Name:: cisco-cookbook
 # Recipe:: ohai_plugins
 #
 # Copyright 2011-2015, Chef Software, Inc

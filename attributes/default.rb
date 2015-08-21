@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: ciscolib_nxos
+# Cookbook Name:: cisco-cookbook
 # Attribute:: default
 #
 # Copyright 2010-2015, Chef Software, Inc

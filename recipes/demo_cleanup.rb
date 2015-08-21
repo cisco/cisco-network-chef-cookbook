@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: ciscolib_nxos
+# Cookbook Name:: cisco-cookbook
 # Recipe:: demo_cleanup
 #
 # Copyright (c) 2014-2015 Cisco and/or its affiliates.
