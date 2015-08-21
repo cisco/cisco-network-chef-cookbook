@@ -37,10 +37,10 @@ class Chef
       Chef::Log.debug "Load current resource for router ospf #{@new_resource.name}"
       @current_resource = Chef::Resource::CiscoOspf.new(@new_resource.name)
       ospfs = Cisco::RouterOspf.routers
-      ospfs.each do |id|
+      ospfs.each do |id, ospf|
         if id == @new_resource.name
           @current_resource.exists = true
-          @ospf = ospfs[id]
+          @ospf = ospf
           return @ospf
         end
       end
