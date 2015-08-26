@@ -39,7 +39,7 @@ at the same time.
 * `guestshell`
    * This is a secure linux container environment running CentOS. It is enabled by default on most NX-OS platforms.
 
-Access the following [link](README-INSTALL-AGENT.md) for more information on enabling these environments.
+Access the following [link](README-agent-install.md) for more information on enabling these environments.
 
 ## <a name="workstation">Workstation Setup</a>
 
@@ -62,10 +62,10 @@ Fetch a copy of the certificate for your Chef server and mark it as trusted:
 chefws$ sudo knife ssl fetch -c /etc/chef/client.rb
 WARNING: Certificates from chefserver.example.com will be fetched and placed in your trusted_cert
 directory (/etc/chef/trusted_certs).
- 
+
 Knife has no means to verify these are the correct certificates. You should
 verify the authenticity of these certificates after downloading.
- 
+
 Adding certificate for chefserver.example.com in /etc/chef/trusted_certs/chefserver_example_com.crt
 chefws$
 ```
@@ -84,7 +84,7 @@ configure terminal
 end
 ```
 
-Additional setup needed for `bash-shell` or `guestshell` (whether using Chef Provisioner or a manual installation) is documented [here](README-INSTALL-AGENT.md). 
+Additional setup needed for `bash-shell` or `guestshell` (whether using Chef Provisioner or a manual installation) is documented [here](README-agent-install.md).
 
 ## <a name="recipe">Chef Provisioning Recipe</a>
 
@@ -131,9 +131,9 @@ As can be seen above, the difference between a `bash-shell` recipe and a `guests
   * `:prefix => 'sudo ip netns exec management '`
      * The `prefix` string is prepended to all commands executed on the node by Chef Provisioning SSH. This prefix causes all commands to be run as root in the `management` VRF namespace.
 * `guestshell`
-  * `:prefix => '/isan/bin/guestshell sudo ip netns exec management '` 
+  * `:prefix => '/isan/bin/guestshell sudo ip netns exec management '`
      * As above, but the addition of `/isan/bin/guestshell` causes commands to be executed in `guestshell` instead of `bash-shell`.
-  * `:scp_temp_dir => '/bootflash'` 
+  * `:scp_temp_dir => '/bootflash'`
      * Because `guestshell` does not have access to the `bash-shell` `/tmp` directory, but does have access to `/bootflash`, we upload files via SCP to `/bootflash` in order to make them visible to `guestshell`.
 
 ## <a name="running">Running The Chef Provisioning Recipe</a>

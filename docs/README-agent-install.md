@@ -126,7 +126,7 @@ The recommended minimum values are currently:
   Disk   : 400MB
   Memory : 300MB
 ```
-  
+
 Use the `show guestshell detail` command to display the current state of the guestshell:
 
 ```
@@ -239,7 +239,7 @@ Edit the chef client config file:  `/etc/chef/client.rb` with settings similar t
   chef_server_url 'https://my_chef_server.mycompany.com/organizations/chef'
 
   node_name 'n3k.mycompany.com'   # "This" client device.
-  
+
   cookbook_sync_threads   5       # necessary for small memory switches (4G or less)
 
   interval 30                     # client-run interval; remove for "never"
@@ -448,11 +448,11 @@ systemctl start my_chef
 
 ## <a name="auto-install">Automated Installation Options</a>
 
-[Chef Provisioning](README-PROVISIONING.md) - Installing & Configuring chef-client using the Chef Provisioning tool
+[Chef Provisioning](README-chef-provisioning.md) - Installing & Configuring chef-client using the Chef Provisioning tool
 
 ## <a name="references">References</a>
 
-[Cisco Nexus Chef Modules](README.md) - Resources, Providers, Utilities
+[Cisco Nexus Chef Modules](../README.md) - Resources, Providers, Utilities
 
 [Cisco Nexus Programmability Guide](http://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus9000/sw/6-x/programmability/guide/b_Cisco_Nexus_9000_Series_NX-OS_Programmability_Guide/b_Cisco_Nexus_9000_Series_NX-OS_Programmability_Guide_chapter_01010.html) - Guestshell Documentation
 
