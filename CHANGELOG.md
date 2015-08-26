@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+- Moved misc READMEs to /docs
 
 ### Fixed
 - Several cases where providers would log an error message on receiving invalid input but would not actually raise an exception.
