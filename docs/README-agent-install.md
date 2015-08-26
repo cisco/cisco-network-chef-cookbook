@@ -1,9 +1,5 @@
 # chef-client Installation & Setup: Cisco Nexus
 
-----
-### _EARLY FIELD TRIAL:_ This is a chef-client EFT for use with Cisco NX-OS release 7.0(3)I2(1). Please see the [Limitations](#limitations) section for more information.
-----
-
 #### Table of Contents
 
 1. [Overview](#overview)
@@ -64,15 +60,6 @@ config term
   interface mgmt0
     vrf member management
     ip address 10.0.0.99/24
-end
-```
-
-#### NXAPI
-NXAPI is a NX-OS feature that is required for ciscopuppet. NX-OS EFT images may have this feature disabled, while release images will have this feature enabled by default. Manually enable NXAPI with this syntax:
-
-```
-config term
-  feature nxapi
 end
 ```
 
@@ -205,15 +192,6 @@ This section is common to both `bash-shell` and `guestshell`.
 
 #### chef RPM Install
 
-##### Special instructions for EFT customers
-EFT images may not have the updated platform family definitions needed for yum to differentiate between `bash-shell` and `guestshell` environments. Therefore the chef RPM will need to be specified explicitly during the installation:
-
-* For `bash-shell` use:
-```bash
-yum install http://chef.io/<TBD_PATH_TO_CHEF_WRL5_RPM>
-```
-
-* For `guestshell` use:
 ```bash
 yum install chef
 ```

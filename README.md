@@ -1,7 +1,3 @@
-----
-### _EARLY FIELD TRIAL:_ This is a chef-client EFT for use with Cisco NX-OS release 7.0(3)I2(1). Please see the [Limitations](#limitations) section for more information.
-----
-
 Cisco NX-OS Cookbook
 ====================
 This cookbook provides configuration resources and providers for Cisco
