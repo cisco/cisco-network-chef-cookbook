@@ -49,6 +49,7 @@ class Chef
         @current_resource.groups(@user.groups)
         @current_resource.auth_protocol(@user.auth_protocol.to_s)
         @current_resource.priv_protocol(@user.priv_protocol.to_s)
+        @current_resource.localized_key(false) if @current_resource.localized_key.nil?
       end
     end
 
