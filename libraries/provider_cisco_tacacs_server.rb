@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift *Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)]
+$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -46,7 +46,7 @@ class Chef
       if Cisco::TacacsServer.enabled
         Chef::Log.debug "tacacs server already enabled"
       else
-        converge_by("enable feature tacacs+") {} 
+        converge_by("enable feature tacacs+") {}
         return if whyrun_mode?
         @tacacs_server.enable
       end
@@ -116,12 +116,12 @@ class Chef
         TS_ENCRYPTION_TYPE_HASH.key(Cisco::TacacsServer.default_encryption_type)
       tacacs_server_type_string =
         TS_ENCRYPTION_TYPE_HASH.key(@tacacs_server.encryption_type)
-      
-      # If neither encryption type nor password is specified, treat it as 
-      # no password. Otherwise use default	
+
+      # If neither encryption type nor password is specified, treat it as
+      # no password. Otherwise use default
       if @new_resource.encryption_type.nil? and @new_resource.encryption_password.nil?
-	@new_resource.encryption_type("none")
-      else 	
+        @new_resource.encryption_type("none")
+      else
         @new_resource.encryption_type(tacacs_server_def_type_string) if
           @new_resource.encryption_type.nil?
         @new_resource.encryption_password(Cisco::TacacsServer.default_encryption_password) if
@@ -130,21 +130,21 @@ class Chef
 
       if tacacs_server_type_string != @new_resource.encryption_type ||
          @tacacs_server.encryption_password != @new_resource.encryption_password
-	
-	if @new_resource.encryption_type == "default"
-	    new_resource_type_value = Cisco::TACACS_SERVER_ENC_NONE
-	else 
-            new_resource_type_value =
-          	TS_ENCRYPTION_TYPE_HASH[@new_resource.encryption_type]
-	end
+
+        if @new_resource.encryption_type == "default"
+          new_resource_type_value = Cisco::TACACS_SERVER_ENC_NONE
+        else
+          new_resource_type_value =
+            TS_ENCRYPTION_TYPE_HASH[@new_resource.encryption_type]
+        end
 
         if @new_resource.encryption_type == "none"
           cb_msg = "Removing encryption key and password"
         else
           cb_msg = "update encryption_type and password from " +
-            "'#{@tacacs_server.encryption_type}" +
-            " #{@tacacs_server.encryption_password}' to " +
-            "'#{new_resource_type_value} #{@new_resource.encryption_password}'"
+                   "'#{@tacacs_server.encryption_type}" +
+                   " #{@tacacs_server.encryption_password}' to " +
+                   "'#{new_resource_type_value} #{@new_resource.encryption_password}'"
         end
 
         converge_by(cb_msg) do
@@ -152,7 +152,6 @@ class Chef
                                             @new_resource.encryption_password)
         end
       end
-
     end
   end
 end

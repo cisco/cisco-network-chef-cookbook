@@ -17,7 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift *Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)]
+$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -48,7 +48,7 @@ class Chef
         return if whyrun_mode?
         @vtp.enable
       end
-      @vtp = Cisco::Vtp.new(@name) if @vtp.nil?
+      @vtp = Cisco::Vtp.new if @vtp.nil?
 
       props = [:domain, :filename, :version, :password]
       Cisco::ChefUtils.generic_prop_set(self, "@vtp", props)
@@ -64,6 +64,5 @@ class Chef
         Chef::Log.debug "feature vtp already disabled"
       end
     end
-
   end
 end

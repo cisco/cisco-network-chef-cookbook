@@ -22,25 +22,24 @@ class Chef
     class Resource::CiscoSnmpCommunity < Resource
       attr_accessor :exists
 
-      def initialize(community, run_context=nil)
+      def initialize(community, run_context = nil)
         super
         @resource_name = :cisco_snmp_community
         @action = :create
         @allowed_actions = [:create, :destroy]
       end
 
-      def community(arg=nil)
+      def community(arg = nil)
         set_or_return(:community, arg, :kind_of => String)
       end
 
-      def group(arg=nil)
+      def group(arg = nil)
         set_or_return(:group, arg, :kind_of => String)
       end
 
-      def acl(arg=nil)
+      def acl(arg = nil)
         set_or_return(:acl, arg, :kind_of => String)
       end
-
     end
   end
 end

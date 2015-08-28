@@ -17,7 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift *Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)]
+$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -37,11 +37,11 @@ class Chef
       Chef::Log.debug "Load current resource for router ospf #{@new_resource.name}"
       @current_resource = Chef::Resource::CiscoOspf.new(@new_resource.name)
       ospfs = Cisco::RouterOspf.routers
-      ospfs.each do |id|
+      ospfs.each do |id, ospf|
         if id == @new_resource.name
           @current_resource.exists = true
-          @ospf = ospfs[id]
-          return
+          @ospf = ospf
+          return @ospf
         end
       end
       @current_resource.exists = false
@@ -69,4 +69,3 @@ class Chef
     end
   end   # class Provider::CiscoOspf
 end     # class Chef
-

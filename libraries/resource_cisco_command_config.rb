@@ -41,7 +41,7 @@ class Chef
     class Resource::CiscoCommandConfig < Resource
       attr_accessor :exists, :cisco_command_config
 
-      def initialize(name, run_context=nil)
+      def initialize(name, run_context = nil)
         super
         @resource_name = :cisco_command_config
         @action = :update
@@ -54,4 +54,3 @@ class Chef
     end
   end   # class Resource
 end     # class Chef
-

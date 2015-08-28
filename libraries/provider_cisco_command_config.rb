@@ -23,7 +23,7 @@
 # of the recipe configuration is required to avoid these acceptable failures.
 #
 
-$:.unshift *Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)]
+$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -90,11 +90,10 @@ class Chef
           @@node.config(@min_config_str)
         end
       end
-      rescue Cisco::CliError => e
-        Chef::Log.info "Successfully updated:\n#{e.previous}" if !e.previous.empty?
-        Chef::Log.error e.message
-        raise
+    rescue Cisco::CliError => e
+      Chef::Log.info "Successfully updated:\n#{e.previous.join("\n")}" \
+                     unless e.previous.empty?
+      raise
     end
-
-  end   # class Provider::CiscoCommandConfig
-end     # class Chef
+  end
+end

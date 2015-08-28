@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift *Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)]
+$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -30,7 +30,7 @@ class Chef
       super(new_resource, run_context)
 
       if new_resource.name.empty?
-        Chef::Log.error "interface name cannot be empty"
+        fail 'interface name cannot be empty'
       end
 
       new_resource.name.downcase!
@@ -47,15 +47,15 @@ class Chef
 
     def action_create
       # ospf and area are required for create action
-      Chef::Log.error "must specify ospf for #{@new_resource.name}" if
+      fail "[#{@new_resource.name}] Required property 'ospf' is missing" if
         new_resource.ospf.nil?
-      Chef::Log.error "must specify area for #{@new_resource.name}" if
+      fail "[#{@new_resource.name}] Required property 'area' is missing" if
         new_resource.area.nil?
 
       # remove old OSPF config if changed process or area
       if @interface_ospf &&
-          (@interface_ospf.area != @new_resource.area.to_s ||
-           @interface_ospf.ospf_name != @new_resource.ospf)
+         (@interface_ospf.area != @new_resource.area.to_s ||
+          @interface_ospf.ospf_name != @new_resource.ospf)
         converge_by("OSPF process name and/or area has changed " +
                     "(#{@interface_ospf.ospf_name}, #{@interface_ospf.area}) " +
                     "=> (#{@new_resource.ospf}, #{@new_resource.area}), " +
@@ -77,13 +77,13 @@ class Chef
       end
 
       @new_resource.message_digest(@interface_ospf.default_message_digest) if
-	@new_resource.message_digest.nil?
+        @new_resource.message_digest.nil?
 
       unless @new_resource.message_digest == @interface_ospf.message_digest
-	converge_by "config authentication message_digest to " +
-		    @new_resource.message_digest.to_s do
-	    @interface_ospf.message_digest = @new_resource.message_digest
-	end
+        converge_by "config authentication message_digest to " +
+          @new_resource.message_digest.to_s do
+          @interface_ospf.message_digest = @new_resource.message_digest
+        end
       end
 
       unless @new_resource.message_digest_key_id.nil? and
@@ -91,9 +91,9 @@ class Chef
              @new_resource.message_digest_encryption_type.nil? and
              @new_resource.message_digest_password.nil?
 
-        Chef::Log.error "must supply message_digest_password" if
+        fail 'must supply message_digest_password' if
           @new_resource.message_digest_password.nil?
-        Chef::Log.error "must supply message_digest_key_id" if
+        fail 'must supply message_digest_key_id' if
           @new_resource.message_digest_key_id.nil?
 
         # supply defaults
@@ -107,20 +107,19 @@ class Chef
         # if any properties differ, reconfigure message_digest attrs
         # (not idempotent for cleartext passwords)
         unless @new_resource.message_digest_key_id ==
-                 @interface_ospf.message_digest_key_id and
+               @interface_ospf.message_digest_key_id and
                @new_resource.message_digest_algorithm_type ==
-                 @interface_ospf.message_digest_algorithm_type and
+               @interface_ospf.message_digest_algorithm_type and
                @new_resource.message_digest_encryption_type ==
-                 @interface_ospf.message_digest_encryption_type and
+               @interface_ospf.message_digest_encryption_type and
                @new_resource.message_digest_password ==
-                 @interface_ospf.message_digest_password
+               @interface_ospf.message_digest_password
 
           converge_by "configure message_digest " +
             "#{@new_resource.message_digest_key_id} " +
             "#{@new_resource.message_digest_algorithm_type} " +
             "#{@new_resource.message_digest_encryption_type} " +
             "#{@new_resource.message_digest_password} " do
-
             @interface_ospf.message_digest_key_set(
               @new_resource.message_digest_key_id,
               @new_resource.message_digest_algorithm_type,

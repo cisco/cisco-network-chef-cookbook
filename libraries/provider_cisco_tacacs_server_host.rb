@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift *Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)]
+$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -35,7 +35,7 @@ class Chef
     end
 
     def load_current_resource
-      @host = Cisco::TacacsServerHost.hosts.values.find{ |host|
+      @host = Cisco::TacacsServerHost.hosts.values.find { |host|
         host.name == @new_resource.name
       }
     end
@@ -61,7 +61,7 @@ class Chef
       if @host.timeout != @new_resource.timeout
         converge_by "update timeout #{@host.timeout} => " +
           @new_resource.timeout.to_s do
-            @host.timeout = @new_resource.timeout
+          @host.timeout = @new_resource.timeout
         end
       end
 
@@ -72,27 +72,27 @@ class Chef
       # If neither encryption nor type specifed, treat it as no key configure;
       # otherwise, use default
       if @new_resource.encryption_type.nil? and @new_resource.encryption_password.nil?
-	@new_resource.encryption_type("none")
-      else 
+        @new_resource.encryption_type("none")
+      else
         @new_resource.encryption_type(def_type_s) if
-           @new_resource.encryption_type.nil?
+          @new_resource.encryption_type.nil?
         @new_resource.encryption_password(
-           Cisco::TacacsServerHost.default_encryption_password) if
-           @new_resource.encryption_password.nil?
-      end	
+          Cisco::TacacsServerHost.default_encryption_password) if
+          @new_resource.encryption_password.nil?
+      end
 
-      encryption_type = @new_resource.encryption_type == "default" ? 
-			def_type_s : @new_resource.encryption_type
+      encryption_type = @new_resource.encryption_type == "default" ?
+                          def_type_s : @new_resource.encryption_type
       if type_s != encryption_type ||
-        @host.encryption_password != @new_resource.encryption_password
+         @host.encryption_password != @new_resource.encryption_password
 
         type_v = ENC_TYPE[encryption_type]
         if @new_resource.encryption_type == "none"
           cb_msg = "remove encryption key and password"
         else
           cb_msg = "update encryption_type and password " +
-          "'#{@host.encryption_type} #{@host.encryption_password}' => " +
-          "'#{type_v} #{@new_resource.encryption_password}'"
+                   "'#{@host.encryption_type} #{@host.encryption_password}' => " +
+                   "'#{type_v} #{@new_resource.encryption_password}'"
         end
 
         converge_by cb_msg do

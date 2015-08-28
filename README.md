@@ -1,50 +1,143 @@
-----
-### _EARLY FIELD TRIAL:_ This is a chef-client EFT for use with Cisco NX-OS release 7.0(3)I2(1). Please see the [Limitations](#limitations) section for more information.
-----
+# cisco-cookbook
 
-Cisco NX-OS Cookbook
-====================
-This cookbook provides configuration resources and providers for Cisco
-NX-OS devices such as the Nexus 3000/3100/9300/9500 series.
+#### Table of Contents
 
-Scope
------
-This cookbook is concerned with management of Cisco switches running Cisco
-NX-OS. It can work with both the native NX-OS Chef client or with a CentOS
-Chef client installed into Guestshell. It does not (yet)
-address other Cisco operating systems such as IOS, IOS-XE, or IOS XR.
+1. [Overview](#overview)
+2. [Cookbook Description](#cookbook-description)
+3. [Setup](#setup)
+4. [Usage](#usage)
+5. [Resource Reference](#resource-reference)
+   * [Resource Catalog (by Technology)](#resource-by-tech)
+   * [Resource Catalog (by Name)](#resource-by-name)
+6. [Limitations](#limitations)
+7. [Development - Guide for contributing to the cookbook](#development)
 
-Requirements
-------------
-- Chef 12.4.1 or higher
-- Ruby 1.9 or higher (preferably from the Chef full-stack installer)
-- Network accessible package repositories
-- Cisco NX-OS release 7.0(3)I2(1) or later
-- Supported Platforms: Cisco Nexus 95xx, Nexus 93xx, Nexus 30xx, Nexus 31xx
+--
+##### Additional References
 
+* Agent Installation
+  * [README-agent-install.md](docs/README-agent-install.md) : Agent Installation and Configuration Guide
+* User Guides
+  * [README-package-provider.md](docs/README-package-provider.md) : Cisco Nexus Package Management using the Package Provider
+* Developer Guides
+  * [README-develop-resources-providers.md](docs/README-develop-resources-providers.md) : Developing New cisco-cookbook Resources and Providers
 
-Usage
------
+--
+
+## Overview
+
+The `cisco-cookbook` allows a network administrator to manage Cisco Network Elements using Chef. This cookbook bundles a set of Chef Resources, providers, Sample Recipes and installation Tools for effective network management.  The resources and capabilities provided by this cookbook will grow with contributions from Cisco, Chef Software Inc., and the open source community.
+
+The Cisco Network Elements and Operating Systems managed by this cookbook are continuously expanding. Please refer to the [Limitations](#limitations) section for details on currently supported hardware and software. The Limitations section also provides details on compatible Chef client and Chef Server versions.
+
+This GitHub repository contains the latest version of the cisco-cookbook source code. Supported versions of the cisco-cookbook are available at Chef Supermarket. Please refer to [SUPPORT.md](SUPPORT.md) for additional details.
+
+Contributions to this cookbook are welcome. Guidelines on contributions to the cookbook are captured in [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## Cookbook Description
+
+This cookbook enables management of supported Cisco Network Elements using Chef. This cookbook enhances the Chef DSL by introducing new Chef Resources and Providers capable of managing network elements.
+
+The set of supported network element platforms is continuously expanding. Please refer to the [Limitations](#limitations) section for a list of currently supported platforms.
+
+## Setup
+
+#### Chef Server
+
+The `cisco-cookbook` is installed on the Chef server. Please see [The Chef Server](https://docs.chef.io/server/) for information on Chef server setup. See Chef's [knife cookbook site](https://docs.chef.io/knife_cookbook_site.html) for general information on Chef cookbook installation.
+
+#### Chef Client
+The Chef Client (agent) requires installation and setup on each device. Agent setup can be performed as a manual process or it may be automated. For more information please see the [README-agent-install.md](docs/README-agent-install.md) document for detailed instructions on agent installation and configuration on Cisco Nexus devices.
+
+##### Artifacts
+
+As noted in the agent installation guide, these are the current RPM versions for use with cisco-cookbook:
+
+* `bash-shell`
+  * http://s3.amazonaws.com/alpha-builds/chef-12.4.1.cisco%2B20150826000706-1.nexus5.x86_64.rpm
+* `guestshell`
+  * https://s3.amazonaws.com/alpha-builds/chef-12.4.1.cisco%2B20150826204615-1.el7.x86_64.rpm
+
+##### Gems
+
+The cisco-cookbook has dependencies on a few ruby gems. These gems are already installed in the cookbook as vendored gems so there are no additional steps required for installing these gems. The gems are shown here for reference only:
+
+* [`net_http_unix`](https://rubygems.org/gems/net_http_unix)
+* [`cisco_nxapi`](https://rubygems.org/gems/cisco_nxapi)
+* [`cisco_node_utils`](https://rubygems.org/gems/cisco_node_utils)
+
+## Usage
+
 Place a dependency on cisco-cookbook in your cookbook's metadata.rb
 
 ```ruby
-depends 'cisco-cookbook', '~> 0.1'
+depends 'cisco-cookbook', '~> 1.0'
 ```
 
-See recipes directory for examples of cisco providers and resources.
+See the recipes directory for example usage of cisco providers and resources.
 
-Resources Overview
-------------------
+## Resource Reference
+
+### <a name="resource-by-tech">Resource Catalog (by Technology)<a>
+
+1. Miscellaneous Types
+  * [`cisco_command_config`](#type-cisco_command_config)
+
+2. Interface Types
+  * [`cisco_interface`](#type-cisco_interface)
+  * [`cisco_interface_ospf`](#type-cisco_interface_ospf)
+
+3. OSPF Types
+  * [`cisco_ospf`](#type-cisco_ospf)
+  * [`cisco_ospf_vrf`](#type-cisco_ospf_vrf)
+  * [`cisco_interface_ospf`](#type-cisco_interface_ospf)
+
+4. SNMP Types
+  * [`cisco_snmp_community`](#type-cisco_snmp_community)
+  * [`cisco_snmp_group`](#type-cisco_snmp_group)
+  * [`cisco_snmp_server`](#type-cisco_snmp_server)
+  * [`cisco_snmp_user`](#type-cisco_snmp_user)
+
+5. TACACS Types
+  * [`cisco_tacacs_server`](#type-cisco_tacacs_server)
+  * [`cisco_tacacs_server_host`](#type-cisco_tacacs_server_host)
+
+6. VLAN Types
+  * [`cisco_vlan`](#type-cisco_vlan)
+  * [`cisco_vtp`](#type-cisco_vtp)
+
+--
+### <a name="resource-by-name">Resource Catalog (by Name)<a>
+
+* [`cisco_command_config`](#type-cisco_command_config)
+* [`cisco_interface`](#type-cisco_interface)
+* [`cisco_interface_ospf`](#type-cisco_interface_ospf)
+* [`cisco_ospf`](#type-cisco_ospf)
+* [`cisco_ospf_vrf`](#type-cisco_ospf_vrf)
+* [`cisco_snmp_community`](#type-cisco_snmp_community)
+* [`cisco_snmp_group`](#type-cisco_snmp_group)
+* [`cisco_snmp_server`](#type-cisco_snmp_server)
+* [`cisco_snmp_user`](#type-cisco_snmp_user)
+* [`cisco_tacacs_server`](#type-cisco_tacacs_server)
+* [`cisco_tacacs_server_host`](#type-cisco_tacacs_server_host)
+* [`cisco_vlan`](#type-cisco_vlan)
+* [`cisco_vtp`](#type-cisco_vtp)
+
+--
+### Resource Details
+
+The following resources are listed alphabetically.
 
 ### cisco_command_config
 
 The `cisco_command_config` resource allows raw configurations to be managed by chef. It serves as a stopgap until specialized resources are created. It has the following limitations:
 
-* The input message buffer is limited to 500KB
+* The input message buffer is limited to 500KB. Large configurations are often easier to debug if broken up into multiple smaller resource blocks.
+* The cisco_command_config configuration block must use the same syntax as displayed by the show running-config command on the switch. In some cases, configuration commands that omit optional keywords when entered may actually appear with a different syntax when displayed by show running-config; for example, some access-list entries may be configured without a sequence number but yet an implicit sequence number is created regardless. This then creates an idempotency problem because there is a mismatch between show running-config and the manifest. The solution in this case is for the manifest to include explicit sequence numbers for the affected access-list entries.
 * Order is important. Some dependent commands may fail if their associated `feature` configuration is not enabled first
 * Indentation counts! It implies sub-mode configuration. Use the switch's running-config as a guide and do not indent configurations that are not normally indented. Do not use tabs to indent.
 * Inline comments must be prefixed by ! or #
-* Negating a submode will also remove configuratons under that submode, without having to specify every submode config statement: `no router ospf RED` removes all configuration under router ospf RED
+* Negating a submode will also remove configurations under that submode, without having to specify every submode config statement: `no router ospf RED` removes all configuration under router ospf RED
 * Syntax does not auto-complete: use `Ethernet1/1`, not `Eth1/1`
 * If a CLI command is rejected during configuration, the resource will abort at that point and will not continue to issue any remaining CLI.  For this reason it is recommended to limit the scope of each instance of this resource.
 
@@ -71,7 +164,7 @@ end
 ### cisco_interface
 
 The `cisco_interface` resource is used to manage general configuration of all
-interface types, including ethernet, port-channel, loopback, and SVI (Vlan).
+interface types, including ethernet, port-channel, loopback, and SVI (vlan).
 
 #### Examples
 
@@ -198,14 +291,14 @@ end
 - `hello_interval` - The OSPF hello interval on this interface, in seconds.
   Default value: `10`.
 
-- `message_digest` - Enable or disable message-digest authentication on 
-  on the interface. Available options are `true` and `false`. Default value: 
-  `false`. 
+- `message_digest` - Enable or disable message-digest authentication on
+  on the interface. Available options are `true` and `false`. Default value:
+  `false`.
 
-- `message_digest_algorithm_type` - OSPF message digest algorithm. 
+- `message_digest_algorithm_type` - OSPF message digest algorithm.
   Default value: `md5`, which is currently the only supported value.
 
-- `message_digest_encryption_type` - Encryption type for the message digest 
+- `message_digest_encryption_type` - Encryption type for the message digest
   password. Available options are `'cleartext'`, `'3des'`, and `'cisco_type_7'`.
   Default value: `'cleartext'`.
 
@@ -332,7 +425,7 @@ end
 
 The `cisco_package` resource is a subclass of the Chef `yum_package` resource.
 Unlike `yum_package`, it will always install packages into the NX-OS native
-environment, even if the Chef agent is running within Guestshell.
+environment, even if the Chef agent is running within `guestshell`.
 
 #### Examples
 
@@ -655,16 +748,30 @@ end
 
 - `:destroy` - Disable VTP.
 
-Contributing
-------------
+## Limitations
 
-1. Fork the cisco-cookbook repository on [Github](https://github.com/chef-partners/cisco-cookbook)
+Minimum Requirements:
+
+* Cisco NX-OS Chef implementation requires Chef version 12.4.1
+* Ruby 1.9 or higher (preferably from the Chef full-stack installer)
+* Supported Platforms:
+  * Cisco Nexus 95xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
+  * Cisco Nexus 93xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
+  * Cisco Nexus 31xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
+  * Cisco Nexus 30xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
+
+## Development
+
+Contributions to cisco-cookbook are welcome and encouraged. Please follow this general workflow for new contributions. See [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+
+1. Fork the cisco-cookbook repository on [GitHub](https://github.com/cisco/cisco-network-chef-cookbook)
 2. Create a named feature branch (like `add_component_x`)
 3. Write your change
 4. Write tests for your change (if applicable)
 5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
+6. Submit a Pull Request using GitHub
 
+--
 
 ```text
 Copyright (c) 2014-2015 Cisco and/or its affiliates.

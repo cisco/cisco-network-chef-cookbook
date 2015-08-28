@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift *Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)]
+$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -36,8 +36,7 @@ class Chef
       super(new_resource, run_context)
 
       if new_resource.name.empty?
-        Chef::Log.error "Interface name cannot be empty"
-        raise ArgumentError
+        fail "Interface name cannot be empty"
       end
 
       @interface = nil
@@ -76,15 +75,14 @@ class Chef
 
       # conditions in which we want to set ipv4 properties
       if @new_resource.switchport_mode == 'disabled' or
-          ((@interface.default_switchport_mode == :disabled) and
-           (@new_resource.switchport_mode.nil? or
-            (@new_resource.switchport_mode == 'default')))
+         ((@interface.default_switchport_mode == :disabled) and
+          (@new_resource.switchport_mode.nil? or
+           (@new_resource.switchport_mode == 'default')))
 
-          set_layer3_properties
+        set_layer3_properties
       else # switchport will be enabled
-          set_layer2_properties
+        set_layer2_properties
       end
-
     end # action_create
 
     def set_switchport_mode
@@ -96,8 +94,8 @@ class Chef
 
       if @interface.switchport_mode.to_s != @new_resource.switchport_mode
         converge_by("update switchport_mode #{@interface.switchport_mode} => " +
-          @new_resource.switchport_mode) do
-            @interface.switchport_mode = @new_resource.switchport_mode.to_sym
+                    @new_resource.switchport_mode) do
+          @interface.switchport_mode = @new_resource.switchport_mode.to_sym
         end
       end
     end
@@ -123,13 +121,13 @@ class Chef
         @new_resource.ipv4_netmask_length.nil?
 
       if @interface.ipv4_address != @new_resource.ipv4_address ||
-        @interface.ipv4_netmask_length != @new_resource.ipv4_netmask_length
-          converge_by("update ipv4_address/netmask '#{@interface.ipv4_address}/" +
-            "#{@interface.ipv4_netmask_length}' => #{@new_resource.ipv4_address}/" +
-            @new_resource.ipv4_netmask_length.to_s) do
-              @interface.ipv4_addr_mask_set(@new_resource.ipv4_address,
-                @new_resource.ipv4_netmask_length)
-          end
+         @interface.ipv4_netmask_length != @new_resource.ipv4_netmask_length
+        converge_by("update ipv4_address/netmask '#{@interface.ipv4_address}/" +
+                    "#{@interface.ipv4_netmask_length}' => #{@new_resource.ipv4_address}/" +
+                    @new_resource.ipv4_netmask_length.to_s) do
+          @interface.ipv4_addr_mask_set(@new_resource.ipv4_address,
+                                        @new_resource.ipv4_netmask_length)
+        end
       end
     end
 
@@ -147,6 +145,5 @@ class Chef
         end
       end
     end
-
   end
 end
