@@ -20,7 +20,7 @@
 * User Guides
   * [README-package-provider.md](docs/README-package-provider.md) : Cisco Nexus Package Management using the Package Provider
 * Developer Guides
-  * [README-develop-types-providers.md](docs/README-develop-types-providers.md) : Developing New cisco-cookbook Resources and Providers
+  * [README-develop-resources-providers.md](docs/README-develop-resources-providers.md) : Developing New cisco-cookbook Resources and Providers
 
 --
 
