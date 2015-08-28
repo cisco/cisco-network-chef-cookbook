@@ -194,7 +194,11 @@ This section is common to both `bash-shell` and `guestshell`.
 
 * `bash-shell` RPM:
 
-`yum install http://s3.amazonaws.com/alpha-builds/chef-12.4.1.cisco%2B20150826000706-1.nexus5.x86_64.rpm`
+```
+wget http://s3.amazonaws.com/alpha-builds/chef-12.4.1.cisco%2B20150826000706-1.nexus5.x86_64.rpm
+
+yum install chef-12.4.1.cisco%2B20150826000706-1.nexus5.x86_64.rpm
+```
 
 * `guestshell` RPM:
 
