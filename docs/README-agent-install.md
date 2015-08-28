@@ -192,9 +192,13 @@ This section is common to both `bash-shell` and `guestshell`.
 
 #### chef RPM Install
 
-```bash
-yum install chef
-```
+* `bash-shell`
+
+`yum install http://s3.amazonaws.com/alpha-builds/chef-12.4.1.cisco%2B20150826000706-1.nexus5.x86_64.rpm`
+
+* `guestshell`
+
+`yum install https://s3.amazonaws.com/alpha-builds/chef-12.4.1.cisco%2B20150826204615-1.el7.x86_64.rpm`
 
 Update PATH var
 
