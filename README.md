@@ -53,8 +53,10 @@ The Chef Client (agent) requires installation and setup on each device. Agent se
 
 As noted in the agent installation guide, these are the current RPM versions for use with cisco-cookbook:
 
-* `bash-shell`: Use http://s3.amazonaws.com/alpha-builds/chef-12.4.1.cisco%2B20150826000706-1.nexus5.x86_64.rpm
-* `guestshell`: Use https://s3.amazonaws.com/alpha-builds/chef-12.4.1.cisco%2B20150826204615-1.el7.x86_64.rpm
+* `bash-shell`
+  * http://s3.amazonaws.com/alpha-builds/chef-12.4.1.cisco%2B20150826000706-1.nexus5.x86_64.rpm
+* `guestshell`
+  * https://s3.amazonaws.com/alpha-builds/chef-12.4.1.cisco%2B20150826204615-1.el7.x86_64.rpm
 
 ##### Gems
 
