@@ -3,7 +3,7 @@
 #### Table of Contents
 
 1. [Overview](#overview)
-2. [Pre-Install Tasks](#pre-install)
+2. [Pre-Install Tasks](#pre-install-tasks)
 3. [chef-client Environment: bash-shell](#env-bs)
 4. [chef-client Environment: guestshell](#env-gs)
 5. [chef-client Installation, Configuration and Usage](#agent-config)
@@ -11,15 +11,15 @@
 7. [(optional) chef-client Persistence](#persistence)
 8. [(optional) Automated Installation Options](#auto-install)
 9. [References](#references)
-10. [Known Issues](#issues)
+10. [Limitations](#limitations)
 
-## <a name="overview">Overview</a>
+## Overview
 
 This document describes chef-client installation and setup on Cisco Nexus switches. These instructions focus on manual setup. See [Automated Installation](#auto-install) section for documentation regarding alternative installation methods.
 
 ![1](chef_client_outline.png)
 
-## <a name="pre-install">Pre-Install Tasks</a>
+## Pre-Install Tasks
 
 #### Platform and Software Requirements
 * Chef 12.4 or higher
@@ -428,17 +428,25 @@ systemctl start my_chef
 
 [Chef Provisioning](README-chef-provisioning.md) - Installing & Configuring chef-client using the Chef Provisioning tool
 
-## <a name="references">References</a>
+## References
 
 [Cisco Nexus Chef Modules](../README.md) - Resources, Providers, Utilities
 
 [Cisco Nexus Programmability Guide](http://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus9000/sw/6-x/programmability/guide/b_Cisco_Nexus_9000_Series_NX-OS_Programmability_Guide/b_Cisco_Nexus_9000_Series_NX-OS_Programmability_Guide_chapter_01010.html) - Guestshell Documentation
 
-## <a name="issues">Known Issues</a>
+--
 
-TBD
+## Limitations
 
-----
+Minimum Requirements:
+* Cisco NX-OS Puppet implementation requires open source Puppet version 4.0 or Puppet Enterprise 2015.2
+* Supported Platforms:
+  * Cisco Nexus 95xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
+  * Cisco Nexus 93xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
+  * Cisco Nexus 31xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
+  * Cisco Nexus 30xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
+
+--
 
 ```bash
 Copyright (c) 2014-2015 Cisco and/or its affiliates.
