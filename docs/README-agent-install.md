@@ -439,7 +439,7 @@ systemctl start my_chef
 ## Limitations
 
 Minimum Requirements:
-* Cisco NX-OS Puppet implementation requires open source Puppet version 4.0 or Puppet Enterprise 2015.2
+* Cisco NX-OS Chef implementation requires Chef version 12.4.1
 * Supported Platforms:
   * Cisco Nexus 95xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
   * Cisco Nexus 93xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
