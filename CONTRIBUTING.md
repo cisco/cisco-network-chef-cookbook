@@ -30,4 +30,4 @@ Cisco Network Elements support a rich set of features to make network robust, ef
 * [General GitHub documentation](http://help.github.com/)
 * [GitHub pull request documentation](http://help.github.com/send-pull-requests/)
 * \#chef-hacking IRC channel on irc.freenode.org
-* [chef-dev mailing list](http://lists.opscode.com/sympa/info/chef-dev)
+* [chef-dev mailing list](http://lists.chef.io/sympa/info/chef-dev)
