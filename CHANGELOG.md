@@ -3,7 +3,8 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-- Moved misc READMEs to /docs
+### Added
+- Added README-maintainers.md
 
 ### Fixed
 - Several cases where providers would log an error message on receiving invalid input but would not actually raise an exception.
@@ -12,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Modified template placeholder names to meet lint reqs
 - cisco_interface_ospf fix for area property when Fixnum is used
 - cisco_ospf idempotency fix
+- Moved misc READMEs to /docs
 
 ## [0.9.0] - 2015-06-22
 ### Added
