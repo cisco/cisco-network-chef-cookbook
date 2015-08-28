@@ -13,10 +13,9 @@ Cisco Network Elements support a rich set of features to make network robust, ef
 * Follow all guidelines documented in [README-creating-resources-providers](https://github.com/cisco/cisco-network-chef-cookbook/README-creating-resources-providers.md)
 * Make changes in your branch.
 * Testing
-  * TBD: Add Chef Kitchen test cases to validate your changes.
   * Run all the tests to ensure there was no collateral damage to existing code.
   * Check for unnecessary whitespace with `git diff --check`
-  * Run `rubocop --lint` against all changed files. See [https://rubygems.org/gems/rubocop](https://rubygems.org/gems/rubocop)
+  * Run `rubocop` against all changed files. See [https://rubygems.org/gems/rubocop](https://rubygems.org/gems/rubocop)
 * Ensure that your commit messages clearly describe the problem you are trying to solve and the proposed solution.
 
 ## Submitting Changes
