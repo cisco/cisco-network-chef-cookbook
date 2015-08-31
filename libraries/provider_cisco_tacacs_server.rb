@@ -21,7 +21,7 @@ $:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FIL
 require 'cisco_node_utils'
 
 TS_ENCRYPTION_TYPE_HASH = {
-  'none'   => Cisco::TACACS_SERVER_ENC_UNKNOWN,
+  'none'      => Cisco::TACACS_SERVER_ENC_UNKNOWN,
   'clear'     => Cisco::TACACS_SERVER_ENC_NONE,
   'encrypted' => Cisco::TACACS_SERVER_ENC_CISCO_TYPE_7,
 }

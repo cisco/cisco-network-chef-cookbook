@@ -27,7 +27,7 @@ class Chef
         @resource_name = :cisco_ospf
         @action = :create
         @allowed_actions = [:create, :destroy]
-        @name  = name
+        @name = name
       end
 
       def name(arg = nil)
