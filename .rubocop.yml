@@ -119,6 +119,11 @@ Style/LineEndConcatenation:
 Style/MethodName:
   Enabled: false
 
+# Offense count: 22
+# Cop supports --auto-correct.
+Style/MultilineOperationIndentation:
+  Enabled: false
+
 # Offense count: 10
 # Cop supports --auto-correct.
 Style/MultilineBlockLayout:
@@ -202,3 +207,8 @@ Style/VariableName:
 # Configuration parameters: WordRegex.
 Style/WordArray:
   MinSize: 6
+
+# Offense count: 1
+# Cop supports --auto-correct.
+Performance/StringReplacement:
+  Enabled: false
