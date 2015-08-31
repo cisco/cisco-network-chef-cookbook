@@ -113,6 +113,7 @@ cisco_interface 'Ethernet1/1' do
   description         'managed by chef'
   ipv4_address        '192.0.2.43'
   ipv4_netmask_length 24
+  vrf                 'vrf_member'
 end
 
 cisco_interface 'Ethernet1/2' do

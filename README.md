@@ -238,6 +238,8 @@ parameters.
 - `svi_management` - Enable/disable SVI management. Default value: `false`.
    Only applicable to SVI (`vlan`) interfaces.
 
+- `vrf` - Specify the vrf membership of this interface.  Value must be a string.
+
 #### Actions
 
 - `:create` - Creates and/or updates the interface configuration.

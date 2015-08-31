@@ -104,6 +104,10 @@ class Chef
                         }
                       })
       end
+
+      def vrf(arg = nil)
+        set_or_return(:vrf, arg, :kind_of => String)
+      end
     end
   end
 end

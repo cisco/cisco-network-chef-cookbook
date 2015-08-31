@@ -108,7 +108,8 @@ class Chef
       # Disable switchport
       set_switchport_mode
       set_common_properties
-      prop_set([:ipv4_proxy_arp, :ipv4_redirects])
+      # set vrf before other L3 props to avoid them being wiped out
+      prop_set([:vrf, :ipv4_proxy_arp, :ipv4_redirects])
       prop_set_if_supported([:svi_autostate, :svi_management])
       set_layer3_combo_properties
     end
