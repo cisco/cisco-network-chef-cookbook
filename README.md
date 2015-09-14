@@ -203,6 +203,9 @@ parameters.
 
 - `description` - Descriptive label for this interface.
 
+- `encapsulation_dot1q` - Enable IEEE 802.1Q encapsulation of traffic on a
+   specified subinterface. Valid values are integer, keyword 'default'.
+
 - `shutdown` - Set to `true` to administratively shut down this interface,
   `false` to administratively enable this interface.
 
@@ -218,6 +221,9 @@ parameters.
 - `ipv4_redirects` - Set to `false` to disable ICMP redirects on this interface,
   `true` to enable them.
 
+- `mtu` - Maximum Trasnmission Unit size for frames received and sent on the specified
+   interface. Valid value is an integer.
+
 - `negotiate_auto` - Set to `true` or `false` to enable or disable
    autonegotiation of interface speed.
 
@@ -228,6 +234,12 @@ parameters.
    on interface type) are 'disabled', 'access', 'tunnel', 'fex_fabric',
    'trunk', 'default'. If set to 'default', the default mode for the interface
    type is used.
+
+- `switchport_trunk_allowed_vlan` - The allowed VLANs for the specified
+   Ethernet interface. Valid values are string, keyword 'default'.
+
+- `switchport_trunk_native_vlan` - The Native VLAN assigned to the switch port.
+   Valid values are integer, keyword 'default'
 
 - `switchport_vtp` - Set to `true` or `false` to enable or disable VTP on this
   interface. Default value: `false`.

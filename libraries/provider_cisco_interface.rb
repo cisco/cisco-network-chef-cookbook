@@ -101,7 +101,7 @@ class Chef
     end
 
     def set_common_properties
-      prop_set([:description, :shutdown, :negotiate_auto])
+      prop_set([:description, :encapsulation_dot1q, :mtu, :shutdown, :negotiate_auto])
     end
 
     def set_layer3_properties
@@ -135,7 +135,10 @@ class Chef
     def set_layer2_properties
       # Disable switchport
       set_switchport_mode
-      prop_set([:access_vlan, :switchport_autostate_exclude, :switchport_vtp])
+      prop_set([:access_vlan, :switchport_autostate_exclude,
+                :switchport_trunk_allowed_vlan, :switchport_trunk_native_vlan,
+                :switchport_vtp
+               ])
     end
 
     def action_destroy

@@ -113,11 +113,23 @@ cisco_interface 'Ethernet1/1' do
   description         'managed by chef'
   ipv4_address        '192.0.2.43'
   ipv4_netmask_length 24
+  mtu                 1600
   vrf                 'vrf_member'
+end
+
+cisco_interface 'Ethernet1/1.1' do
+  encapsulation_dot1q 10
+  negotiate_auto false
 end
 
 cisco_interface 'Ethernet1/2' do
   # set all props to default
+end
+
+cisco_interface 'Ethernet1/3' do
+  switchport_mode 'trunk'
+  switchport_trunk_allowed_vlan '20, 30'
+  switchport_trunk_native_vlan 40
 end
 
 cisco_interface 'Vlan22' do

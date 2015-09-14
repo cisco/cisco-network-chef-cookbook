@@ -4,7 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Added vrf property to cisco_interface
+- Extended cisco_interface with the following attributes:
+  - encapsulation dot1q
+  - mtu
+  - switchport trunk allowed vlan
+  - switchport trunk native vlan
+  - vrf member
 
 ## [1.0.0] - 2015-08-28
 ### Added

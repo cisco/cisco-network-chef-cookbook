@@ -41,6 +41,10 @@ class Chef
         set_or_return(:description, arg, :kind_of => String)
       end
 
+      def encapsulation_dot1q(arg = nil)
+        set_or_return(:encapsualtion_dot1q, arg, :kind_of => [Fixnum, String])
+      end
+
       def shutdown(arg = nil)
         set_or_return(:shutdown, arg,
                       :kind_of => [TrueClass, FalseClass])
@@ -56,6 +60,10 @@ class Chef
                       :kind_of => [TrueClass, FalseClass])
       end
 
+      def mtu(arg = nil)
+        set_or_return(:mtu, arg, :kind_of => [Fixnum, String])
+      end
+
       def negotiate_auto(arg = nil)
         set_or_return(:negotiate_auto, arg,
                       :kind_of => [TrueClass, FalseClass])
@@ -64,6 +72,16 @@ class Chef
       def switchport_autostate_exclude(arg = nil)
         set_or_return(:switchport_autostate_exclude, arg,
                       :kind_of => [TrueClass, FalseClass])
+      end
+
+      def switchport_trunk_allowed_vlan(arg = nil)
+        set_or_return(:switchport_trunk_allowed_vlan, arg,
+                      :kind_of => [Fixnum, String])
+      end
+
+      def switchport_trunk_native_vlan(arg = nil)
+        set_or_return(:switchport_trunk_native_vlan, arg,
+                      :kind_of => [Fixnum, String])
       end
 
       def switchport_vtp(arg = nil)
