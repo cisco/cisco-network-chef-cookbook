@@ -128,7 +128,7 @@ See the recipes directory for example usage of cisco providers and resources.
 
 The following resources are listed alphabetically.
 
-### cisco_command_config
+### Type: cisco_command_config
 
 The `cisco_command_config` resource allows raw configurations to be managed by chef. It serves as a stopgap until specialized resources are created. It has the following limitations:
 
