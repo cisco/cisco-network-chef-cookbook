@@ -10,7 +10,7 @@ Cisco Network Elements support a rich set of features to make network robust, ef
 
 * Fork the repository
 * Pull a branch under the "**develop**" branch for your changes.
-* Follow all guidelines documented in [README-creating-resources-providers](https://github.com/cisco/cisco-network-chef-cookbook/README-creating-resources-providers.md)
+* Follow all guidelines documented in [README-develop-resources-providers.md](docs/README-develop-resources-providers.md)
 * Make changes in your branch.
 * Testing
   * Run all the tests to ensure there was no collateral damage to existing code.
