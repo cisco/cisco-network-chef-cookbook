@@ -4,7 +4,7 @@
 
 1. [Overview](#overview)
 2. [Syntax](#syntax)
-3. [Examples](examples)
+3. [Examples](#examples)
 4. [References](#references)
 
 ## <a name="overview">Overview</a>
