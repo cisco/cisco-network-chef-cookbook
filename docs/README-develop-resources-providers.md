@@ -533,7 +533,7 @@ end
 
 ## <a name="comp_test">Step 3. Testing: router eigrp</a>
 
-Similar to the test setup for the simple bash_shell example, this section assumes that a `router_eigrp.rb` node_utils API has already been written for our new router_eigrp resource and provider files. See [README-creating-node_utils-APIs.md][doc_nu] for more information on writing these APIs.
+Similar to the test setup for the simple bash_shell example, this section assumes that a `router_eigrp.rb` node_utils API has already been written for our new router_eigrp resource and provider files. See [README-develop-node_utils-APIs.md](https://github.com/cisco/cisco-network-node-utils/blob/master/docs/README-develop-node-utils-APIs.md) for more information on writing these APIs.
 
 ### <a name="eigrp_api">node_utils API: router_eigrp.rb</a>
 
