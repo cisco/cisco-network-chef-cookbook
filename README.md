@@ -161,7 +161,7 @@ end
 
 - `command` - The sequence of configuration commands to apply.
 
-### cisco_interface
+### Type: cisco_interface
 
 The `cisco_interface` resource is used to manage general configuration of all
 interface types, including ethernet, port-channel, loopback, and SVI (vlan).
@@ -262,7 +262,7 @@ Note that logical interfaces (loopback, SVI, etc.) can be created/destroyed,
 while physical interfaces (Ethernet, etc.) can only be configured/unconfigured.
 The same actions apply regardless.
 
-### cisco_interface_ospf
+### Type: cisco_interface_ospf
 
 The `cisco_interface_ospf` resource is used to manage per-interface OSPF
 configuration properties. More broadly applicable OSPF configuration is
@@ -332,7 +332,7 @@ end
 
 - `:destroy` - Removes all OSPF configuration on the interface.
 
-### cisco_ospf
+### Type: cisco_ospf
 
 The `cisco_ospf` resource is used to enable/disable OSPF on the switch.
 More detailed OSPF configuration is managed by the `cisco_ospf_vrf` and
@@ -358,7 +358,7 @@ end
 - `:destroy` - Destroys the given OSPF process. If no OSPF configuration
   remains, will also disable `feature ospf`.
 
-### cisco_ospf_vrf
+### Type: cisco_ospf_vrf
 
 The `cisco_ospf_vrf` resource is used to manage per-VRF OSPF configuration,
 including the `default` VRF.
@@ -435,7 +435,7 @@ end
 
 - `:destroy` - Removes the given VRF from the given OSPF process.
 
-### cisco_package
+### Type: cisco_package
 
 The `cisco_package` resource is a subclass of the Chef `yum_package` resource.
 Unlike `yum_package`, it will always install packages into the NX-OS native
@@ -465,7 +465,7 @@ See https://docs.chef.io/resource_package.html
 
 See https://docs.chef.io/resource_package.html
 
-### cisco_snmp_community
+### Type: cisco_snmp_community
 
 The `cisco_snmp_community` resource is used to manage SNMP communities.
 
@@ -495,7 +495,7 @@ end
 
 - `:destroy` - Destroy the given SNMP community.
 
-### cisco_snmp_group
+### Type: cisco_snmp_group
 
 The `cisco_snmp_group` resource is used to manage SNMP groups. Cisco NX-OS
 defines SNMP groups based on user roles, so this resource is unable to create
@@ -519,7 +519,7 @@ end
 
 - `:destroy` - Ensure that the given group does not exist, or raise an error.
 
-### cisco_snmp_server
+### Type: cisco_snmp_server
 
 The `cisco_snmp_server` resource is used to manage the SNMP server configuration
 on a node. There can only be one instance of this resource per node.
@@ -563,7 +563,7 @@ end
 
 - `:update` - Apply changes to the SNMP server configuration as necessary.
 
-### cisco_snmp_user
+### Type: cisco_snmp_user
 
 The `cisco_snmp_user` resource is used to manage SNMP user configuration.
 
@@ -615,7 +615,7 @@ end
 
 - `:destroy` - Destroy the given SNMP user.
 
-### cisco_tacacs_server
+### Type: cisco_tacacs_server
 
 The `cisco_tacacs_server` resource is used to manage global TACACS+ server
 configuration. There can only be one instance of this resource per node.
@@ -659,7 +659,7 @@ end
 
 - `:destroy` - Disable TACACS+.
 
-### cisco_tacacs_server_host
+### Type: cisco_tacacs_server_host
 
 The `cisco_tacacs_server_host` resource is used to manage per-host TACACS+
 configuration.
@@ -696,7 +696,7 @@ end
 
 - `:destroy` - Remove all configuration for this host.
 
-### cisco_vlan
+### Type: cisco_vlan
 
 The `cisco_vlan` resource is used to manage VLAN configuration.
 
@@ -729,7 +729,7 @@ end
 
 - `:destroy` - Delete the specified VLAN.
 
-### cisco_vtp
+### Type: cisco_vtp
 
 The `cisco_vtp` resource is used to manage VLAN Trunking Protocol (VTP)
 configuration. There can only be one instance of this resource per node.
