@@ -5,9 +5,7 @@
 1. [Overview](#overview)
 2. [Syntax](#syntax)
 3. [Examples](examples)
-9. [References](#references)
-10. [Limitations](#limitations)
-11. [Known Issues](#issues)
+4. [References](#references)
 
 ## <a name="overview">Overview</a>
 
@@ -33,7 +31,7 @@ where:
 
 * `source` Optional. Path to local file or URI for remote RPMs.
 
-## <a name="Examples">Examples</a>
+## <a name="examples">Examples</a>
 
 * **Cisco RPMs**
 
@@ -63,7 +61,4 @@ cisco_package { 'n9000_sample':
 
 [Cisco Nexus Programmability Guide](http://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus9000/sw/6-x/programmability/guide/b_Cisco_Nexus_9000_Series_NX-OS_Programmability_Guide/b_Cisco_Nexus_9000_Series_NX-OS_Programmability_Guide_chapter_01010.html) - Guestshell Documentation
 
-## <a name="limitations">Limitations</a>
-
-## <a name="issues">Known Issues</a>
 
