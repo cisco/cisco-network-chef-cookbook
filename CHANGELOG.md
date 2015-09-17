@@ -11,6 +11,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - switchport trunk native vlan
   - vrf member
 
+### Fixed
+- Fixed broken documentation links under root and docs folder.
+
 ## [1.0.0] - 2015-08-28
 ### Added
 - Added README-maintainers.md
