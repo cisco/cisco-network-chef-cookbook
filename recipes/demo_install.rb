@@ -18,7 +18,6 @@
 
 # In our recipes, due to the number of different parameters, we prefer to align
 # the arguments in a single column rather than following rubocop's style.
-# rubocop:disable Style/SingleSpaceBeforeFirstArg
 Chef::Log.info('Install cisco package:')
 
 cookbook_file '/bootflash/n9000_sample-1.0.0-7.0.3.x86_64.rpm' do
@@ -246,4 +245,3 @@ end
 cisco_snmp_user 'v3test' do
   groups ['network-admin']
 end
-# rubocop:enable Style/SingleSpaceBeforeFirstArg
