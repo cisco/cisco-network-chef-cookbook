@@ -21,7 +21,7 @@ $:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FIL
 require 'cisco_node_utils'
 
 TS_ENCRYPTION_TYPE_HASH = {
-  'none'   => Cisco::TACACS_SERVER_ENC_UNKNOWN,
+  'none'      => Cisco::TACACS_SERVER_ENC_UNKNOWN,
   'clear'     => Cisco::TACACS_SERVER_ENC_NONE,
   'encrypted' => Cisco::TACACS_SERVER_ENC_CISCO_TYPE_7,
 }
@@ -44,9 +44,9 @@ class Chef
 
     def action_create
       if Cisco::TacacsServer.enabled
-        Chef::Log.debug "tacacs server already enabled"
+        Chef::Log.debug 'tacacs server already enabled'
       else
-        converge_by("enable feature tacacs+") {}
+        converge_by('enable feature tacacs+') {}
         return if whyrun_mode?
         @tacacs_server.enable
       end
@@ -56,11 +56,11 @@ class Chef
     def action_destroy
       if Cisco::TacacsServer.enabled
         # Only one instance of tacacs_server per box, just remove the feature
-        converge_by("disable feature tacacs+") do
+        converge_by('disable feature tacacs+') do
           @tacacs_server.destroy
         end
       else
-        Chef::Log.debug "tacacs server already disabled"
+        Chef::Log.debug 'tacacs server already disabled'
       end
     end
 
@@ -92,7 +92,7 @@ class Chef
       @new_resource.directed_request(Cisco::TacacsServer.default_directed_request) if
         @new_resource.directed_request.nil?
       if @tacacs_server.directed_request? != @new_resource.directed_request
-        converge_by("update directed_request from " +
+        converge_by('update directed_request from ' +
                     "#{@tacacs_server.directed_request?} to " +
                     @new_resource.directed_request.to_s) do
           @tacacs_server.directed_request = @new_resource.directed_request
@@ -103,7 +103,7 @@ class Chef
       @new_resource.source_interface(Cisco::TacacsServer.default_source_interface) if
         @new_resource.source_interface.nil?
       if @tacacs_server.source_interface != @new_resource.source_interface
-        converge_by("update source_interface from " +
+        converge_by('update source_interface from ' +
                     "#{@tacacs_server.source_interface} to " +
                     @new_resource.source_interface) do
           @tacacs_server.source_interface = @new_resource.source_interface
@@ -120,7 +120,7 @@ class Chef
       # If neither encryption type nor password is specified, treat it as
       # no password. Otherwise use default
       if @new_resource.encryption_type.nil? and @new_resource.encryption_password.nil?
-        @new_resource.encryption_type("none")
+        @new_resource.encryption_type('none')
       else
         @new_resource.encryption_type(tacacs_server_def_type_string) if
           @new_resource.encryption_type.nil?
@@ -131,17 +131,17 @@ class Chef
       if tacacs_server_type_string != @new_resource.encryption_type ||
          @tacacs_server.encryption_password != @new_resource.encryption_password
 
-        if @new_resource.encryption_type == "default"
+        if @new_resource.encryption_type == 'default'
           new_resource_type_value = Cisco::TACACS_SERVER_ENC_NONE
         else
           new_resource_type_value =
             TS_ENCRYPTION_TYPE_HASH[@new_resource.encryption_type]
         end
 
-        if @new_resource.encryption_type == "none"
-          cb_msg = "Removing encryption key and password"
+        if @new_resource.encryption_type == 'none'
+          cb_msg = 'Removing encryption key and password'
         else
-          cb_msg = "update encryption_type and password from " +
+          cb_msg = 'update encryption_type and password from ' +
                    "'#{@tacacs_server.encryption_type}" +
                    " #{@tacacs_server.encryption_password}' to " +
                    "'#{new_resource_type_value} #{@new_resource.encryption_password}'"

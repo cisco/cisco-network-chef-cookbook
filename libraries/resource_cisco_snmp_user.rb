@@ -36,13 +36,13 @@ class Chef
         validate_name(name.strip)
         @name = name.strip
         @user = @@title_pattern.match(@name)[1]
-        @engine_id = @@title_pattern.match(@name)[2].nil? ? "" : @@title_pattern.match(@name)[2]
+        @engine_id = @@title_pattern.match(@name)[2].nil? ? '' : @@title_pattern.match(@name)[2]
       end
 
       # use chef's built-in validation to validate name parameter
       def validate_name(arg = nil)
         set_or_return(:name, arg, :kind_of => String, :callbacks => {
-                        "user must be string of word characters and Engine ID should be either empty string or 5 to 32 octets separated by colons" => lambda {
+                        'user must be string of word characters and Engine ID should be either empty string or 5 to 32 octets separated by colons' => lambda {
                           |name| !@@title_pattern.match(name).nil?
                         }
                       })
@@ -74,7 +74,7 @@ class Chef
 
       def groups(arg = nil)
         set_or_return(:groups, arg, :kind_of => Array, :callbacks => {
-                        "must be kind of String" => lambda {
+                        'must be kind of String' => lambda {
                           |groups| groups.select { |group| not group.kind_of? String }.empty?
                         }
                       })

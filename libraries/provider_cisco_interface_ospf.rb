@@ -56,10 +56,10 @@ class Chef
       if @interface_ospf &&
          (@interface_ospf.area != @new_resource.area.to_s ||
           @interface_ospf.ospf_name != @new_resource.ospf)
-        converge_by("OSPF process name and/or area has changed " +
+        converge_by('OSPF process name and/or area has changed ' +
                     "(#{@interface_ospf.ospf_name}, #{@interface_ospf.area}) " +
                     "=> (#{@new_resource.ospf}, #{@new_resource.area}), " +
-                    "remove old config") do
+                    'remove old config') do
           @interface_ospf.destroy
           @interface_ospf = nil
         end
@@ -80,8 +80,8 @@ class Chef
         @new_resource.message_digest.nil?
 
       unless @new_resource.message_digest == @interface_ospf.message_digest
-        converge_by "config authentication message_digest to " +
-          @new_resource.message_digest.to_s do
+        converge_by 'config authentication message_digest to ' +
+                    @new_resource.message_digest.to_s do
           @interface_ospf.message_digest = @new_resource.message_digest
         end
       end
@@ -115,11 +115,11 @@ class Chef
                @new_resource.message_digest_password ==
                @interface_ospf.message_digest_password
 
-          converge_by "configure message_digest " +
-            "#{@new_resource.message_digest_key_id} " +
-            "#{@new_resource.message_digest_algorithm_type} " +
-            "#{@new_resource.message_digest_encryption_type} " +
-            "#{@new_resource.message_digest_password} " do
+          converge_by 'configure message_digest ' +
+                      "#{@new_resource.message_digest_key_id} " +
+                      "#{@new_resource.message_digest_algorithm_type} " +
+                      "#{@new_resource.message_digest_encryption_type} " +
+                      "#{@new_resource.message_digest_password} " do
             @interface_ospf.message_digest_key_set(
               @new_resource.message_digest_key_id,
               @new_resource.message_digest_algorithm_type,
@@ -131,9 +131,9 @@ class Chef
         # checking for nil password is sufficient to check if message_digest
         # is configured
         unless @interface_ospf.message_digest_password.nil?
-          converge_by "unconfigure message_digest" do
+          converge_by 'unconfigure message_digest' do
             @interface_ospf.message_digest_key_set(
-              @interface_ospf.default_message_digest_key_id, "", "", "")
+              @interface_ospf.default_message_digest_key_id, '', '', '')
           end
         end
       end
@@ -151,28 +151,28 @@ class Chef
 
       if @new_resource.cost != @interface_ospf.cost
         converge_by "update cost #{@interface_ospf.cost} => " +
-          @new_resource.cost.to_s do
+                    @new_resource.cost.to_s do
           @interface_ospf.cost = @new_resource.cost
         end
       end
       if @new_resource.hello_interval != @interface_ospf.hello_interval
-        converge_by "update hello_interval " +
-          "#{@interface_ospf.hello_interval} => " +
-          @new_resource.hello_interval.to_s do
+        converge_by 'update hello_interval ' +
+                    "#{@interface_ospf.hello_interval} => " +
+                    @new_resource.hello_interval.to_s do
           @interface_ospf.hello_interval = @new_resource.hello_interval
         end
       end
       if @new_resource.dead_interval != @interface_ospf.dead_interval
-        converge_by "update dead_interval " +
-          "#{@interface_ospf.dead_interval} => " +
-          @new_resource.dead_interval.to_s do
+        converge_by 'update dead_interval ' +
+                    "#{@interface_ospf.dead_interval} => " +
+                    @new_resource.dead_interval.to_s do
           @interface_ospf.dead_interval = @new_resource.dead_interval
         end
       end
       if @new_resource.passive_interface != @interface_ospf.passive_interface
-        converge_by "update passive_interface " +
-          "#{@interface_ospf.passive_interface} => " +
-          @new_resource.passive_interface.to_s do
+        converge_by 'update passive_interface ' +
+                    "#{@interface_ospf.passive_interface} => " +
+                    @new_resource.passive_interface.to_s do
           @interface_ospf.passive_interface = @new_resource.passive_interface
         end
       end

@@ -26,7 +26,7 @@ class Chef
         super
         @resource_name = :cisco_vlan
         @action = :create
-        @allowed_actions =  [
+        @allowed_actions = [
           :create,
           :destroy
         ]

@@ -39,7 +39,7 @@ class Chef
   class Provider
     class Package
       class CiscoPackage < Chef::Provider::Package::Yum
-        provides :cisco_package, os: "linux"
+        provides :cisco_package, os: 'linux'
 
         # ex: chef-12.0.0alpha.2+20150319.git.1.b6f-1.el5.x86_64.rpm
         @@name_ver_arch_regex = /^([\w\-\+]+)-(\d+\..*)\.(\w{4,})(?:\.rpm)?$/
@@ -59,7 +59,7 @@ class Chef
 
         def load_current_resource
           if detect_gs
-            Chef::Log.debug "load_current_resource (GS, use nxapi yum)"
+            Chef::Log.debug 'load_current_resource (GS, use nxapi yum)'
 
             # package name can be either:
             # 1. shortname, e.g. bgp-dev
@@ -97,7 +97,7 @@ class Chef
             @new_resource.source.gsub!(/^\/([^\/]+)\//, '\1:') if
               @new_resource.source
           else
-            Chef::Log.debug "load_current_resource (NATIVE, use native yum)"
+            Chef::Log.debug 'load_current_resource (NATIVE, use native yum)'
 
             # replace bootflash:path with /bootflash/path for native env
             @new_resource.source.gsub!(/^([^\/]+):\/?/, '/\1/') if
@@ -108,7 +108,7 @@ class Chef
 
         def action_install
           if detect_gs
-            Chef::Log.debug "action_install (GS, use nxapi yum)"
+            Chef::Log.debug 'action_install (GS, use nxapi yum)'
 
             installed_ver = get_installed_ver
             # want to install the package if:
@@ -124,14 +124,14 @@ class Chef
               end
             end
           else
-            Chef::Log.debug "action_install (NATIVE, use native yum)"
+            Chef::Log.debug 'action_install (NATIVE, use native yum)'
             super
           end
         end
 
         def action_remove
           if detect_gs
-            Chef::Log.debug "action_remove (GS, use nxapi yum)"
+            Chef::Log.debug 'action_remove (GS, use nxapi yum)'
 
             installed_ver = get_installed_ver
             # want to remove if:
@@ -147,7 +147,7 @@ class Chef
               end
             end
           else
-            Chef::Log.debug "action_remove (NATIVE, use native yum)"
+            Chef::Log.debug 'action_remove (NATIVE, use native yum)'
             super
           end
         end

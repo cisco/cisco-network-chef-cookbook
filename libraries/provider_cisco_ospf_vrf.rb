@@ -62,7 +62,7 @@ class Chef
 
       # default_metric is standard and can be generated
       props = [:default_metric]
-      Cisco::ChefUtils.generic_prop_set(self, "@ospf_vrf", props)
+      Cisco::ChefUtils.generic_prop_set(self, '@ospf_vrf', props)
 
       # set defaults
       @new_resource.auto_cost(cost_to_mbps(@ospf_vrf.default_auto_cost)) if
@@ -93,7 +93,7 @@ class Chef
       curr_cost = cost_to_mbps(@ospf_vrf.auto_cost)
       unless @new_resource.auto_cost == curr_cost
         converge_by "update auto_cost #{curr_cost} " +
-          "=> #{@new_resource.auto_cost}" do
+                    "=> #{@new_resource.auto_cost}" do
           @ospf_vrf.auto_cost_set(@new_resource.auto_cost,
                                   Cisco::RouterOspfVrf::OSPF_AUTO_COST[:mbps])
         end
@@ -101,13 +101,13 @@ class Chef
 
       unless @ospf_vrf.router_id == @new_resource.router_id
         converge_by "update router_id #{@ospf_vrf.router_id} => " +
-          @new_resource.router_id do
+                    @new_resource.router_id do
           @ospf_vrf.router_id = @new_resource.router_id
         end
       end
       unless @new_resource.log_adjacency == @ospf_vrf.log_adjacency.to_s
         converge_by "update log_adjacency #{@ospf_vrf.log_adjacency} => " +
-          @new_resource.log_adjacency do
+                    @new_resource.log_adjacency do
           @ospf_vrf.log_adjacency = @new_resource.log_adjacency.to_sym
         end
       end
@@ -118,10 +118,10 @@ class Chef
              @ospf_vrf.timer_throttle_lsa_hold and
              @new_resource.timer_throttle_lsa_start ==
              @ospf_vrf.timer_throttle_lsa_start
-        converge_by "update timer_throttle_lsa [start, hold, max] => " +
-          "[#{@new_resource.timer_throttle_lsa_start}, " +
-          "#{@new_resource.timer_throttle_lsa_hold}, " +
-          "#{@new_resource.timer_throttle_lsa_max}]" do
+        converge_by 'update timer_throttle_lsa [start, hold, max] => ' +
+                    "[#{@new_resource.timer_throttle_lsa_start}, " +
+                    "#{@new_resource.timer_throttle_lsa_hold}, " +
+                    "#{@new_resource.timer_throttle_lsa_max}]" do
           @ospf_vrf.timer_throttle_lsa_set(
             @new_resource.timer_throttle_lsa_start,
             @new_resource.timer_throttle_lsa_hold,
@@ -135,10 +135,10 @@ class Chef
              @ospf_vrf.timer_throttle_spf_hold and
              @new_resource.timer_throttle_spf_start ==
              @ospf_vrf.timer_throttle_spf_start
-        converge_by "update timer_throttle_spf [start, hold, max] => " +
-          "[#{@new_resource.timer_throttle_spf_start}, " +
-          "#{@new_resource.timer_throttle_spf_hold}, " +
-          "#{@new_resource.timer_throttle_spf_max}]" do
+        converge_by 'update timer_throttle_spf [start, hold, max] => ' +
+                    "[#{@new_resource.timer_throttle_spf_start}, " +
+                    "#{@new_resource.timer_throttle_spf_hold}, " +
+                    "#{@new_resource.timer_throttle_spf_max}]" do
           @ospf_vrf.timer_throttle_spf_set(
             @new_resource.timer_throttle_spf_start,
             @new_resource.timer_throttle_spf_hold,
@@ -149,7 +149,7 @@ class Chef
 
     def action_destroy
       unless @ospf_vrf.nil?
-        raise ArgumentError.new "use cisco_ospf to remove default vrf" if
+        raise ArgumentError.new 'use cisco_ospf to remove default vrf' if
           @new_resource.vrf == 'default'
         converge_by "destroy ospf vrf '#{@new_resource.name}'" do
           @ospf_vrf.destroy

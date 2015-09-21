@@ -49,7 +49,7 @@ class Chef
       @vlan = Cisco::Vlan.new(@name, instantiate) if @vlan.nil?
 
       props = [:vlan_name, :state, :shutdown]
-      Cisco::ChefUtils.generic_prop_set(self, "@vlan", props)
+      Cisco::ChefUtils.generic_prop_set(self, '@vlan', props)
     end
 
     def action_destroy

@@ -39,7 +39,7 @@ class Chef
       super(new_resource, run_context)
       # @new_resource.name holds the configuration from the original recipe.
       # @min_config_str is the pre-processed, minimum config to apply to running
-      @min_config_str = ""
+      @min_config_str = ''
       @name = new_resource.name
       Chef::Log.debug "Cisco commandconfig #{@name}"
     end
@@ -49,10 +49,10 @@ class Chef
     end
 
     def load_current_resource
-      Chef::Log.debug "Load current resource for free-form configuration"
+      Chef::Log.debug 'Load current resource for free-form configuration'
       @current_resource = Chef::Resource::CiscoCommandConfig.new(@name)
 
-      running_config_str = @@node.show("show running-config all")
+      running_config_str = @@node.show('show running-config all')
 
       # Sanitize new config (from recipe)
       @new_resource.command.gsub!(/^\s*$\n/, '')

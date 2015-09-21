@@ -142,7 +142,7 @@ Chef::Log.info('Demo cisco_vlan provider')
 cisco_vlan '220' do
   action    :create
   vlan_name 'newtest'
-  shutdown   true
+  shutdown  true
   state     'active'
 end
 
@@ -217,7 +217,7 @@ cisco_vtp 'default' do
   action      :create
   domain      'cisco1234'
   password    'test1234'
-  version      2
+  version     2
   filename    'bootflash:/vlan.dat'
 end
 

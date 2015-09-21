@@ -42,26 +42,26 @@ class Chef
 
     def action_create
       if Cisco::Vtp.enabled
-        Chef::Log.debug "feature vtp already enabled"
+        Chef::Log.debug 'feature vtp already enabled'
       else
-        converge_by("enable feature vtp") {}
+        converge_by('enable feature vtp') {}
         return if whyrun_mode?
         @vtp.enable
       end
       @vtp = Cisco::Vtp.new if @vtp.nil?
 
       props = [:domain, :filename, :version, :password]
-      Cisco::ChefUtils.generic_prop_set(self, "@vtp", props)
+      Cisco::ChefUtils.generic_prop_set(self, '@vtp', props)
     end
 
     def action_destroy
       if Cisco::Vtp.enabled
-        converge_by("disable vtp") do
+        converge_by('disable vtp') do
           @vtp.destroy
           @vtp = nil
         end
       else
-        Chef::Log.debug "feature vtp already disabled"
+        Chef::Log.debug 'feature vtp already disabled'
       end
     end
   end

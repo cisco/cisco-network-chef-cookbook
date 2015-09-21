@@ -36,7 +36,7 @@ class Chef
       super(new_resource, run_context)
 
       if new_resource.name.empty?
-        fail "Interface name cannot be empty"
+        fail 'Interface name cannot be empty'
       end
 
       @interface = nil
@@ -54,7 +54,7 @@ class Chef
     end
 
     def prop_set(props)
-      Cisco::ChefUtils.generic_prop_set(self, "@interface", props)
+      Cisco::ChefUtils.generic_prop_set(self, '@interface', props)
     end
 
     # Wrapper for properties that are only supported on certain interfaces;

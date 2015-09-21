@@ -57,7 +57,7 @@ class Chef
 
     # Helper method to set properties
     def prop_set(props)
-      Cisco::ChefUtils.generic_prop_set(self, "@router", props)
+      Cisco::ChefUtils.generic_prop_set(self, '@router', props)
     end
 
     # Complex properties: includes compound properties and other complex

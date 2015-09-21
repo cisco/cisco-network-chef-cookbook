@@ -37,7 +37,7 @@ class Chef
 
     def action_enable
       unless Cisco::X__CLASS_NAME__X.feature_enabled
-        converge_by("enable feature X__CLI_NAME__X") {}
+        converge_by('enable feature X__CLI_NAME__X') {}
         return if whyrun_mode?
         @X__RESOURCE_NAME__X.feature_enable
       end
@@ -45,7 +45,7 @@ class Chef
 
     def action_disable
       if Cisco::X__CLASS_NAME__X.feature_enabled
-        converge_by("disable feature X__CLI_NAME__X") do
+        converge_by('disable feature X__CLI_NAME__X') do
           @X__RESOURCE_NAME__X.feature_disable
           @X__RESOURCE_NAME__X = nil
         end

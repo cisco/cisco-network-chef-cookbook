@@ -55,7 +55,7 @@ class Chef
       @new_resource.aaa_user_cache_timeout(@element.default_aaa_user_cache_timeout) if
         @new_resource.aaa_user_cache_timeout.nil?
       if @element.aaa_user_cache_timeout != @new_resource.aaa_user_cache_timeout
-        converge_by("update aaa_user_cache_timeout " +
+        converge_by('update aaa_user_cache_timeout ' +
                     "'#{@element.aaa_user_cache_timeout}'" +
                     " => '#{@new_resource.aaa_user_cache_timeout}'") do
           @element.aaa_user_cache_timeout = @new_resource.aaa_user_cache_timeout
@@ -93,7 +93,7 @@ class Chef
         @new_resource.tcp_session_auth.nil?
       if @element.tcp_session_auth? != @new_resource.tcp_session_auth
         converge_by("update tcp_session_auth '#{@element.tcp_session_auth?}'" +
-          " => '#{@new_resource.tcp_session_auth}'") do
+                    " => '#{@new_resource.tcp_session_auth}'") do
           @element.tcp_session_auth = @new_resource.tcp_session_auth
         end
       end
