@@ -22,39 +22,39 @@ class Chef
     class Resource::CiscoSnmpServer < Resource
       attr_accessor :cisco_snmp_server
 
-      def initialize(name, run_context = nil)
+      def initialize(name, run_context=nil)
         super
         @resource_name = :cisco_snmp_server
         @action = :update
         @allowed_actions = [:update]
       end
 
-      def aaa_user_cache_timeout(arg = nil)
-        set_or_return(:aaa_user_cache_timeout, arg, :kind_of => Fixnum)
+      def aaa_user_cache_timeout(arg=nil)
+        set_or_return(:aaa_user_cache_timeout, arg, kind_of: Fixnum)
       end
 
-      def location(arg = nil)
-        set_or_return(:location, arg, :kind_of => String)
+      def location(arg=nil)
+        set_or_return(:location, arg, kind_of: String)
       end
 
-      def contact(arg = nil)
-        set_or_return(:contact, arg, :kind_of => String)
+      def contact(arg=nil)
+        set_or_return(:contact, arg, kind_of: String)
       end
 
-      def packet_size(arg = nil)
-        set_or_return(:packet_size, arg, :kind_of => Fixnum)
+      def packet_size(arg=nil)
+        set_or_return(:packet_size, arg, kind_of: Fixnum)
       end
 
-      def global_enforce_priv(arg = nil)
-        set_or_return(:global_enforce_priv, arg, :kind_of => [TrueClass, FalseClass])
+      def global_enforce_priv(arg=nil)
+        set_or_return(:global_enforce_priv, arg, kind_of: [TrueClass, FalseClass])
       end
 
-      def protocol(arg = nil)
-        set_or_return(:protocol, arg, :kind_of => [TrueClass, FalseClass])
+      def protocol(arg=nil)
+        set_or_return(:protocol, arg, kind_of: [TrueClass, FalseClass])
       end
 
-      def tcp_session_auth(arg = nil)
-        set_or_return(:tcp_session_auth, arg, :kind_of => [TrueClass, FalseClass])
+      def tcp_session_auth(arg=nil)
+        set_or_return(:tcp_session_auth, arg, kind_of: [TrueClass, FalseClass])
       end
     end
   end

@@ -41,14 +41,14 @@ class Chef
     class Resource::CiscoCommandConfig < Resource
       attr_accessor :exists, :cisco_command_config
 
-      def initialize(name, run_context = nil)
+      def initialize(name, run_context=nil)
         super
         @resource_name = :cisco_command_config
         @action = :update
         @allowed_actions = [:update]
       end
 
-      def command(arg = nil)
+      def command(arg=nil)
         set_or_return(:command, arg, kind_of: String)
       end
     end

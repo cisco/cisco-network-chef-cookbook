@@ -17,7 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
+$LOAD_PATH.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -42,9 +42,7 @@ class Chef
     end
 
     def action_create
-      if @vlan.nil?
-        converge_by("Create vlan '#{@name}'") {}
-      end
+      converge_by("Create vlan '#{@name}'") {} if @vlan.nil?
       instantiate = whyrun_mode? ? false : true
       @vlan = Cisco::Vlan.new(@name, instantiate) if @vlan.nil?
 

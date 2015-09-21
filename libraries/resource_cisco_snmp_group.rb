@@ -20,15 +20,15 @@
 class Chef
   class Resource
     class Resource::CiscoSnmpGroup < Resource
-      def initialize(group, run_context = nil)
+      def initialize(group, run_context=nil)
         super
         @resource_name = :cisco_snmp_group
         @action = :create
         @allowed_actions = [:create, :destroy]
       end
 
-      def group(arg = nil)
-        set_or_return(:group, arg, :kind_of => String)
+      def group(arg=nil)
+        set_or_return(:group, arg, kind_of: String)
       end
     end
   end

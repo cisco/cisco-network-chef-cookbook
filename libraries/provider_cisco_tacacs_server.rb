@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
+$LOAD_PATH.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -92,7 +92,7 @@ class Chef
       @new_resource.directed_request(Cisco::TacacsServer.default_directed_request) if
         @new_resource.directed_request.nil?
       if @tacacs_server.directed_request? != @new_resource.directed_request
-        converge_by('update directed_request from ' +
+        converge_by('update directed_request from ' \
                     "#{@tacacs_server.directed_request?} to " +
                     @new_resource.directed_request.to_s) do
           @tacacs_server.directed_request = @new_resource.directed_request
@@ -103,7 +103,7 @@ class Chef
       @new_resource.source_interface(Cisco::TacacsServer.default_source_interface) if
         @new_resource.source_interface.nil?
       if @tacacs_server.source_interface != @new_resource.source_interface
-        converge_by('update source_interface from ' +
+        converge_by('update source_interface from ' \
                     "#{@tacacs_server.source_interface} to " +
                     @new_resource.source_interface) do
           @tacacs_server.source_interface = @new_resource.source_interface
@@ -119,7 +119,7 @@ class Chef
 
       # If neither encryption type nor password is specified, treat it as
       # no password. Otherwise use default
-      if @new_resource.encryption_type.nil? and @new_resource.encryption_password.nil?
+      if @new_resource.encryption_type.nil? && @new_resource.encryption_password.nil?
         @new_resource.encryption_type('none')
       else
         @new_resource.encryption_type(tacacs_server_def_type_string) if
@@ -141,9 +141,9 @@ class Chef
         if @new_resource.encryption_type == 'none'
           cb_msg = 'Removing encryption key and password'
         else
-          cb_msg = 'update encryption_type and password from ' +
-                   "'#{@tacacs_server.encryption_type}" +
-                   " #{@tacacs_server.encryption_password}' to " +
+          cb_msg = 'update encryption_type and password from ' \
+                   "'#{@tacacs_server.encryption_type}" \
+                   " #{@tacacs_server.encryption_password}' to " \
                    "'#{new_resource_type_value} #{@new_resource.encryption_password}'"
         end
 

@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
+$LOAD_PATH.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -35,9 +35,7 @@ class Chef
     def initialize(new_resource, run_context)
       super(new_resource, run_context)
 
-      if new_resource.name.empty?
-        fail 'Interface name cannot be empty'
-      end
+      fail 'Interface name cannot be empty' if new_resource.name.empty?
 
       @interface = nil
       @name = new_resource.name
@@ -62,21 +60,19 @@ class Chef
     # node_utils layer returns non-nil or it's an explicit property in the recipe.
     def prop_set_if_supported(props)
       props.each do |prop|
-        prop_set([prop]) if @interface.send(prop) or @new_resource.send(prop)
+        prop_set([prop]) if @interface.send(prop) || @new_resource.send(prop)
       end
     end
 
     def action_create
-      if @interface.nil?
-        converge_by("create interface '#{@name}'") {}
-      end
+      converge_by("create interface '#{@name}'") {} if @interface.nil?
       instantiate = whyrun_mode? ? false : true
       @interface = Cisco::Interface.new(@name, instantiate) if @interface.nil?
 
       # conditions in which we want to set ipv4 properties
-      if @new_resource.switchport_mode == 'disabled' or
-         ((@interface.default_switchport_mode == :disabled) and
-          (@new_resource.switchport_mode.nil? or
+      if @new_resource.switchport_mode == 'disabled' ||
+         ((@interface.default_switchport_mode == :disabled) &&
+          (@new_resource.switchport_mode.nil? ||
            (@new_resource.switchport_mode == 'default')))
 
         set_layer3_properties
@@ -89,7 +85,7 @@ class Chef
       # switchport must be enabled or disabled before other properties can be
       # configured.
       @new_resource.switchport_mode(@interface.default_switchport_mode.to_s) if
-        @new_resource.switchport_mode.nil? or
+        @new_resource.switchport_mode.nil? ||
         @new_resource.switchport_mode == 'default'
 
       if @interface.switchport_mode.to_s != @new_resource.switchport_mode
@@ -123,7 +119,7 @@ class Chef
 
       if @interface.ipv4_address != @new_resource.ipv4_address ||
          @interface.ipv4_netmask_length != @new_resource.ipv4_netmask_length
-        converge_by("update ipv4_address/netmask '#{@interface.ipv4_address}/" +
+        converge_by("update ipv4_address/netmask '#{@interface.ipv4_address}/" \
                     "#{@interface.ipv4_netmask_length}' => #{@new_resource.ipv4_address}/" +
                     @new_resource.ipv4_netmask_length.to_s) do
           @interface.ipv4_addr_mask_set(@new_resource.ipv4_address,

@@ -17,7 +17,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
+$LOAD_PATH.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -60,7 +60,7 @@ class Chef
 
       @new_resource.acl(@snmp_community.default_acl) if @new_resource.acl.nil?
       if @new_resource.acl != @snmp_community.acl
-        converge_by('update SnmpCommunity ACL ' +
+        converge_by('update SnmpCommunity ACL ' \
                     "'#{@snmp_community.acl}' => '#{@new_resource.acl}'") do
           @snmp_community.acl = @new_resource.acl
         end

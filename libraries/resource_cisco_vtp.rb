@@ -22,27 +22,27 @@ class Chef
     class Resource::CiscoVtp < Resource
       attr_accessor :cisco_vtp
 
-      def initialize(name, run_context = nil)
+      def initialize(name, run_context=nil)
         super
         @resource_name = :cisco_vtp
         @action = :create
         @allowed_actions = [:create, :destroy]
       end
 
-      def domain(arg = nil)
-        set_or_return(:domain, arg, :kind_of => String)
+      def domain(arg=nil)
+        set_or_return(:domain, arg, kind_of: String)
       end
 
-      def version(arg = nil)
-        set_or_return(:version, arg, :kind_of => Fixnum)
+      def version(arg=nil)
+        set_or_return(:version, arg, kind_of: Fixnum)
       end
 
-      def filename(arg = nil)
-        set_or_return(:filename, arg, :kind_of => String)
+      def filename(arg=nil)
+        set_or_return(:filename, arg, kind_of: String)
       end
 
-      def password(arg = nil)
-        set_or_return(:password, arg, :kind_of => String)
+      def password(arg=nil)
+        set_or_return(:password, arg, kind_of: String)
       end
     end
   end

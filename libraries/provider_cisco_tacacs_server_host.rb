@@ -16,12 +16,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
+$LOAD_PATH.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
 ENC_TYPE = {
-  'none'   => Cisco::TACACS_SERVER_ENC_UNKNOWN,
+  'none'      => Cisco::TACACS_SERVER_ENC_UNKNOWN,
   'clear'     => Cisco::TACACS_SERVER_ENC_NONE,
   'encrypted' => Cisco::TACACS_SERVER_ENC_CISCO_TYPE_7,
 }
@@ -35,9 +35,9 @@ class Chef
     end
 
     def load_current_resource
-      @host = Cisco::TacacsServerHost.hosts.values.find { |host|
+      @host = Cisco::TacacsServerHost.hosts.values.find do |host|
         host.name == @new_resource.name
-      }
+      end
     end
 
     def action_create
@@ -60,7 +60,7 @@ class Chef
         @new_resource.timeout.nil?
       if @host.timeout != @new_resource.timeout
         converge_by "update timeout #{@host.timeout} => " +
-                    @new_resource.timeout.to_s do
+          @new_resource.timeout.to_s do
           @host.timeout = @new_resource.timeout
         end
       end
@@ -71,7 +71,7 @@ class Chef
 
       # If neither encryption nor type specifed, treat it as no key configure;
       # otherwise, use default
-      if @new_resource.encryption_type.nil? and @new_resource.encryption_password.nil?
+      if @new_resource.encryption_type.nil? && @new_resource.encryption_password.nil?
         @new_resource.encryption_type('none')
       else
         @new_resource.encryption_type(def_type_s) if
@@ -90,8 +90,8 @@ class Chef
         if @new_resource.encryption_type == 'none'
           cb_msg = 'remove encryption key and password'
         else
-          cb_msg = 'update encryption_type and password ' +
-                   "'#{@host.encryption_type} #{@host.encryption_password}' => " +
+          cb_msg = 'update encryption_type and password ' \
+                   "'#{@host.encryption_type} #{@host.encryption_password}' => " \
                    "'#{type_v} #{@new_resource.encryption_password}'"
         end
 

@@ -20,7 +20,7 @@ class Chef
     class Resource::CiscoX__CLASS_NAME__X < Resource
       attr_accessor :exists, :cisco_X__RESOURCE_NAME__X
 
-      def initialize(name, run_context = nil)
+      def initialize(name, run_context=nil)
         super
         @resource_name = :cisco_X__RESOURCE_NAME__X
         @name = name

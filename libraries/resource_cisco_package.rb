@@ -36,7 +36,7 @@
 class Chef
   class Resource
     class CiscoPackage < Chef::Resource::Package::YumPackage
-      def initialize(name, run_context = nil)
+      def initialize(name, run_context=nil)
         super
         @resource_name = :cisco_package
       end

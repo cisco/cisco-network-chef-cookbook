@@ -24,10 +24,10 @@ class Chef
     class Resource::CiscoSnmpUser < Resource
       attr_accessor :user, :engine_id
 
-      @@auth_choices = ['md5', 'sha', 'none']
-      @@priv_choices = ['des', 'aes128', 'none']
+      @@auth_choices = %w(md5 sha none)
+      @@priv_choices = %w(des aes128 none)
       @@title_pattern = /^(\w+)\s*([0-9]{1,3}(?::[0-9]{1,3}){4,31})?\s*$/
-      def initialize(name, run_context = nil)
+      def initialize(name, run_context=nil)
         super
         @resource_name = :cisco_snmp_user
         @action = :create
@@ -40,48 +40,50 @@ class Chef
       end
 
       # use chef's built-in validation to validate name parameter
-      def validate_name(arg = nil)
-        set_or_return(:name, arg, :kind_of => String, :callbacks => {
-                        'user must be string of word characters and Engine ID should be either empty string or 5 to 32 octets separated by colons' => lambda {
-                          |name| !@@title_pattern.match(name).nil?
-                        }
+      def validate_name(arg=nil)
+        set_or_return(:name, arg, kind_of: String, callbacks: {
+                        'user must be string of word characters and ' \
+                        'Engine ID should be either empty string or ' \
+                        '5 to 32 octets separated by colons' => lambda do |name|
+                          !@@title_pattern.match(name).nil?
+                        end,
                       })
       end
 
-      def auth_protocol(arg = nil)
-        set_or_return(:auth_protocol, arg, :kind_of => String, :callbacks => {
-                        "must be one of: [#{@@auth_choices.join(' ')}]" => lambda {
-                          |proto| @@auth_choices.include? proto
-                        }
+      def auth_protocol(arg=nil)
+        set_or_return(:auth_protocol, arg, kind_of: String, callbacks: {
+                        "must be one of: [#{@@auth_choices.join(' ')}]" => lambda do |proto|
+                          @@auth_choices.include? proto
+                        end,
                       })
       end
 
-      def auth_password(arg = nil)
-        set_or_return(:auth_password, arg, :kind_of => String)
+      def auth_password(arg=nil)
+        set_or_return(:auth_password, arg, kind_of: String)
       end
 
-      def priv_protocol(arg = nil)
-        set_or_return(:priv_protocol, arg, :kind_of => String, :callbacks => {
-                        "must be one of: [#{@@priv_choices.join(' ')}]" => lambda {
-                          |proto| @@priv_choices.include? proto
-                        }
+      def priv_protocol(arg=nil)
+        set_or_return(:priv_protocol, arg, kind_of: String, callbacks: {
+                        "must be one of: [#{@@priv_choices.join(' ')}]" => lambda do |proto|
+                          @@priv_choices.include? proto
+                        end,
                       })
       end
 
-      def priv_password(arg = nil)
-        set_or_return(:priv_password, arg, :kind_of => String)
+      def priv_password(arg=nil)
+        set_or_return(:priv_password, arg, kind_of: String)
       end
 
-      def groups(arg = nil)
-        set_or_return(:groups, arg, :kind_of => Array, :callbacks => {
-                        'must be kind of String' => lambda {
-                          |groups| groups.select { |group| not group.kind_of? String }.empty?
-                        }
+      def groups(arg=nil)
+        set_or_return(:groups, arg, kind_of: Array, callbacks: {
+                        'must be kind of String' => lambda do |groups|
+                          groups.select { |group| !group.kind_of? String }.empty?
+                        end,
                       })
       end
 
-      def localized_key(arg = nil)
-        set_or_return(:localized_key, arg, :kind_of => [TrueClass, FalseClass])
+      def localized_key(arg=nil)
+        set_or_return(:localized_key, arg, kind_of: [TrueClass, FalseClass])
       end
     end
   end

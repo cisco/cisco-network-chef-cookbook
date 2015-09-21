@@ -31,7 +31,7 @@
 #     itself. Use either "package" or "yum_package" for local package handling
 #     within Guestshell.
 
-$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
+$LOAD_PATH.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -72,19 +72,19 @@ class Chef
             # unix-style path and store just the package name in package_name
             if @new_resource.source
               @new_resource.package_name(
-                @new_resource.source.strip.gsub(':', '/').split('/').last)
+                @new_resource.source.strip.tr(':', '/').split('/').last)
             end
 
             # check for most complex pattern first (filename)
-            if @new_resource.package_name =~ @@name_ver_arch_regex or
+            if @new_resource.package_name =~ @@name_ver_arch_regex ||
                @new_resource.package_name =~ @@name_ver_arch_regex_NX
-              @pkg_nm = $1
-              @ver = $2
-              @arch_nm = $3
+              @pkg_nm = Regexp.last_match(1)
+              @ver = Regexp.last_match(2)
+              @arch_nm = Regexp.last_match(3)
             # next, second most complex (name.arch)
             elsif @new_resource.package_name =~ @@name_arch_regex
-              @pkg_nm = $1
-              @arch_nm = $2
+              @pkg_nm = Regexp.last_match(1)
+              @arch_nm = Regexp.last_match(2)
             # otherwise must be shortname
             else
               @pkg_nm = @new_resource.package_name
@@ -94,13 +94,13 @@ class Chef
             @ver ||= @new_resource.version
 
             # replace /bootflash/path with bootflash:path
-            @new_resource.source.gsub!(/^\/([^\/]+)\//, '\1:') if
+            @new_resource.source.gsub!(%r{^/([^/]+)/}, '\1:') if
               @new_resource.source
           else
             Chef::Log.debug 'load_current_resource (NATIVE, use native yum)'
 
             # replace bootflash:path with /bootflash/path for native env
-            @new_resource.source.gsub!(/^([^\/]+):\/?/, '/\1/') if
+            @new_resource.source.gsub!(%r{^([^/]+):/?}, '/\1/') if
               @new_resource.source
             super
           end
@@ -114,7 +114,7 @@ class Chef
             # want to install the package if:
             # 1. there is no version installed
             # 2. the recipe specifies a version different than installed ver
-            if (not installed_ver) or (@ver and @ver != installed_ver)
+            if (!installed_ver) || (@ver && @ver != installed_ver)
               converge_by "install package #{@new_resource.package_name}" do
                 if @new_resource.source
                   Cisco::Yum.install(@new_resource.source)
@@ -137,7 +137,7 @@ class Chef
             # want to remove if:
             # 1. package is installed and matches recipe version
             # 2. package is installed and no recipe version specified
-            if installed_ver and (@ver == installed_ver or not @ver)
+            if installed_ver && (@ver == installed_ver || !@ver)
               converge_by "remove package #{@new_resource.package_name}" do
                 if @arch_nm
                   Cisco::Yum.remove("#{@pkg_nm}.#{@arch_nm}")

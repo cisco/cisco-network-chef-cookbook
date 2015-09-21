@@ -22,9 +22,9 @@ class Chef
   class Resource
     class Resource::CiscoInterfaceOspf < Chef::Resource
       @@alg_types = ['md5']
-      @@enc_types = ['cleartext', '3des', 'cisco_type_7']
+      @@enc_types = %w(cleartext 3des cisco_type_7)
 
-      def initialize(interface_name, run_context = nil)
+      def initialize(interface_name, run_context=nil)
         super
         @resource_name = :cisco_interface_ospf
         @action = :create
@@ -32,57 +32,56 @@ class Chef
       end
 
       # required
-      def ospf(arg = nil)
-        set_or_return(:ospf, arg, :kind_of => String)
+      def ospf(arg=nil)
+        set_or_return(:ospf, arg, kind_of: String)
       end
 
       # required
-      def area(arg = nil)
+      def area(arg=nil)
         # Coerce numeric area to the expected dot-decimal format.
         arg = IPAddr.new(arg.to_i, Socket::AF_INET).to_s unless
-          arg.nil? or arg.to_s.match(/\./)
-        set_or_return(:area, arg, :kind_of => String)
+          arg.nil? || arg.to_s.match(/\./)
+        set_or_return(:area, arg, kind_of: String)
       end
 
-      def message_digest(arg = nil)
-        set_or_return(:message_digest, arg, :equal_to => [true, false])
+      def message_digest(arg=nil)
+        set_or_return(:message_digest, arg, equal_to: [true, false])
       end
 
-      def message_digest_key_id(arg = nil)
-        set_or_return(:message_digest_key_id, arg, :kind_of => Fixnum)
+      def message_digest_key_id(arg=nil)
+        set_or_return(:message_digest_key_id, arg, kind_of: Fixnum)
       end
 
-      def message_digest_algorithm_type(arg = nil)
-        set_or_return(:message_digest_algorithm_type, arg, :kind_of => String,
-                                                           :callbacks => { "must be one of:[#{@@alg_types.join(' ')}]" =>
-                                      lambda { |alg| @@alg_types.include? alg } })
+      def message_digest_algorithm_type(arg=nil)
+        set_or_return(:message_digest_algorithm_type, arg, kind_of:   String,
+                                                           callbacks: { "must be one of:[#{@@alg_types.join(' ')}]" =>
+                                      ->(alg) { @@alg_types.include? alg } })
       end
 
-      def message_digest_encryption_type(arg = nil)
-        set_or_return(:message_digest_encryption_type, arg, :kind_of => String,
-                                                            :callbacks => { "must be one of:[#{@@enc_types.join(' ')}]" =>
-                                      lambda { |enc| @@enc_types.include? enc } })
+      def message_digest_encryption_type(arg=nil)
+        set_or_return(:message_digest_encryption_type, arg, kind_of:   String,
+                                                            callbacks: { "must be one of:[#{@@enc_types.join(' ')}]" =>
+                                      ->(enc) { @@enc_types.include? enc } })
       end
 
-      def message_digest_password(arg = nil)
-        set_or_return(:message_digest_password, arg, :kind_of => String)
+      def message_digest_password(arg=nil)
+        set_or_return(:message_digest_password, arg, kind_of: String)
       end
 
-      def cost(arg = nil)
-        set_or_return(:cost, arg, :kind_of => Fixnum)
+      def cost(arg=nil)
+        set_or_return(:cost, arg, kind_of: Fixnum)
       end
 
-      def hello_interval(arg = nil)
-        set_or_return(:hello_interval, arg, :kind_of => Fixnum)
+      def hello_interval(arg=nil)
+        set_or_return(:hello_interval, arg, kind_of: Fixnum)
       end
 
-      def dead_interval(arg = nil)
-        set_or_return(:dead_interval, arg, :kind_of => Fixnum)
+      def dead_interval(arg=nil)
+        set_or_return(:dead_interval, arg, kind_of: Fixnum)
       end
 
-      def passive_interface(arg = nil)
-        set_or_return(:passive_interface, arg, :kind_of =>
-                                               [TrueClass, FalseClass])
+      def passive_interface(arg=nil)
+        set_or_return(:passive_interface, arg, kind_of: [TrueClass, FalseClass])
       end
     end
   end

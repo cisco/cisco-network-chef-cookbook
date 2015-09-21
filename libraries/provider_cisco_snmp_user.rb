@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
+$LOAD_PATH.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
@@ -41,9 +41,11 @@ class Chef
     def load_current_resource
       @current_resource = Chef::Resource::CiscoSnmpUser.new(@new_resource.name)
 
+      # rubocop:disable Style/BlockDelimiters
       @user = Cisco::SnmpUser.users.select { |_index, user|
-        user.name == @new_resource.user and user.engine_id == @new_resource.engine_id
+        user.name == @new_resource.user && user.engine_id == @new_resource.engine_id
       }.values.first
+      # rubocop:enable Style/BlockDelimiters
 
       unless @user.nil?
         @current_resource.groups(@user.groups)
@@ -56,25 +58,25 @@ class Chef
     def action_create
       set_defaults
 
-      if @user.nil? or (not @user.nil? and properties_differ?)
+      if @user.nil? || (!@user.nil? && properties_differ?)
         # must destroy and re-create to update
         @user.destroy unless @user.nil?
 
         # if this user doesn't exist yet, @curr_resource will just display nothing
         converge_by("user: #{@new_resource.user}, " +
                     (@new_resource.engine_id.empty? ? '' : "engine id: #{@new_resource.engine_id}, ") +
-                    "update the following:\n" +
-                    'groups ' +
-                    "#{@current_resource.groups} => #{@new_resource.groups}\n" +
-                    'auth_protocol ' +
-                    "#{@current_resource.auth_protocol} => #{@new_resource.auth_protocol}\n" +
-                    'auth_password ' +
-                    "#{@current_resource.auth_password} => #{@new_resource.auth_password}\n" +
-                    'priv_protocol ' +
-                    "#{@current_resource.priv_protocol} => #{@new_resource.priv_protocol}\n" +
-                    'priv_password ' +
-                    "#{@current_resource.priv_password} => #{@new_resource.priv_password}\n" +
-                    'localized_key ' +
+                    "update the following:\n" \
+                    'groups ' \
+                    "#{@current_resource.groups} => #{@new_resource.groups}\n" \
+                    'auth_protocol ' \
+                    "#{@current_resource.auth_protocol} => #{@new_resource.auth_protocol}\n" \
+                    'auth_password ' \
+                    "#{@current_resource.auth_password} => #{@new_resource.auth_password}\n" \
+                    'priv_protocol ' \
+                    "#{@current_resource.priv_protocol} => #{@new_resource.priv_protocol}\n" \
+                    'priv_password ' \
+                    "#{@current_resource.priv_password} => #{@new_resource.priv_password}\n" \
+                    'localized_key ' \
                     "#{@current_resource.localized_key} => #{@new_resource.localized_key}\n") do
           # snmp user must be configured in a single command
           @user = Cisco::SnmpUser.new(@new_resource.user,
@@ -92,12 +94,12 @@ class Chef
     def set_defaults
       # don't select a default auth/priv protocol if the user hasn't
       # supplied an auth/priv password
-      if (not @new_resource.auth_password.nil?) and @new_resource.auth_protocol.nil?
+      if (!@new_resource.auth_password.nil?) && @new_resource.auth_protocol.nil?
         @new_resource.auth_protocol(Cisco::SnmpUser.default_auth_protocol.to_s)
       elsif @new_resource.auth_protocol.nil?
         @new_resource.auth_protocol('none')
       end
-      if (not @new_resource.priv_password.nil?) and @new_resource.priv_protocol.nil?
+      if (!@new_resource.priv_password.nil?) && @new_resource.priv_protocol.nil?
         @new_resource.priv_protocol(Cisco::SnmpUser.default_priv_protocol.to_s)
       elsif @new_resource.priv_protocol.nil?
         @new_resource.priv_protocol('none')
@@ -120,7 +122,7 @@ class Chef
 
     def properties_differ?
       return true if @user.nil?
-      return true if @new_resource.engine_id.empty? and @new_resource.groups.sort != @current_resource.groups.sort
+      return true if @new_resource.engine_id.empty? && @new_resource.groups.sort != @current_resource.groups.sort
       return true if @new_resource.auth_protocol != @current_resource.auth_protocol
       return true if @new_resource.priv_protocol != @current_resource.priv_protocol
       return true if @new_resource.engine_id != @current_resource.engine_id
@@ -130,7 +132,7 @@ class Chef
       return true unless @user.priv_password_equal?(@new_resource.priv_password,
                                                     @new_resource.localized_key)
 
-      return false
+      false
     end
 
     def action_destroy

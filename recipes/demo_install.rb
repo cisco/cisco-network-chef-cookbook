@@ -167,7 +167,7 @@ cisco_interface_ospf 'Ethernet1/2' do
 end
 
 cisco_ospf_vrf 'dark_blue default' do
-  auto_cost                45000
+  auto_cost                45_000
   default_metric           5
   log_adjacency            'detail'
   timer_throttle_lsa_hold  5500
@@ -179,7 +179,7 @@ cisco_ospf_vrf 'dark_blue default' do
 end
 
 cisco_ospf_vrf 'dark_blue vrf1' do
-  auto_cost                46000
+  auto_cost                46_000
   default_metric           10
   log_adjacency            'log'
   timer_throttle_lsa_hold  5600

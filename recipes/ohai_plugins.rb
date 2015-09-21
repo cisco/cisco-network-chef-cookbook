@@ -42,6 +42,4 @@ end
 
 # Reload ohai if the client's plugin_path did not contain
 # node['ohai']['plugin_path'], or new plugins were loaded
-if reload_ohai
-  resource.run_action(:reload)
-end
+resource.run_action(:reload) if reload_ohai
