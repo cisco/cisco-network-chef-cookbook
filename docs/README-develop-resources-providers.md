@@ -30,9 +30,9 @@ There are multiple components involved when creating new resources. This documen
 
 * Resource providers are essentially back-ends that implement support for a specific implementation of a given resource type.
 
-* The resource types and providers work in conjunction with a node_utils API, which is the interface between the chef agent and the NX-OS CLI. Please see the [README-develop-node_utils-APIs.md](https://github.com/cisco/cisco-network-node-utils/blob/master/docs/README-develop-node-utils-APIs.md) guide for more information on writing node_utils APIs.
+* The resource types and providers work in conjunction with a node_utils API, which is the interface between the chef agent and the NX-OS CLI. Please see the [README-develop-node_utils-APIs.md][doc_nu] guide for more information on writing node_utils APIs.
 
-This document relies heavily on example code. The exercises in this document can be written independently but they are intended to work in conjuction with the example node_utils APIs created in the [README-develop-node_utils-APIs.md](https://github.com/cisco/cisco-network-node-utils/blob/master/docs/README-develop-node-utils-APIs.md) guide. The examples in that guide are based on code templates for the `feature bash-shell` CLI and the `router eigrp` CLI. Note that some prefer to write the node_utils API before the resource types and providers while others may prefer the opposite workflow.
+This document relies heavily on example code. The exercises in this document can be written independently but they are intended to work in conjuction with the example node_utils APIs created in the [README-develop-node_utils-APIs.md][doc_nu] guide. The examples in that guide are based on code templates for the `feature bash-shell` CLI and the `router eigrp` CLI. Note that some prefer to write the node_utils API before the resource types and providers while others may prefer the opposite workflow.
 
 ## <a name="clone">Start here: Clone the Repo</a>
 
@@ -203,7 +203,7 @@ end     # class Chef
 
 ## <a name="testing">Step 3. Testing: feature bash-shell</a>
 
-This section assumes that a `bash_shell.rb` node_utils API has already been written to work with our new bash_shell resource and provider files. See [README-develop-node_utils-APIs.md](https://github.com/cisco/cisco-network-node-utils/blob/master/docs/README-develop-node-utils-APIs.md) for more information on writing these APIs.
+This section assumes that a `bash_shell.rb` node_utils API has already been written to work with our new bash_shell resource and provider files. See [README-develop-node_utils-APIs.md][doc_nu] for more information on writing these APIs.
 
 ### <a name="bash_api">node_utils API: bash_shell.rb</a>
 
@@ -329,7 +329,7 @@ Inspecting 2 files
 
 ## <a name="comp">Complex Example: router eigrp</a>
 
-This resource and provider exercise will build on the router_eigrp API example shown in the cisco node_utils [README-develop-node_utils-APIs.md](https://github.com/cisco/cisco-network-node-utils/blob/master/docs/README-develop-node-utils-APIs.md) document.
+This resource and provider exercise will build on the router_eigrp API example shown in the cisco node_utils [README-develop-node_utils-APIs.md][doc_nu] document.
 
 The router_eigrp node_utils example created a new API for the cli below:
 
@@ -533,7 +533,7 @@ end
 
 ## <a name="comp_test">Step 3. Testing: router eigrp</a>
 
-Similar to the test setup for the simple bash_shell example, this section assumes that a `router_eigrp.rb` node_utils API has already been written for our new router_eigrp resource and provider files. See [README-develop-node_utils-APIs.md](https://github.com/cisco/cisco-network-node-utils/blob/master/docs/README-develop-node-utils-APIs.md) for more information on writing these APIs.
+Similar to the test setup for the simple bash_shell example, this section assumes that a `router_eigrp.rb` node_utils API has already been written for our new router_eigrp resource and provider files. See [README-develop-node_utils-APIs.md][doc_nu] for more information on writing these APIs.
 
 ### <a name="eigrp_api">node_utils API: router_eigrp.rb</a>
 
@@ -697,5 +697,5 @@ Please see the [CONTRIBUTING](../CONTRIBUTING.md) document for code commit workf
 
 [chef_res]: https://docs.chef.io/resources.html
 [doc_hwrp]: https://docs.chef.io/hwrp.html
-[doc_nu]: https://github.com/cisco/cisco-network-node-utils/README-develop-node-utils-APIs.md
+[doc_nu]: https://github.com/cisco/cisco-network-node-utils/blob/master/docs/README-develop-node-utils-APIs.md
 [doc_rubocop]: https://rubygems.org/gems/rubocop
