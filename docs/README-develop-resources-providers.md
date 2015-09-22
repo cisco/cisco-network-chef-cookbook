@@ -82,9 +82,6 @@ Note. There may be additional instructions within the template.
 This is the completed bash_shell resource file based on `template-resource-feature.rb`. This is a very simple resource to write since it has no additional properties.
 
 ~~~chef
-#
-# CiscoBashShell resource for Chef
-#
 # Copyright (c) 2015 Cisco and/or its affiliates.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -101,14 +98,19 @@ This is the completed bash_shell resource file based on `template-resource-featu
 
 class Chef
   class Resource
-    class Resource::CiscoBashShell < Resource
+    # CiscoBashShell resource for Chef
+    class CiscoBashShell < Chef::Resource
       attr_accessor :exists, :cisco_bash_shell
 
       def initialize(name, run_context=nil)
         super
         @resource_name = :cisco_bash_shell
         @name = name
+
+        # Define the default action
         @action = :enable
+
+        # List supported actions
         @allowed_actions = [:enable, :disable]
       end
 
@@ -143,9 +145,6 @@ cp  docs/template-provider-feature.rb  libraries/provider_cisco_bash_shell.rb
 This is the completed bash_shell provider based on `template-provider-feature.rb`:
 
 ~~~chef
-#
-# CiscoBashShell provider for Chef.
-#
 # Copyright (c) 2015 Cisco and/or its affiliates.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -165,40 +164,40 @@ $:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FIL
 require 'cisco_node_utils'
 
 class Chef
-  class Provider::CiscoBashShell < Provider
-    provides :cisco_bash_shell
+  class Provider
+    # CiscoBashShell provider for Chef.
+    class CiscoBashShell < Chef::Provider
+      provides :cisco_bash_shell
 
-    def initialize(new_resource, run_context)
-      super(new_resource, run_context)
-    end
+      def initialize(new_resource, run_context)
+        super(new_resource, run_context)
+      end
 
-    def whyrun_supported?
-      true
-    end
+      def whyrun_supported?
+        true
+      end
 
-    def load_current_resource
-      @bash_shell = Cisco::BashShell.new
-    end
+      def load_current_resource
+        @bash_shell = Cisco::BashShell.new
+      end
 
-    def action_enable
-      unless Cisco::BashShell.feature_enabled
+      def action_enable
+        return if Cisco::BashShell.feature_enabled
         converge_by("enable feature bash-shell") {}
         return if whyrun_mode?
         @bash_shell.feature_enable
       end
-    end
 
-    def action_disable
-      if Cisco::BashShell.feature_enabled
+      def action_disable
+        return unless Cisco::BashShell.feature_enabled
         converge_by("disable feature bash-shell") do
           @bash_shell.feature_disable
           @bash_shell = nil
         end
       end
-    end
-
-  end   # class Provider::CiscoBashShell
-end     # class Chef
+    end # class CiscoBashShell
+  end # class Provider
+end # class Chef
 ~~~
 
 ## <a name="testing">Step 3. Testing: feature bash-shell</a>
@@ -227,14 +226,14 @@ gem install --install-dir files/default/vendor/  \
 ```bash
 
 cp bash_shell.rb  \
-   files/default/vendor/gems/cisco_node_utils-0.9.0/lib/cisco_node_utils/
+   files/default/vendor/gems/cisco_node_utils-*/lib/cisco_node_utils/
 ```
 
 * Then add a require statement to the list of node_utils resources by adding this line:
 `require "cisco_node_utils/bash_shell"`
 
 To this file:
-`files/default/vendor/gems/cisco_node_utils-0.9.0/lib/cisco_node_utils.rb`
+`files/default/vendor/gems/cisco_node_utils-*/lib/cisco_node_utils.rb`
 
 ### Recipe: cisco_bash_shell
 
@@ -316,11 +315,11 @@ Chef Client finished, 1/4 resources updated in 2.347796694 seconds
 
 ## <a name="lint">Static Analysis</a>
 
-Run [rubocop][doc_rubocop] with the --lint option to validate the new code.
+Run [rubocop][doc_rubocop] to validate the new code.
 
 ```bash
-% rubocop --lint libraries/resource_cisco_bash_shell.rb  \
-                 libraries/provider_cisco_bash_shell.rb
+% rubocop libraries/resource_cisco_bash_shell.rb  \
+          libraries/provider_cisco_bash_shell.rb
 Inspecting 2 files
 ..
 
@@ -378,9 +377,6 @@ Note: There may be additional steps to follow in the template.
 This is the completed router_eigrp resource based on `template-resource-router.rb`:
 
 ~~~chef
-#
-# CiscoRouterEigrp resource for Chef
-#
 # Copyright (c) 2015 Cisco and/or its affiliates.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -397,14 +393,19 @@ This is the completed router_eigrp resource based on `template-resource-router.r
 
 class Chef
   class Resource
-    class Resource::CiscoRouterEigrp < Resource
+    # CiscoRouterEigrp resource for Chef
+    class CiscoRouterEigrp < Chef::Resource
       attr_accessor     :cisco_router_eigrp
 
       def initialize(name, run_context=nil)
         super
         @resource_name = :cisco_router_eigrp
         @name = name
+
+        # Define default action
         @action = :create
+
+        # Define list of supported actions
         @allowed_actions = [:create, :destroy]
       end
 
@@ -415,7 +416,6 @@ class Chef
       def shutdown(arg=nil)
         set_or_return(:shutdown, arg, :kind_of=>[TrueClass, FalseClass])
       end
-
     end
   end
 end
@@ -449,9 +449,6 @@ Note: There may be additional steps to follow in the template.
 This is the completed router_eigrp provider based on `template-provider-router.rb`:
 
 ~~~chef
-#
-# CiscoRouterEigrp provider for Chef
-#
 # Copyright (c) 2015 Cisco and/or its affiliates.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -471,62 +468,61 @@ $:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FIL
 require 'cisco_node_utils'
 
 class Chef
-  class Provider::CiscoRouterEigrp < Provider
-    provides :cisco_router_eigrp
+  class Provider
+    # CiscoRouterEigrp provider for Chef
+    class CiscoRouterEigrp < Provider
+      provides :cisco_router_eigrp
 
-    def initialize(new_resource, run_context)
-      super(new_resource, run_context)
-      @router = nil
-      @name = new_resource.name
-    end
-
-    def whyrun_supported?
-      true
-    end
-
-    # Find specific router instance with this name
-    def load_current_resource
-      @router = Cisco::RouterEigrp.routers[@name]
-    end
-
-    def action_create
-      if @router.nil?
-        converge_by("create router '#{@name}'") {}
+      def initialize(new_resource, run_context)
+        super(new_resource, run_context)
+        @router = nil
+        @name = new_resource.name
       end
-      instantiate = whyrun_mode? ? false : true
-      @router = Cisco::RouterEigrp.new(@name, instantiate) if @router.nil?
 
-      set_simple_properties
-      set_complex_properties
-    end
+      def whyrun_supported?
+        true
+      end
 
-    # Simple properties: Most properties fit this category. Add new property
-    # symbols to the array, generic_prop_set will call dynamic setter methods
-    def set_simple_properties
-      prop_set([:maximum_paths, :shutdown])
-    end
+      # Find specific router instance with this name
+      def load_current_resource
+        @router = Cisco::RouterEigrp.routers[@name]
+      end
 
-    # Helper method to set properties
-    def prop_set(props)
-      Cisco::ChefUtils.generic_prop_set(self, "@router", props)
-    end
+      def action_create
+        converge_by("create router '#{@name}'") {} if @router.nil?
+        instantiate = whyrun_mode? ? false : true
+        @router = Cisco::RouterEigrp.new(@name, instantiate) if @router.nil?
 
-    # Complex properties: includes compound properties and other complex
-    # properties that require custom methods.
+        set_simple_properties
+        set_complex_properties
+      end
 
-    def set_complex_properties
-      # none
-    end
+      # Simple properties: Most properties fit this category. Add new property
+      # symbols to the array, generic_prop_set will call dynamic setter methods
+      def set_simple_properties
+        prop_set([:maximum_paths, :shutdown])
+      end
 
-    def action_destroy
-      unless @router.nil?
+      # Helper method to set properties
+      def prop_set(props)
+        Cisco::ChefUtils.generic_prop_set(self, "@router", props)
+      end
+
+      # Complex properties: includes compound properties and other complex
+      # properties that require custom methods.
+
+      def set_complex_properties
+        # none
+      end
+
+      def action_destroy
+        return if @router.nil?
         converge_by("destroy router #{@name}") do
           @router.destroy
           @router = nil
         end
       end
     end
-
   end
 end
 ~~~
@@ -680,11 +676,11 @@ n9k# sh run eigrp
 
 ## <a name="comp_lint">Static Analysis</a>
 
-Run [rubocop][doc_rubocop] with the --lint option to validate the new code.
+Run [rubocop][doc_rubocop] to validate the new code.
 
 ```bash
-% rubocop --lint libraries/resource_cisco_router_eigrp.rb  \
-                 libraries/provider_cisco_router_eigrp.rb
+% rubocop libraries/resource_cisco_router_eigrp.rb  \
+          libraries/provider_cisco_router_eigrp.rb
 Inspecting 2 files
 ..
 

@@ -10,9 +10,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - switchport trunk allowed vlan
   - switchport trunk native vlan
   - vrf member
+- Travis-CI integration, currently running Rubocop and Foodcritic validation.
 
 ### Fixed
 - Fixed broken documentation links under root and docs folder.
+- Code changes to satisfy Rubocop.
 
 ## [1.0.0] - 2015-08-28
 ### Added
