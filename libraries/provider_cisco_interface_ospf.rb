@@ -66,8 +66,8 @@ class Chef
         # configure ospf on this interface if it isn't
         if @interface_ospf.nil?
           converge_by("configure ospf #{@new_resource.ospf} " \
-                      "#{@new_resource.area} on interface " \
-                      "#{@new_resource.name}") {}
+                      "area #{@new_resource.area} " \
+                      "on interface #{@new_resource.name}") {}
           return if whyrun_mode?
           @interface_ospf = Cisco::InterfaceOspf.new(@new_resource.name,
                                                      @new_resource.ospf,
