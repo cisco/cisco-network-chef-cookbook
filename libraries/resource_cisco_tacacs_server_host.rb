@@ -1,5 +1,3 @@
-# CiscoTacacsServerHost resource for Chef.
-#
 # March 2015, Alex Hunsberger
 #
 # Copyright (c) 2015 Cisco and/or its affiliates.
@@ -18,7 +16,8 @@
 
 class Chef
   class Resource
-    class Resource::CiscoTacacsServerHost < Resource
+    # CiscoTacacsServerHost resource for Chef.
+    class CiscoTacacsServerHost < Chef::Resource
       attr_accessor :cisco_tacacs_server_host
 
       def initialize(name, run_context=nil)

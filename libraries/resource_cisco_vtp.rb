@@ -1,6 +1,3 @@
-#
-# CiscoVtp resource for Chef.
-#
 # January 2015, Alex Hunsberger
 #
 # Copyright (c) 2014-2015 Cisco and/or its affiliates.
@@ -19,7 +16,8 @@
 
 class Chef
   class Resource
-    class Resource::CiscoVtp < Resource
+    # CiscoVtp resource for Chef.
+    class CiscoVtp < Chef::Resource
       attr_accessor :cisco_vtp
 
       def initialize(name, run_context=nil)

@@ -1,6 +1,3 @@
-#
-# Chef Resource definition for CiscoSnmpCommunity
-#
 # February 2015, Glenn F. Matthews
 #
 # Copyright (c) 2015 Cisco and/or its affiliates.
@@ -19,7 +16,8 @@
 
 class Chef
   class Resource
-    class Resource::CiscoSnmpCommunity < Resource
+    # Chef Resource definition for CiscoSnmpCommunity
+    class CiscoSnmpCommunity < Chef::Resource
       attr_accessor :exists
 
       def initialize(community, run_context=nil)

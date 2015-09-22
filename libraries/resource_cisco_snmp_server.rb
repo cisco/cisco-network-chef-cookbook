@@ -1,6 +1,3 @@
-#
-# Chef Provider definition for CiscoSnmpServer
-#
 # December 2014, Alex Hunsberger
 #
 # Copyright (c) 2014-2015 Cisco and/or its affiliates.
@@ -19,7 +16,8 @@
 
 class Chef
   class Resource
-    class Resource::CiscoSnmpServer < Resource
+    # Chef Provider definition for CiscoSnmpServer
+    class CiscoSnmpServer < Chef::Resource
       attr_accessor :cisco_snmp_server
 
       def initialize(name, run_context=nil)

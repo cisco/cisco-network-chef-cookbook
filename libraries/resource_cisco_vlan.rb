@@ -1,6 +1,3 @@
-#
-# Chef Resource definition for CiscoVlan
-#
 # December 2014, Jie Yang
 #
 # Copyright (c) 2014-2015 Cisco and/or its affiliates.
@@ -19,7 +16,8 @@
 
 class Chef
   class Resource
-    class Resource::CiscoVlan < Chef::Resource
+    # Chef Resource definition for CiscoVlan
+    class CiscoVlan < Chef::Resource
       attr_accessor :exists
 
       def initialize(name, run_context=nil)

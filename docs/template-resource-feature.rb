@@ -1,6 +1,3 @@
-#
-# CiscoX__CLASS_NAME__X resource for Chef
-#
 # Copyright (c) 2014-2015 Cisco and/or its affiliates.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +14,8 @@
 
 class Chef
   class Resource
-    class Resource::CiscoX__CLASS_NAME__X < Resource
+    # CiscoX__CLASS_NAME__X resource for Chef
+    class CiscoX__CLASS_NAME__X < Chef::Resource
       attr_accessor :exists, :cisco_X__RESOURCE_NAME__X
 
       def initialize(name, run_context=nil)

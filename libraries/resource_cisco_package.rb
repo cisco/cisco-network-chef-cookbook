@@ -1,8 +1,3 @@
-#
-# cisco_package.rb
-#
-# Resource for Package:: cisco_package
-#
 # February 2015, Chris Van Heuveln
 #
 # Copyright (c) 2015 Cisco and/or its affiliates.
@@ -18,23 +13,22 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# cisco_package is essentially just a wrapper for yum to facilitate package
-# handling from Nexus Guestshell that is targeted for the host:
-#
-#  o Nexus Native bash shell:
-#     If chef-client runs from here then standard yum methods are invoked
-#     directly to handle the package operations. The preference is to use
-#     either "package" or "yum_package" for this environment.
-#
-#  o Nexus Guestshell:
-#     If chef-client runs from here then package operations are handled via
-#     Nexus NXAPI and target the host environment rather than the Guestshell
-#     itself. Use either "package" or "yum_package" for local package handling
-#     within Guestshell.
 
 class Chef
   class Resource
+    # CiscoPackage is essentially just a wrapper for yum to facilitate package
+    # handling from Nexus Guestshell that is targeted for the host:
+    #
+    #  o Nexus Native bash shell:
+    #     If chef-client runs from here then standard yum methods are invoked
+    #     directly to handle the package operations. The preference is to use
+    #     either "package" or "yum_package" for this environment.
+    #
+    #  o Nexus Guestshell:
+    #     If chef-client runs from here then package operations are handled via
+    #     Nexus NXAPI and target the host environment rather than the Guestshell
+    #     itself. Use either "package" or "yum_package" for local package
+    #     handling within Guestshell.
     class CiscoPackage < Chef::Resource::Package::YumPackage
       def initialize(name, run_context=nil)
         super

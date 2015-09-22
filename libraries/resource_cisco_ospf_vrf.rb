@@ -1,6 +1,3 @@
-#
-# resource_cisco_ospf_vrf.rb
-#
 # Author: Glenn F. Matthews
 #
 # Copyright (c) 2015 Cisco and/or its affiliates.
@@ -19,11 +16,12 @@
 
 class Chef
   class Resource
-    class Resource::CiscoOspfVrf < Resource
+    # CiscoOspfVrf resource for Chef.
+    class CiscoOspfVrf < Chef::Resource
       attr_accessor :ospf, :vrf
 
-      @@title_pattern = /^(\w+)\s+(\w+)$/
-      @@log_adj_choices = %w(none log detail)
+      @title_pattern = /^(\w+)\s+(\w+)$/
+      @log_adj_choices = %w(none log detail)
 
       def initialize(name, run_context)
         super
@@ -33,14 +31,14 @@ class Chef
         @provider = Chef::Provider::CiscoOspfVrf
         validate_name(name.strip)
         @name = name.strip
-        @ospf, @vrf = @@title_pattern.match(@name)[1, 2]
+        @ospf, @vrf = @title_pattern.match(@name)[1, 2]
       end
 
       def validate_name(arg=nil)
         set_or_return(:name, arg, kind_of: String, callbacks: {
                         "name must be of the form '<ospf name> <vrf name>'" =>
                         lambda do |name|
-                          m = @@title_pattern.match(name)
+                          m = @title_pattern.match(name)
                           !m.nil? && m.size == 3
                         end,
                       })
@@ -56,8 +54,8 @@ class Chef
 
       def log_adjacency(arg=nil)
         set_or_return(:log_adjacency, arg, kind_of: String, callbacks: {
-                        "must be one of: [#{@@log_adj_choices.join(' ')}]" => lambda do |mode|
-                          @@log_adj_choices.include? mode.downcase
+                        "must be one of: [#{@log_adj_choices.join(' ')}]" => lambda do |mode|
+                          @log_adj_choices.include? mode.downcase
                         end,
                       })
       end

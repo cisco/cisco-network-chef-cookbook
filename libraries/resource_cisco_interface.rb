@@ -1,6 +1,3 @@
-#
-# resource_cisco_interface.rb
-#
 # Author: Alex Hunsberger
 #
 # Copyright (c) 2015 Cisco and/or its affiliates.
@@ -19,11 +16,11 @@
 
 class Chef
   class Resource
-    class Resource::CiscoInterface < Resource
+    # CiscoInterface resource for Chef.
+    class CiscoInterface < Chef::Resource
       attr_accessor :cisco_interface
 
-      @@sw_mode_choices =
-        %w(disabled access tunnel fex_fabric trunk default)
+      @sw_mode_choices = %w(disabled access tunnel fex_fabric trunk default)
 
       def initialize(interface_name, run_context=nil)
         super
@@ -117,8 +114,8 @@ class Chef
 
       def switchport_mode(arg=nil)
         set_or_return(:switchport_mode, arg, kind_of: String, callbacks: {
-                        "must be one of: [#{@@sw_mode_choices.join(' ')}]" => lambda do |mode|
-                          @@sw_mode_choices.include? mode.downcase
+                        "must be one of: [#{@sw_mode_choices.join(' ')}]" => lambda do |mode|
+                          @sw_mode_choices.include? mode.downcase
                         end,
                       })
       end

@@ -1,5 +1,3 @@
-# Chef Resource definition for CiscoInterfaceOspf
-#
 # March 2015, Alex Hunsberger
 #
 # Copyright (c) 2015 Cisco and/or its affiliates.
@@ -20,9 +18,10 @@ require 'ipaddr'
 
 class Chef
   class Resource
-    class Resource::CiscoInterfaceOspf < Chef::Resource
-      @@alg_types = ['md5']
-      @@enc_types = %w(cleartext 3des cisco_type_7)
+    # Chef Resource definition for CiscoInterfaceOspf
+    class CiscoInterfaceOspf < Chef::Resource
+      @alg_types = %w(md5)
+      @enc_types = %w(cleartext 3des cisco_type_7)
 
       def initialize(interface_name, run_context=nil)
         super
@@ -54,14 +53,14 @@ class Chef
 
       def message_digest_algorithm_type(arg=nil)
         set_or_return(:message_digest_algorithm_type, arg, kind_of:   String,
-                                                           callbacks: { "must be one of:[#{@@alg_types.join(' ')}]" =>
-                                      ->(alg) { @@alg_types.include? alg } })
+                                                           callbacks: { "must be one of:[#{@alg_types.join(' ')}]" =>
+                                      ->(alg) { @alg_types.include? alg } })
       end
 
       def message_digest_encryption_type(arg=nil)
         set_or_return(:message_digest_encryption_type, arg, kind_of:   String,
-                                                            callbacks: { "must be one of:[#{@@enc_types.join(' ')}]" =>
-                                      ->(enc) { @@enc_types.include? enc } })
+                                                            callbacks: { "must be one of:[#{@enc_types.join(' ')}]" =>
+                                      ->(enc) { @enc_types.include? enc } })
       end
 
       def message_digest_password(arg=nil)

@@ -1,6 +1,3 @@
-#
-# Chef Provider definition for CiscoVlan
-#
 # December 2014, Jie Yang
 #
 # Copyright (c) 2014-2015 Cisco and/or its affiliates.
@@ -22,36 +19,38 @@ $LOAD_PATH.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib
 require 'cisco_node_utils'
 
 class Chef
-  class Provider::CiscoVlan < Provider
-    provides :cisco_vlan
+  class Provider
+    # Chef Provider definition for CiscoVlan
+    class CiscoVlan < Chef::Provider
+      provides :cisco_vlan
 
-    def initialize(new_resource, run_context)
-      super(new_resource, run_context)
-      @vlan = nil
-      @name = new_resource.name
-      Chef::Log.debug "Cisco vlan #{@name}"
-    end
+      def initialize(new_resource, run_context)
+        super(new_resource, run_context)
+        @vlan = nil
+        @name = new_resource.name
+        Chef::Log.debug "Cisco vlan #{@name}"
+      end
 
-    def whyrun_supported?
-      true
-    end
+      def whyrun_supported?
+        true
+      end
 
-    def load_current_resource
-      Chef::Log.debug "Load current resource for vlan #{@name}"
-      @vlan = Cisco::Vlan.vlans[@name]
-    end
+      def load_current_resource
+        Chef::Log.debug "Load current resource for vlan #{@name}"
+        @vlan = Cisco::Vlan.vlans[@name]
+      end
 
-    def action_create
-      converge_by("Create vlan '#{@name}'") {} if @vlan.nil?
-      instantiate = whyrun_mode? ? false : true
-      @vlan = Cisco::Vlan.new(@name, instantiate) if @vlan.nil?
+      def action_create
+        converge_by("Create vlan '#{@name}'") {} if @vlan.nil?
+        instantiate = whyrun_mode? ? false : true
+        @vlan = Cisco::Vlan.new(@name, instantiate) if @vlan.nil?
 
-      props = [:vlan_name, :state, :shutdown]
-      Cisco::ChefUtils.generic_prop_set(self, '@vlan', props)
-    end
+        props = [:vlan_name, :state, :shutdown]
+        Cisco::ChefUtils.generic_prop_set(self, '@vlan', props)
+      end
 
-    def action_destroy
-      unless @vlan.nil?
+      def action_destroy
+        return if @vlan.nil?
         converge_by("destroy vlan #{@name}") do
           @vlan.destroy
           @vlan = nil
