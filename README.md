@@ -1,5 +1,7 @@
 # cisco-cookbook
 
+[![Build Status](https://travis-ci.org/cisco/cisco-network-chef-cookbook.svg?branch=develop)](https://travis-ci.org/cisco/cisco-network-chef-cookbook)
+
 #### Table of Contents
 
 1. [Overview](#overview)
