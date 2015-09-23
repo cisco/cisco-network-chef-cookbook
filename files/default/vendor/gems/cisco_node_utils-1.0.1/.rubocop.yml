@@ -1,0 +1,53 @@
+# Rubocop configuration
+
+# Baseline code complexity metrics - we should try and reduce these over time
+Metrics/AbcSize:
+  Max: 142
+
+Metrics/BlockNesting:
+  Max: 4
+
+Metrics/ClassLength:
+  Max: 745
+
+Metrics/CyclomaticComplexity:
+  Max: 26
+
+Metrics/LineLength:
+  Max: 126
+
+Metrics/MethodLength:
+  Max: 123
+
+Metrics/ParameterLists:
+  Max: 9
+
+Metrics/PerceivedComplexity:
+  Max: 26
+
+# Team preferences different from Rubocop defaults:
+Style/AlignHash:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+Style/ClassCheck:
+  Enabled: false
+
+Style/FormatString:
+  EnforcedStyle: sprintf
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19_no_mixed_keys
+
+Style/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: no_space
+
+Style/TrailingComma:
+  EnforcedStyleForMultiline: comma
+
+# Because an SnmpServer cannot be destroyed, we end most of the SnmpServer
+# test cases by explicitly returning the configuration to default.
+# Rubocop thinks this is a no-op but it isn't.
+Lint/UselessSetterCall:
+  Exclude:
+    - 'tests/test_snmpserver.rb'

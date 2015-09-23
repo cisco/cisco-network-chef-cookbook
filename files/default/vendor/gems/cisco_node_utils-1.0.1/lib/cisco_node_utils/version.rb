@@ -1,6 +1,4 @@
-#
-# metadata.rb
-# Copyright (c) 2014-2015 Cisco and/or its affiliates.
+# Copyright (c) 2015 Cisco and/or its affiliates.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,13 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name             'cisco-cookbook'
-maintainer       'Cisco Systems'
-license          'Apache v2.0'
-description      'Installs/Configures Cisco NX-OS devices'
-long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-issues_url       'https://github.com/cisco/cisco-network-chef-cookbook/issues'
-source_url       'https://github.com/cisco/cisco-network-chef-cookbook'
-supports         'nexus'
-supports         'nexus_centos'
-version          '1.0.1'
+# Container module for version number only.
+module CiscoNodeUtils
+  VERSION = '1.0.1'
+end

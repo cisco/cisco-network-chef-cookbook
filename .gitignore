@@ -4,4 +4,3 @@
 .kitchen/
 .kitchen.local.yml
 Gemfile.lock
-vendor/
