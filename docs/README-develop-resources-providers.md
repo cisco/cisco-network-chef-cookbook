@@ -36,7 +36,7 @@ This document relies heavily on example code. The exercises in this document can
 
 ## <a name="clone">Start here: Clone the Repo</a>
 
-Please see the [CONTRIBUTING](#CONTRIBUTING) document for workflow instructions. In general, you will need to fork the cisco-cookbook repository for your changes and submit a pull request when it is ready for commit.
+Please see the [CONTRIBUTING](../CONTRIBUTING.md) document for workflow instructions. In general, you will need to fork the cisco-cookbook repository for your changes and submit a pull request when it is ready for commit.
 
 First install the code base. Clone the cisco-cookbook repo into a workspace:
 
@@ -693,9 +693,9 @@ Inspecting 2 files
 
 ## <a name="next">Next Steps</a>
 
-Please see the [CONTRIBUTING](#CONTRIBUTING) document for code commit workflow instructions.
+Please see the [CONTRIBUTING](../CONTRIBUTING.md) document for code commit workflow instructions.
 
 [chef_res]: https://docs.chef.io/resources.html
 [doc_hwrp]: https://docs.chef.io/hwrp.html
-[doc_nu]: https://github.com/cisco/cisco-network-node-utils/README-develop-node-utils-APIs.md
+[doc_nu]: https://github.com/cisco/cisco-network-node-utils/blob/master/docs/README-develop-node-utils-APIs.md 
 [doc_rubocop]: https://rubygems.org/gems/rubocop
