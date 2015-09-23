@@ -197,7 +197,7 @@ This section is common to both `bash-shell` and `guestshell`.
 ```
 wget http://s3.amazonaws.com/alpha-builds/chef-12.4.1.cisco%2B20150826000706-1.nexus5.x86_64.rpm
 
-yum install chef-12.4.1.cisco%2B20150826000706-1.nexus5.x86_64.rpm
+yum install ./chef-12.4.1.cisco%2B20150826000706-1.nexus5.x86_64.rpm
 ```
 
 * `guestshell` RPM:
@@ -207,7 +207,7 @@ yum install chef-12.4.1.cisco%2B20150826000706-1.nexus5.x86_64.rpm
 Update PATH var
 
 ```bash
-export PATH=$PATH:/opt/chef/bin
+export PATH=/opt/chef/bin:$PATH
 ```
 
 #### validation.pem
