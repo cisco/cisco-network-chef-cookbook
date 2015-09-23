@@ -23,9 +23,10 @@ class Chef
     class CiscoSnmpUser < Chef::Resource
       attr_accessor :user, :engine_id
 
-      @auth_choices = %w(md5 sha none)
-      @priv_choices = %w(des aes128 none)
-      @title_pattern = /^(\w+)\s*([0-9]{1,3}(?::[0-9]{1,3}){4,31})?\s*$/
+      # rubocop:disable Style/ClassVars
+      @@title_pattern = /^(\w+)\s*([0-9]{1,3}(?::[0-9]{1,3}){4,31})?\s*$/
+      # rubocop:enable Style/ClassVars
+
       def initialize(name, run_context=nil)
         super
         @resource_name = :cisco_snmp_user
@@ -34,8 +35,9 @@ class Chef
         @provider = Chef::Provider::CiscoSnmpUser
         validate_name(name.strip)
         @name = name.strip
-        @user = @title_pattern.match(@name)[1]
-        @engine_id = @title_pattern.match(@name)[2].nil? ? '' : @title_pattern.match(@name)[2]
+        m = @@title_pattern.match(@name)
+        @user = m[1]
+        @engine_id = m[2].nil? ? '' : m[2]
       end
 
       # use chef's built-in validation to validate name parameter
@@ -44,17 +46,15 @@ class Chef
                         'user must be string of word characters and ' \
                         'Engine ID should be either empty string or ' \
                         '5 to 32 octets separated by colons' => lambda do |name|
-                          !@title_pattern.match(name).nil?
+                          !@@title_pattern.match(name).nil?
                         end,
                       })
       end
 
       def auth_protocol(arg=nil)
-        set_or_return(:auth_protocol, arg, kind_of: String, callbacks: {
-                        "must be one of: [#{@auth_choices.join(' ')}]" => lambda do |proto|
-                          @auth_choices.include? proto
-                        end,
-                      })
+        set_or_return(:auth_protocol, arg,
+                      kind_of:  String,
+                      equal_to: %w(md5 sha none))
       end
 
       def auth_password(arg=nil)
@@ -62,11 +62,9 @@ class Chef
       end
 
       def priv_protocol(arg=nil)
-        set_or_return(:priv_protocol, arg, kind_of: String, callbacks: {
-                        "must be one of: [#{@priv_choices.join(' ')}]" => lambda do |proto|
-                          @priv_choices.include? proto
-                        end,
-                      })
+        set_or_return(:priv_protocol, arg,
+                      kind_of:  String,
+                      equal_to: %w(des aes128 none))
       end
 
       def priv_password(arg=nil)

@@ -20,9 +20,6 @@ class Chef
   class Resource
     # Chef Resource definition for CiscoInterfaceOspf
     class CiscoInterfaceOspf < Chef::Resource
-      @alg_types = %w(md5)
-      @enc_types = %w(cleartext 3des cisco_type_7)
-
       def initialize(interface_name, run_context=nil)
         super
         @resource_name = :cisco_interface_ospf
@@ -52,15 +49,15 @@ class Chef
       end
 
       def message_digest_algorithm_type(arg=nil)
-        set_or_return(:message_digest_algorithm_type, arg, kind_of:   String,
-                                                           callbacks: { "must be one of:[#{@alg_types.join(' ')}]" =>
-                                      ->(alg) { @alg_types.include? alg } })
+        set_or_return(:message_digest_algorithm_type, arg,
+                      kind_of:  String,
+                      equal_to: %w(md5))
       end
 
       def message_digest_encryption_type(arg=nil)
-        set_or_return(:message_digest_encryption_type, arg, kind_of:   String,
-                                                            callbacks: { "must be one of:[#{@enc_types.join(' ')}]" =>
-                                      ->(enc) { @enc_types.include? enc } })
+        set_or_return(:message_digest_encryption_type, arg,
+                      kind_of:  String,
+                      equal_to: %w(cleartext 3des cisco_type_7))
       end
 
       def message_digest_password(arg=nil)

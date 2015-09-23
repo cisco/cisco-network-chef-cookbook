@@ -16,6 +16,7 @@
 
 name             'cisco-cookbook'
 maintainer       'Cisco Systems'
+maintainer_email 'partnereng@chef.io'
 license          'Apache v2.0'
 description      'Installs/Configures Cisco NX-OS devices'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))

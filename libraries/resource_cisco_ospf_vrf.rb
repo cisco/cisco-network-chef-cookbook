@@ -20,8 +20,7 @@ class Chef
     class CiscoOspfVrf < Chef::Resource
       attr_accessor :ospf, :vrf
 
-      @title_pattern = /^(\w+)\s+(\w+)$/
-      @log_adj_choices = %w(none log detail)
+      @@title_pattern = /^(\w+)\s+(\w+)$/ # rubocop:disable Style/ClassVars
 
       def initialize(name, run_context)
         super
@@ -31,14 +30,14 @@ class Chef
         @provider = Chef::Provider::CiscoOspfVrf
         validate_name(name.strip)
         @name = name.strip
-        @ospf, @vrf = @title_pattern.match(@name)[1, 2]
+        @ospf, @vrf = @@title_pattern.match(@name)[1, 2]
       end
 
       def validate_name(arg=nil)
         set_or_return(:name, arg, kind_of: String, callbacks: {
                         "name must be of the form '<ospf name> <vrf name>'" =>
                         lambda do |name|
-                          m = @title_pattern.match(name)
+                          m = @@title_pattern.match(name)
                           !m.nil? && m.size == 3
                         end,
                       })
@@ -53,11 +52,9 @@ class Chef
       end
 
       def log_adjacency(arg=nil)
-        set_or_return(:log_adjacency, arg, kind_of: String, callbacks: {
-                        "must be one of: [#{@log_adj_choices.join(' ')}]" => lambda do |mode|
-                          @log_adj_choices.include? mode.downcase
-                        end,
-                      })
+        set_or_return(:log_adjacency, arg,
+                      kind_of:  String,
+                      equal_to: %w(none log detail))
       end
 
       def router_id(arg=nil)

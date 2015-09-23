@@ -33,10 +33,10 @@ class Chef
       attr_reader :new_resource
 
       include Cisco::ConfigParser
-      @node = Cisco::Node.instance
 
       def initialize(new_resource, run_context)
         super(new_resource, run_context)
+        @node = Cisco::Node.instance
         # @new_resource.name holds the configuration from the original recipe.
         # @min_config_str is the pre-processed, minimum config to apply to running
         @min_config_str = ''

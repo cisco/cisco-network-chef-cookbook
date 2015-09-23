@@ -20,8 +20,6 @@ class Chef
     class CiscoInterface < Chef::Resource
       attr_accessor :cisco_interface
 
-      @sw_mode_choices = %w(disabled access tunnel fex_fabric trunk default)
-
       def initialize(interface_name, run_context=nil)
         super
         @resource_name = :cisco_interface
@@ -113,11 +111,10 @@ class Chef
       end
 
       def switchport_mode(arg=nil)
-        set_or_return(:switchport_mode, arg, kind_of: String, callbacks: {
-                        "must be one of: [#{@sw_mode_choices.join(' ')}]" => lambda do |mode|
-                          @sw_mode_choices.include? mode.downcase
-                        end,
-                      })
+        set_or_return(:switchport_mode, arg,
+                      kind_of:  String,
+                      equal_to: %w(disabled access tunnel fex_fabric
+                                   trunk default))
       end
 
       def vrf(arg=nil)
