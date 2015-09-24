@@ -1,7 +1,28 @@
 # cisco-cookbook
 
+[![Cookbook Release](https://img.shields.io/cookbook/v/cisco-cookbook.svg)](https://supermarket.chef.io/cookbooks/cisco-cookbook)
 [![Build Status](https://travis-ci.org/cisco/cisco-network-chef-cookbook.svg?branch=develop)](https://travis-ci.org/cisco/cisco-network-chef-cookbook)
 
+##### Documentation Workflow Map
+
+This workflow map aids *users*, *developers* and *maintainers* of the cisco-cookbook project in selecting the appropriate document(s) for their task.
+
+* User Guides
+  * [README-agent-install.md](docs/README-agent-install.md) : Agent Installation and Configuration Guide
+  * [README-chef-provisioning.md](docs/README-chef-provisioning.md) : Automated Agent Installation and Configuration
+  * [README-package-provider.md](docs/README-package-provider.md) : Cisco Nexus Package Management using the Package Provider
+  * The remainder of this document is aimed at end users
+* Developer Guides
+  * [CONTRIBUTING.md](CONTRIBUTING.md) : Contribution guidelines
+  * [README-develop-resources-providers.md](docs/README-develop-resources-providers.md) : Developing New cisco-cookbook Resources and Providers
+* Maintainers Guides
+  * [README-maintainers.md](docs/README-maintainers.md) : Guidelines for core maintainers of the cisco-cookbook project
+  * All developer guides apply to maintainers as well
+
+
+Please see [Learning Resources](#learning-resources) for additional references.
+
+--
 #### Table of Contents
 
 1. [Overview](#overview)
@@ -12,19 +33,9 @@
    * [Resource Catalog (by Technology)](#resource-by-tech)
    * [Resource Catalog (by Name)](#resource-by-name)
 6. [Limitations](#limitations)
-7. [Development - Guide for contributing to the cookbook](#development)
+7. [Learning Resources](#learning-resources)
 
---
-##### Additional References
 
-* Agent Installation
-  * [README-agent-install.md](docs/README-agent-install.md) : Agent Installation and Configuration Guide
-* User Guides
-  * [README-package-provider.md](docs/README-package-provider.md) : Cisco Nexus Package Management using the Package Provider
-* Developer Guides
-  * [README-develop-resources-providers.md](docs/README-develop-resources-providers.md) : Developing New cisco-cookbook Resources and Providers
-
-Please see [Learning Resources](#learning-resources) for additional references.
 
 ## Overview
 
@@ -775,17 +786,6 @@ Minimum Requirements:
   * Cisco Nexus 93xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
   * Cisco Nexus 31xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
   * Cisco Nexus 30xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
-
-## Development
-
-Contributions to cisco-cookbook are welcome and encouraged. Please follow this general workflow for new contributions. See [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
-
-1. Fork the cisco-cookbook repository on [GitHub](https://github.com/cisco/cisco-network-chef-cookbook)
-2. Create a named feature branch (like `add_component_x`)
-3. Write your change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using GitHub
 
 --
 
