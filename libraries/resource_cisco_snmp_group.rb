@@ -1,6 +1,3 @@
-#
-# Chef Resource definition for CiscoSnmpGroup
-#
 # February 2015, Jie Yang
 #
 # Copyright (c) 2015 Cisco and/or its affiliates.
@@ -19,16 +16,17 @@
 
 class Chef
   class Resource
-    class Resource::CiscoSnmpGroup < Resource
-      def initialize(group, run_context = nil)
+    # Chef Resource definition for CiscoSnmpGroup
+    class CiscoSnmpGroup < Chef::Resource
+      def initialize(group, run_context=nil)
         super
         @resource_name = :cisco_snmp_group
         @action = :create
         @allowed_actions = [:create, :destroy]
       end
 
-      def group(arg = nil)
-        set_or_return(:group, arg, :kind_of => String)
+      def group(arg=nil)
+        set_or_return(:group, arg, kind_of: String)
       end
     end
   end

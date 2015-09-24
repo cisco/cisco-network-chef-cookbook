@@ -9,16 +9,16 @@ describe 'cisco-cookbook::cisco_package_test_all' do
 
   it 'creates a cookbook_file' do
     expect(chef_run).to create_cookbook_file('/bootflash/bgp-dev-1.0.0-r0.lib32_n9000.rpm').with(
-      owner: 'root',
-      group: 'root',
-      mode: '0775',
-      source: 'rpm-store/bgp-dev-1.0.0-r0.lib32_n9000.rpm'
+      owner:  'root',
+      group:  'root',
+      mode:   '0775',
+      source: 'rpm-store/bgp-dev-1.0.0-r0.lib32_n9000.rpm',
     )
   end
 
   it 'test package install linux-style source path' do
     expect(chef_run).to create_cisco_package('bgp-dev').with(
-      source: '/bootflash/bgp-dev-1.0.0-r0.lib32_n9000.rpm'
+      source: '/bootflash/bgp-dev-1.0.0-r0.lib32_n9000.rpm',
     )
   end
 
@@ -48,19 +48,19 @@ describe 'cisco-cookbook::cisco_package_test_all' do
 
   it 'test package install using package_name attribute' do
     expect(chef_run).to create_cisco_package('bgp-dev').with(
-      package_name: 'bgp-dev'
+      package_name: 'bgp-dev',
     )
   end
 
   it 'test package remove using package_name attribute' do
     expect(chef_run).to remove_cisco_package('bgp-dev').with(
-      package_name: 'bgp-dev'
+      package_name: 'bgp-dev',
     )
   end
 
   it 'test package remove linux-style source path' do
     expect(chef_run).to remove_cisco_package('bgp-dev').with(
-      source: '/bootflash/bgp-dev-1.0.0-r0.lib32_n9000.rpm'
+      source: '/bootflash/bgp-dev-1.0.0-r0.lib32_n9000.rpm',
     )
   end
 end

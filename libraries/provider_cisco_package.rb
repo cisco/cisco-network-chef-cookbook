@@ -1,6 +1,3 @@
-#
-# Provider implementation for Package:: cisco_package
-#
 # February 2015, Chris Van Heuveln, Alex Hunsberger
 #
 # Copyright (c) 2015 Cisco and/or its affiliates.
@@ -16,37 +13,36 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-# cisco_package is essentially just a wrapper for yum to facilitate package
-# handling from Nexus Guestshell that is targeted for the host:
-#
-#  o Nexus Native bash shell:
-#     If chef-client runs from here then standard yum methods are invoked
-#     directly to handle the package operations. The preference is to use
-#     either "package" or "yum_package" for this environment.
-#
-#  o Nexus Guestshell:
-#     If chef-client runs from here then package operations are handled via
-#     Nexus NXAPI and target the host environment rather than the Guestshell
-#     itself. Use either "package" or "yum_package" for local package handling
-#     within Guestshell.
 
-$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
+$LOAD_PATH.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
 class Chef
   class Provider
     class Package
+      # CiscoPackage is essentially just a wrapper for yum to facilitate package
+      # handling from Nexus Guestshell that is targeted for the host:
+      #
+      #  o Nexus Native bash shell:
+      #     If chef-client runs from here then standard yum methods are invoked
+      #     directly to handle the package operations. The preference is to use
+      #     either "package" or "yum_package" for this environment.
+      #
+      #  o Nexus Guestshell:
+      #     If chef-client runs from here then package operations are handled
+      #     via Nexus NXAPI and target the host environment rather than the
+      #     Guestshell itself. Use either "package" or "yum_package" for local
+      #     package handling within Guestshell.
       class CiscoPackage < Chef::Provider::Package::Yum
         provides :cisco_package, os: 'linux'
 
         # ex: chef-12.0.0alpha.2+20150319.git.1.b6f-1.el5.x86_64.rpm
-        @@name_ver_arch_regex = /^([\w\-\+]+)-(\d+\..*)\.(\w{4,})(?:\.rpm)?$/
+        @name_ver_arch_regex = /^([\w\-\+]+)-(\d+\..*)\.(\w{4,})(?:\.rpm)?$/
         # ex n9000-dk9.LIBPROCMIBREST-1.0.0-7.0.3.x86_64.rpm
-        @@name_ver_arch_regex_NX = /^(.*)-([\d\.]+-[\d\.]+)\.(\w{4,})\.rpm$/
+        @name_ver_arch_regex_nxos = /^(.*)-([\d\.]+-[\d\.]+)\.(\w{4,})\.rpm$/
         # ex: b+z-ip2.x64_64
-        @@name_arch_regex = /^([\w\-\+]+)\.(\w+)$/
+        @name_arch_regex = /^([\w\-\+]+)\.(\w+)$/
 
         def whyrun_supported?
           true
@@ -72,19 +68,19 @@ class Chef
             # unix-style path and store just the package name in package_name
             if @new_resource.source
               @new_resource.package_name(
-                @new_resource.source.strip.gsub(':', '/').split('/').last)
+                @new_resource.source.strip.tr(':', '/').split('/').last)
             end
 
             # check for most complex pattern first (filename)
-            if @new_resource.package_name =~ @@name_ver_arch_regex or
-               @new_resource.package_name =~ @@name_ver_arch_regex_NX
-              @pkg_nm = $1
-              @ver = $2
-              @arch_nm = $3
+            if @new_resource.package_name =~ @name_ver_arch_regex ||
+               @new_resource.package_name =~ @name_ver_arch_regex_nxos
+              @pkg_nm = Regexp.last_match(1)
+              @ver = Regexp.last_match(2)
+              @arch_nm = Regexp.last_match(3)
             # next, second most complex (name.arch)
-            elsif @new_resource.package_name =~ @@name_arch_regex
-              @pkg_nm = $1
-              @arch_nm = $2
+            elsif @new_resource.package_name =~ @name_arch_regex
+              @pkg_nm = Regexp.last_match(1)
+              @arch_nm = Regexp.last_match(2)
             # otherwise must be shortname
             else
               @pkg_nm = @new_resource.package_name
@@ -94,13 +90,13 @@ class Chef
             @ver ||= @new_resource.version
 
             # replace /bootflash/path with bootflash:path
-            @new_resource.source.gsub!(/^\/([^\/]+)\//, '\1:') if
+            @new_resource.source.gsub!(%r{^/([^/]+)/}, '\1:') if
               @new_resource.source
           else
             Chef::Log.debug 'load_current_resource (NATIVE, use native yum)'
 
             # replace bootflash:path with /bootflash/path for native env
-            @new_resource.source.gsub!(/^([^\/]+):\/?/, '/\1/') if
+            @new_resource.source.gsub!(%r{^([^/]+):/?}, '/\1/') if
               @new_resource.source
             super
           end
@@ -110,11 +106,11 @@ class Chef
           if detect_gs
             Chef::Log.debug 'action_install (GS, use nxapi yum)'
 
-            installed_ver = get_installed_ver
+            inst_ver = installed_ver
             # want to install the package if:
             # 1. there is no version installed
             # 2. the recipe specifies a version different than installed ver
-            if (not installed_ver) or (@ver and @ver != installed_ver)
+            if (!inst_ver) || (@ver && @ver != inst_ver)
               converge_by "install package #{@new_resource.package_name}" do
                 if @new_resource.source
                   Cisco::Yum.install(@new_resource.source)
@@ -133,11 +129,11 @@ class Chef
           if detect_gs
             Chef::Log.debug 'action_remove (GS, use nxapi yum)'
 
-            installed_ver = get_installed_ver
+            inst_ver = installed_ver
             # want to remove if:
             # 1. package is installed and matches recipe version
             # 2. package is installed and no recipe version specified
-            if installed_ver and (@ver == installed_ver or not @ver)
+            if inst_ver && (@ver == inst_ver || !@ver)
               converge_by "remove package #{@new_resource.package_name}" do
                 if @arch_nm
                   Cisco::Yum.remove("#{@pkg_nm}.#{@arch_nm}")
@@ -158,7 +154,7 @@ class Chef
           super unless detect_gs
         end
 
-        def get_installed_ver
+        def installed_ver
           if @arch_nm
             installed_ver = Cisco::Yum.query("#{@pkg_nm}.#{@arch_nm}")
           else

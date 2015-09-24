@@ -1,5 +1,8 @@
 # cisco-cookbook
 
+[![Cookbook Release](https://img.shields.io/cookbook/v/cisco-cookbook.svg)](https://supermarket.chef.io/cookbooks/cisco-cookbook)
+[![Build Status](https://travis-ci.org/cisco/cisco-network-chef-cookbook.svg?branch=develop)](https://travis-ci.org/cisco/cisco-network-chef-cookbook)
+
 ##### Documentation Workflow Map
 
 This workflow map aids *users*, *developers* and *maintainers* of the cisco-cookbook project in selecting the appropriate document(s) for their task.

@@ -1,6 +1,3 @@
-#
-# Chef Resource definition for CiscoSnmpCommunity
-#
 # February 2015, Glenn F. Matthews
 #
 # Copyright (c) 2015 Cisco and/or its affiliates.
@@ -19,26 +16,27 @@
 
 class Chef
   class Resource
-    class Resource::CiscoSnmpCommunity < Resource
+    # Chef Resource definition for CiscoSnmpCommunity
+    class CiscoSnmpCommunity < Chef::Resource
       attr_accessor :exists
 
-      def initialize(community, run_context = nil)
+      def initialize(community, run_context=nil)
         super
         @resource_name = :cisco_snmp_community
         @action = :create
         @allowed_actions = [:create, :destroy]
       end
 
-      def community(arg = nil)
-        set_or_return(:community, arg, :kind_of => String)
+      def community(arg=nil)
+        set_or_return(:community, arg, kind_of: String)
       end
 
-      def group(arg = nil)
-        set_or_return(:group, arg, :kind_of => String)
+      def group(arg=nil)
+        set_or_return(:group, arg, kind_of: String)
       end
 
-      def acl(arg = nil)
-        set_or_return(:acl, arg, :kind_of => String)
+      def acl(arg=nil)
+        set_or_return(:acl, arg, kind_of: String)
       end
     end
   end
