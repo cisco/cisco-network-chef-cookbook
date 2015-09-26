@@ -4,11 +4,11 @@
 
 * [Overview](#overview)
 * [Start here: Clone the Repo](#clone)
-* [Basic Example: feature bash-shell](#simple)
- * [Step 1. Type: feature bash-shell](#res)
- * [Step 2. Provider: feature bash-shell](#prov)
- * [Step 3. Testing: feature bash-shell](#testing)
-     * [node_utils API: bash_shell.rb](#bash_api)
+* [Basic Example: feature tunnel](#simple)
+ * [Step 1. Type: feature tunnel](#res)
+ * [Step 2. Provider: feature tunnel](#prov)
+ * [Step 3. Testing: feature tunnel](#testing)
+     * [node_utils API: tunnel.rb](#tunnel_api)
  * [Static Analysis](#lint)
 * [Complex Example: router eigrp](#comp)
  * [Step 1. Type: router eigrp](#comp_res)
@@ -32,7 +32,7 @@ There are multiple components involved when creating new resources. This documen
 
 * The resource types and providers work in conjunction with a node_utils API, which is the interface between the chef agent and the NX-OS CLI. Please see the [README-develop-node_utils-APIs.md][doc_nu] guide for more information on writing node_utils APIs.
 
-This document relies heavily on example code. The exercises in this document can be written independently but they are intended to work in conjuction with the example node_utils APIs created in the [README-develop-node_utils-APIs.md][doc_nu] guide. The examples in that guide are based on code templates for the `feature bash-shell` CLI and the `router eigrp` CLI. Note that some prefer to write the node_utils API before the resource types and providers while others may prefer the opposite workflow.
+This document relies heavily on example code. The exercises in this document can be written independently but they are intended to work in conjuction with the example node_utils APIs created in the [README-develop-node_utils-APIs.md][doc_nu] guide. The examples in that guide are based on code templates for the `feature tunnel` CLI and the `router eigrp` CLI. Note that some prefer to write the node_utils API before the resource types and providers while others may prefer the opposite workflow.
 
 ## <a name="clone">Start here: Clone the Repo</a>
 
@@ -44,42 +44,42 @@ First install the code base. Clone the cisco-cookbook repo into a workspace:
 git clone https://github.com/chef-partners/cisco-cookbook
 ```
 
-## <a name="simple">Basic Example: feature bash-shell</a>
+## <a name="simple">Basic Example: feature tunnel</a>
 
-We will start with a very basic example. The NX-OS CLI for `feature bash-shell` is a simple on / off style configuration:
+We will start with a very basic example. The NX-OS CLI for `feature tunnel` is a simple on / off style configuration:
 
-`[no] feature bash-shell`
+`[no] feature tunnel`
 
 This resource has no other properties.
 
-*Note. This example disables the bash-shell so you will need to use the guestshell environment when testing, or choose a different feature for this exercise.*
+*Note. This example disables the tunnel so you will need to use the guestshell environment when testing, or choose a different feature for this exercise.*
 
-## <a name="res">Step 1. Resource: feature bash-shell</a>
+## <a name="res">Step 1. Resource: feature tunnel</a>
 
 * Chef resource files for Cisco NX-OS are typically stored in the `libraries` directory using a convention that prefixes the filename with `resource_cisco_*`
 
 *Note. Most cisco-cookbook resources are [HWRP resources][doc_hwrp], which is why they are found in the libraries directory.*
 
-* There are template files in /docs that may help when writing new types and providers. These templates provide most of the necessary code with just a few customizations required for a new resource. Copy the `template-resource-feature.rb` file to use as the basis for our new `resource_cisco_bash_shell.rb` type file:
+* There are template files in /docs that may help when writing new types and providers. These templates provide most of the necessary code with just a few customizations required for a new resource. Copy the `template-resource-feature.rb` file to use as the basis for our new `resource_cisco_tunnel.rb` type file:
 
 ```bash
 cd  cisco-cookbook
-cp  docs/template-resource-feature.rb  libraries/resource_cisco_bash_shell.rb
+cp  docs/template-resource-feature.rb  libraries/resource_cisco_tunnel.rb
 ```
 
-* Edit `resource_cisco_bash_shell.rb` and substitute the placeholder text as shown here:
+* Edit `resource_cisco_tunnel.rb` and substitute the placeholder text as shown here:
 
 ```bash
-/X__CLASS_NAME__X/BashShell/
+/X__CLASS_NAME__X/Tunnel/
 
-/X__RESOURCE_NAME__X/bash_shell/
+/X__RESOURCE_NAME__X/tunnel/
 ```
 
 Note. There may be additional instructions within the template.
 
-#### Example: resource_cisco_bash_shell.rb
+#### Example: resource_cisco_tunnel.rb
 
-This is the completed bash_shell resource file based on `template-resource-feature.rb`. This is a very simple resource to write since it has no additional properties.
+This is the completed tunnel resource file based on `template-resource-feature.rb`. This is a very simple resource to write since it has no additional properties.
 
 ~~~chef
 # Copyright (c) 2015 Cisco and/or its affiliates.
@@ -98,13 +98,13 @@ This is the completed bash_shell resource file based on `template-resource-featu
 
 class Chef
   class Resource
-    # CiscoBashShell resource for Chef
-    class CiscoBashShell < Chef::Resource
-      attr_accessor :exists, :cisco_bash_shell
+    # CiscoTunnel resource for Chef
+    class CiscoTunnel < Chef::Resource
+      attr_accessor :exists, :cisco_tunnel
 
       def initialize(name, run_context=nil)
         super
-        @resource_name = :cisco_bash_shell
+        @resource_name = :cisco_tunnel
         @name = name
 
         # Define the default action
@@ -119,30 +119,30 @@ class Chef
 end     # class Chef
 ~~~
 
-## <a name="prov">Step 2. Provider: feature bash-shell</a>
+## <a name="prov">Step 2. Provider: feature tunnel</a>
 
 * Chef provider files for Cisco NX-OS are typically stored in the `libraries` directory using a convention that prefixes the filename with `provider_cisco_*`
 
-* Use the `template-provider-feature.rb` file to use as the basis for our new `provider_cisco_bash_shell.rb` type file:
+* Use the `template-provider-feature.rb` file to use as the basis for our new `provider_cisco_tunnel.rb` type file:
 
 ```bash
 cd  cisco-cookbook
-cp  docs/template-provider-feature.rb  libraries/provider_cisco_bash_shell.rb
+cp  docs/template-provider-feature.rb  libraries/provider_cisco_tunnel.rb
 ```
 
-* Edit `provider_cisco_bash_shell.rb` and substitute the placeholder text as shown here:
+* Edit `provider_cisco_tunnel.rb` and substitute the placeholder text as shown here:
 
 ```bash
-/X__CLASS_NAME__X/BashShell/
+/X__CLASS_NAME__X/Tunnel/
 
-/X__RESOURCE_NAME__X/bash_shell/
+/X__RESOURCE_NAME__X/tunnel/
 
-/X__CLI_NAME__X/bash-shell/
+/X__CLI_NAME__X/tunnel/
 ```
 
-#### Example: provider_cisco_bash_shell.rb
+#### Example: provider_cisco_tunnel.rb
 
-This is the completed bash_shell provider based on `template-provider-feature.rb`:
+This is the completed tunnel provider based on `template-provider-feature.rb`:
 
 ~~~chef
 # Copyright (c) 2015 Cisco and/or its affiliates.
@@ -165,9 +165,9 @@ require 'cisco_node_utils'
 
 class Chef
   class Provider
-    # CiscoBashShell provider for Chef.
-    class CiscoBashShell < Chef::Provider
-      provides :cisco_bash_shell
+    # CiscoTunnel provider for Chef.
+    class CiscoTunnel < Chef::Provider
+      provides :cisco_tunnel
 
       def initialize(new_resource, run_context)
         super(new_resource, run_context)
@@ -178,37 +178,37 @@ class Chef
       end
 
       def load_current_resource
-        @bash_shell = Cisco::BashShell.new
+        @tunnel = Cisco::Tunnel.new
       end
 
       def action_enable
-        return if Cisco::BashShell.feature_enabled
-        converge_by("enable feature bash-shell") {}
+        return if Cisco::Tunnel.feature_enabled
+        converge_by("enable feature tunnel") {}
         return if whyrun_mode?
-        @bash_shell.feature_enable
+        @tunnel.feature_enable
       end
 
       def action_disable
-        return unless Cisco::BashShell.feature_enabled
-        converge_by("disable feature bash-shell") do
-          @bash_shell.feature_disable
-          @bash_shell = nil
+        return unless Cisco::Tunnel.feature_enabled
+        converge_by("disable feature tunnel") do
+          @tunnel.feature_disable
+          @tunnel = nil
         end
       end
-    end # class CiscoBashShell
+    end # class CiscoTunnel
   end # class Provider
 end # class Chef
 ~~~
 
-## <a name="testing">Step 3. Testing: feature bash-shell</a>
+## <a name="testing">Step 3. Testing: feature tunnel</a>
 
-This section assumes that a `bash_shell.rb` node_utils API has already been written to work with our new bash_shell resource and provider files. See [README-develop-node_utils-APIs.md][doc_nu] for more information on writing these APIs.
+This section assumes that a `tunnel.rb` node_utils API has already been written to work with our new tunnel resource and provider files. See [README-develop-node_utils-APIs.md][doc_nu] for more information on writing these APIs.
 
-### <a name="bash_api">node_utils API: bash_shell.rb</a>
+### <a name="tunnel_api">node_utils API: tunnel.rb</a>
 
-The node_utils APIs become part of the cisco_node_utils gem, which is then installed directly into cisco-cookbook as a 'vendored' gem. Therefore, a new `bash_shell.rb` API file will need to be installed in the cisco-cookbook using one of two methods:
+The node_utils APIs become part of the cisco_node_utils gem, which is then installed directly into cisco-cookbook as a 'vendored' gem. Therefore, a new `tunnel.rb` API file will need to be installed in the cisco-cookbook using one of two methods:
 
-##### Option A) If `bash_shell.rb` is already part of cisco_node_utils gem:
+##### Option A) If `tunnel.rb` is already part of cisco_node_utils gem:
 
 Simply install the gem in your local cookbook workspace.
 
@@ -219,30 +219,30 @@ gem install --install-dir files/default/vendor/  \
             --no-rdoc  --no-ri   cisco_node_utils.gem
 ```
 
-##### Option B) If `bash_shell.rb` is not part of cisco_node_utils gem:
+##### Option B) If `tunnel.rb` is not part of cisco_node_utils gem:
 
-* First, copy `bash_shell.rb` file to the proper cookbook directory.
+* First, copy `tunnel.rb` file to the proper cookbook directory.
 
 ```bash
 
-cp bash_shell.rb  \
+cp tunnel.rb  \
    files/default/vendor/gems/cisco_node_utils-*/lib/cisco_node_utils/
 ```
 
 * Then add a require statement to the list of node_utils resources by adding this line:
-`require "cisco_node_utils/bash_shell"`
+`require "cisco_node_utils/tunnel"`
 
 To this file:
 `files/default/vendor/gems/cisco_node_utils-*/lib/cisco_node_utils.rb`
 
-### Recipe: cisco_bash_shell
+### Recipe: cisco_tunnel
 
-After the `bash_shell.rb` API is installed you can create recipes to test the new resource and provider.
+After the `tunnel.rb` API is installed you can create recipes to test the new resource and provider.
 
 * Create a simple recipe to test feature enable:
 
 ```chef
-cisco_bash_shell "test_on" do
+cisco_tunnel "test_on" do
   action :enable
 end
 ```
@@ -250,7 +250,7 @@ end
 * Check the cli state on the NX-OS device prior to the chef run:
 
 ```bash
-n9k# sh run | i 'feature bash'
+n9k# sh run | i 'feature tunnel'
 n9k#
 ```
 
@@ -262,8 +262,8 @@ n9k#
 Starting Chef Client, version 12.4.1
  ...
 Recipe: my_cookbook::my_recipe
-  * cisco_bash_shell[test_on] action enable
-    - enable feature bash-shell
+  * cisco_tunnel[test_on] action enable
+    - enable feature tunnel
 
 Chef Client finished, 1/1 resources updated in 2.159415163 seconds
 ```
@@ -271,26 +271,26 @@ Chef Client finished, 1/1 resources updated in 2.159415163 seconds
 * Check cli state again
 
 ```bash
-n9k# sh run | i 'feature bash'
-feature bash-shell
+n9k# sh run | i 'feature tunnel'
+feature tunnel
 ```
 
 * The test was successful. Now add a recipe test for idempotency and feature disablement:
 
 ```chef
-cisco_bash_shell "test_on" do
+cisco_tunnel "test_on" do
   action :enable
 end
 
-cisco_bash_shell "test_on_idempotent" do
+cisco_tunnel "test_on_idempotent" do
   action :enable
 end
 
-cisco_bash_shell "test_off" do
+cisco_tunnel "test_off" do
   action :disable
 end
 
-cisco_bash_shell "test_off_idempotent" do
+cisco_tunnel "test_off_idempotent" do
   action :disable
 end
 ```
@@ -302,11 +302,11 @@ end
 Starting Chef Client, version 12.4.1
  ...
 Recipe: my_cookbook::my_recipe
-  * cisco_bash_shell[test_on] action enable (up to date)
-  * cisco_bash_shell[test_on_idempotent] action enable (up to date)
-  * cisco_bash_shell[test_off] action disable
-    - disable feature bash-shell
-  * cisco_bash_shell[test_off_idempotent] action disable (up to date)
+  * cisco_tunnel[test_on] action enable (up to date)
+  * cisco_tunnel[test_on_idempotent] action enable (up to date)
+  * cisco_tunnel[test_off] action disable
+    - disable feature tunnel
+  * cisco_tunnel[test_off_idempotent] action disable (up to date)
 
 Running handlers:
 Running handlers complete
@@ -318,8 +318,8 @@ Chef Client finished, 1/4 resources updated in 2.347796694 seconds
 Run [rubocop][doc_rubocop] to validate the new code.
 
 ```bash
-% rubocop libraries/resource_cisco_bash_shell.rb  \
-          libraries/provider_cisco_bash_shell.rb
+% rubocop libraries/resource_cisco_tunnel.rb  \
+          libraries/provider_cisco_tunnel.rb
 Inspecting 2 files
 ..
 
@@ -529,12 +529,12 @@ end
 
 ## <a name="comp_test">Step 3. Testing: router eigrp</a>
 
-Similar to the test setup for the simple bash_shell example, this section assumes that a `router_eigrp.rb` node_utils API has already been written for our new router_eigrp resource and provider files. See [README-develop-node_utils-APIs.md][doc_nu] for more information on writing these APIs.
+Similar to the test setup for the simple tunnel example, this section assumes that a `router_eigrp.rb` node_utils API has already been written for our new router_eigrp resource and provider files. See [README-develop-node_utils-APIs.md][doc_nu] for more information on writing these APIs.
 
 ### <a name="eigrp_api">node_utils API: router_eigrp.rb</a>
 
 Install or copy the `router_eigrp.rb` API file into the cisco-cookbook.
-Please reference the [node_utils API: bash_shell.rb](#bash_api) section for more information on installing node_utils API files.
+Please reference the [node_utils API: tunnel.rb](#tunnel_api) section for more information on installing node_utils API files.
 
 ### Recipe: cisco_router_eigrp
 
