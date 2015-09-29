@@ -6,3 +6,8 @@ group :test do
   gem 'rspec'
   gem 'rubocop', '~> 0.34'
 end
+
+gem 'test-kitchen'
+gem "kitchen-ssh_cisco"
+gem 'berkshelf'
+
