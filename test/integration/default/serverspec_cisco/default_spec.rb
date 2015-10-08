@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe 'cisco-coobook' do
-  #it 'installs a cisco-package' do
-  #  expect(package('demo-one')).to be_installed
-  #end
+  it 'installs a cisco-package' do
+    expect(package('demo-one')).to be_installed
+  end
 
   it 'writes out a file using the file resource' do
     expect(file('/tmp/file_resource.txt')).to be_file

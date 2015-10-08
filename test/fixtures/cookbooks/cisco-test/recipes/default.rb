@@ -18,12 +18,12 @@ template '/tmp/template_resource.txt' do
   action :create
 end
 
-cookbook_file '/tmp/demo-one-1.0-1.x86_64.rpm' do
+cookbook_file '/bootflash/demo-one-1.0-1.x86_64.rpm' do
   source 'rpm-store/demo-one-1.0-1.x86_64.rpm'
   action :create
 end
 
-#cisco_package 'demo-one' do
-#  source '/tmp/demo-one-1.0-1.x86_64.rpm'
-#  action :install
-#end
+cisco_package 'demo-one' do
+  source '/bootflash/demo-one-1.0-1.x86_64.rpm'
+  action :install
+end
