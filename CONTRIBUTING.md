@@ -25,6 +25,12 @@ Cisco Network Elements support a rich set of features to make network robust, ef
 * Submit a pull request to the repository
 * A core team consisting of Cisco and Chef Inc employees will review your pull request and provide feedback.
 * After feedback has been given we expect responses within two weeks. After two weeks we may close the pull request if it isn't showing any activity.
+* All code commits must be associated with your github account and email address. Before committing any code use the following commands to update your workspace with your credentials:
+
+```bash
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+```
 
 # Additional Resources
 
