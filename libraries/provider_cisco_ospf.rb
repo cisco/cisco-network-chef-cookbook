@@ -1,6 +1,3 @@
-#
-# CiscoOspf provider for Chef.
-#
 # December 2014, Chris Van Heuveln
 #
 # Copyright (c) 2014-2015 Cisco and/or its affiliates.
@@ -17,55 +14,57 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
+$LOAD_PATH.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
 class Chef
-  class Provider::CiscoOspf < Provider
-    provides :cisco_ospf
+  class Provider
+    # CiscoOspf provider for Chef.
+    class CiscoOspf < Chef::Provider
+      provides :cisco_ospf
 
-    def initialize(new_resource, run_context)
-      super(new_resource, run_context)
-    end
+      def initialize(new_resource, run_context)
+        super(new_resource, run_context)
+      end
 
-    def whyrun_supported?
-      true
-    end
+      def whyrun_supported?
+        true
+      end
 
-    def load_current_resource
-      Chef::Log.debug "Load current resource for router ospf #{@new_resource.name}"
-      @current_resource = Chef::Resource::CiscoOspf.new(@new_resource.name)
-      ospfs = Cisco::RouterOspf.routers
-      ospfs.each do |id, ospf|
-        if id == @new_resource.name
+      def load_current_resource
+        Chef::Log.debug "Load current resource for router ospf #{@new_resource.name}"
+        @current_resource = Chef::Resource::CiscoOspf.new(@new_resource.name)
+        ospfs = Cisco::RouterOspf.routers
+        ospfs.each do |id, ospf|
+          next unless id == @new_resource.name
           @current_resource.exists = true
           @ospf = ospf
           return @ospf
         end
+        @current_resource.exists = false
+        @ospf = Cisco::RouterOspf.new(@new_resource.name, false)
       end
-      @current_resource.exists = false
-      @ospf = Cisco::RouterOspf.new(@new_resource.name, false)
-    end
 
-    def action_create
-      if current_resource.exists
-        Chef::Log.debug "router ospf #{@current_resource.name} already enabled"
-      else
-        converge_by("enable router ospf #{@ospf.name}") do
-          @ospf.create
+      def action_create
+        if current_resource.exists
+          Chef::Log.debug "router ospf #{@current_resource.name} already enabled"
+        else
+          converge_by("enable router ospf #{@ospf.name}") do
+            @ospf.create
+          end
         end
       end
-    end
 
-    def action_destroy
-      if current_resource.exists
-        converge_by("remove router ospf #{@ospf.name}") do
-          @ospf.destroy
+      def action_destroy
+        if current_resource.exists
+          converge_by("remove router ospf #{@ospf.name}") do
+            @ospf.destroy
+          end
+        else
+          Chef::Log.debug "router ospf #{@new_resource.name} already removed"
         end
-      else
-        Chef::Log.debug "router ospf #{@new_resource.name} already removed"
       end
-    end
-  end   # class Provider::CiscoOspf
-end     # class Chef
+    end # class CiscoOspf
+  end # class Provider
+end # class Chef

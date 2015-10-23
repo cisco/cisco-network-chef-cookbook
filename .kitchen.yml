@@ -1,17 +1,19 @@
 ---
 driver:
-  name: vagrant
+  name: ssh_cisco
+  hostname: 192.168.122.250
+  username: kitchen
+  password: insecure
+  ssh_command_prefix: 'sudo ip netns exec management su -l kitchen -c'
 
 provisioner:
   name: chef_zero
 
 platforms:
-  - name: packer-wrl-x86_64
-  driver_config:
-    box: packer-wrl-x86_64
-    box_url: /Users/rkailas/packer/packer-wrl.box
+  - name: n9kv-windriver
+
 suites:
   - name: default
     run_list:
-      - recipe[ciscolib_nxos::cisco_package_test_all]
+      - recipe[cisco-test::default]
     attributes:

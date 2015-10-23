@@ -4,7 +4,8 @@ require 'rubocop/rake_task'
 require 'foodcritic'
 
 task :spec    => 'spec:all'
-task :default => :spec
+task :style   => 'style:ruby'
+task :default => :style
 
 # Style tests. Rubocop and Foodcritic
 namespace :style do
@@ -18,6 +19,8 @@ namespace :style do
       tags: ['~FC023']
     }
   end
+
+  task :all => [:ruby, :chef]
 end
 
 namespace :spec do

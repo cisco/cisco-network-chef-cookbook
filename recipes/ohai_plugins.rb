@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: ciscolib_nxos
+# Cookbook Name:: cisco-cookbook
 # Recipe:: ohai_plugins
 #
-# Copyright 2011-2015, Opscode, Inc
+# Copyright 2011-2015, Chef Software, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,6 +42,4 @@ end
 
 # Reload ohai if the client's plugin_path did not contain
 # node['ohai']['plugin_path'], or new plugins were loaded
-if reload_ohai
-  resource.run_action(:reload)
-end
+resource.run_action(:reload) if reload_ohai

@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: ciscolib_nxos
+# Cookbook Name:: cisco-cookbook
 # Recipe:: demo_cleanup
 #
 # Copyright (c) 2014-2015 Cisco and/or its affiliates.
@@ -19,7 +19,7 @@
 # This is just a cleanup for the demo_install recipe.
 # ----------------------------------------------------
 
-Chef::Log.info('Case 1. Package Mgmt: Cisco RPM, Cisco RPM Patch');
+Chef::Log.info('Case 1. Package Mgmt: Cisco RPM, Cisco RPM Patch')
 cisco_package 'bgp-dev' do
   action :remove
 end
@@ -30,7 +30,7 @@ end
 
 # ----------------------------------------------------
 
-Chef::Log.info('Case 2. Package Mgmt: 3rd Party RPM');
+Chef::Log.info('Case 2. Package Mgmt: 3rd Party RPM')
 
 service 'demo-one' do
   action :stop
@@ -42,7 +42,7 @@ end
 
 # ----------------------------------------------------
 
-Chef::Log.info('Case 3. Cisco Command Config');
+Chef::Log.info('Case 3. Cisco Command Config')
 
 cisco_command_config 'cleanup-all' do
   action :update
@@ -54,7 +54,7 @@ end
 
 # ----------------------------------------------------
 
-Chef::Log.info('Case 4. Current Cisco Resource & Providers');
+Chef::Log.info('Case 4. Current Cisco Resource & Providers')
 
 cisco_interface_ospf 'loopback2' do
   action :destroy
@@ -65,6 +65,14 @@ cisco_interface 'loopback2' do
 end
 
 cisco_interface 'Ethernet1/1' do
+  switchport_mode 'default'
+end
+
+cisco_interface 'Ethernet1/1.1' do
+  action :destroy
+end
+
+cisco_interface 'Ethernet1/3' do
   switchport_mode 'default'
 end
 

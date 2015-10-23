@@ -18,7 +18,6 @@
 
 # In our recipes, due to the number of different parameters, we prefer to align
 # the arguments in a single column rather than following rubocop's style.
-# rubocop:disable Style/SingleSpaceBeforeFirstArg
 Chef::Log.info('Install cisco package:')
 
 cookbook_file '/bootflash/n9000_sample-1.0.0-7.0.3.x86_64.rpm' do
@@ -113,10 +112,23 @@ cisco_interface 'Ethernet1/1' do
   description         'managed by chef'
   ipv4_address        '192.0.2.43'
   ipv4_netmask_length 24
+  mtu                 1600
+  vrf                 'vrf_member'
+end
+
+cisco_interface 'Ethernet1/1.1' do
+  encapsulation_dot1q 10
+  negotiate_auto false
 end
 
 cisco_interface 'Ethernet1/2' do
   # set all props to default
+end
+
+cisco_interface 'Ethernet1/3' do
+  switchport_mode 'trunk'
+  switchport_trunk_allowed_vlan '20, 30'
+  switchport_trunk_native_vlan 40
 end
 
 cisco_interface 'Vlan22' do
@@ -129,7 +141,7 @@ Chef::Log.info('Demo cisco_vlan provider')
 cisco_vlan '220' do
   action    :create
   vlan_name 'newtest'
-  shutdown   true
+  shutdown  true
   state     'active'
 end
 
@@ -204,7 +216,7 @@ cisco_vtp 'default' do
   action      :create
   domain      'cisco1234'
   password    'test1234'
-  version      2
+  version     2
   filename    'bootflash:/vlan.dat'
 end
 
@@ -233,4 +245,3 @@ end
 cisco_snmp_user 'v3test' do
   groups ['network-admin']
 end
-# rubocop:enable Style/SingleSpaceBeforeFirstArg

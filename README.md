@@ -1,5 +1,28 @@
 # cisco-cookbook
 
+[![Cookbook Release](https://img.shields.io/cookbook/v/cisco-cookbook.svg)](https://supermarket.chef.io/cookbooks/cisco-cookbook)
+[![Build Status](https://travis-ci.org/cisco/cisco-network-chef-cookbook.svg?branch=develop)](https://travis-ci.org/cisco/cisco-network-chef-cookbook)
+
+##### Documentation Workflow Map
+
+This workflow map aids *users*, *developers* and *maintainers* of the cisco-cookbook project in selecting the appropriate document(s) for their task.
+
+* User Guides
+  * [README-agent-install.md](docs/README-agent-install.md) : Agent Installation and Configuration Guide
+  * [README-chef-provisioning.md](docs/README-chef-provisioning.md) : Automated Agent Installation and Configuration
+  * [README-package-provider.md](docs/README-package-provider.md) : Cisco Nexus Package Management using the Package Provider
+  * The remainder of this document is aimed at end users
+* Developer Guides
+  * [CONTRIBUTING.md](CONTRIBUTING.md) : Contribution guidelines
+  * [README-develop-resources-providers.md](docs/README-develop-resources-providers.md) : Developing New cisco-cookbook Resources and Providers
+* Maintainers Guides
+  * [README-maintainers.md](docs/README-maintainers.md) : Guidelines for core maintainers of the cisco-cookbook project
+  * All developer guides apply to maintainers as well
+
+
+Please see [Learning Resources](#learning-resources) for additional references.
+
+--
 #### Table of Contents
 
 1. [Overview](#overview)
@@ -10,19 +33,9 @@
    * [Resource Catalog (by Technology)](#resource-by-tech)
    * [Resource Catalog (by Name)](#resource-by-name)
 6. [Limitations](#limitations)
-7. [Development - Guide for contributing to the cookbook](#development)
+7. [Learning Resources](#learning-resources)
 
---
-##### Additional References
 
-* Agent Installation
-  * [README-agent-install.md](docs/README-agent-install.md) : Agent Installation and Configuration Guide
-* User Guides
-  * [README-package-provider.md](docs/README-package-provider.md) : Cisco Nexus Package Management using the Package Provider
-* Developer Guides
-  * [README-develop-resources-providers.md](docs/README-develop-resources-providers.md) : Developing New cisco-cookbook Resources and Providers
-
---
 
 ## Overview
 
@@ -80,29 +93,29 @@ See the recipes directory for example usage of cisco providers and resources.
 
 ### <a name="resource-by-tech">Resource Catalog (by Technology)<a>
 
-1. Miscellaneous Types
+* Miscellaneous Types
   * [`cisco_command_config`](#type-cisco_command_config)
 
-2. Interface Types
+* Interface Types
   * [`cisco_interface`](#type-cisco_interface)
   * [`cisco_interface_ospf`](#type-cisco_interface_ospf)
 
-3. OSPF Types
+* OSPF Types
   * [`cisco_ospf`](#type-cisco_ospf)
   * [`cisco_ospf_vrf`](#type-cisco_ospf_vrf)
   * [`cisco_interface_ospf`](#type-cisco_interface_ospf)
 
-4. SNMP Types
+* SNMP Types
   * [`cisco_snmp_community`](#type-cisco_snmp_community)
   * [`cisco_snmp_group`](#type-cisco_snmp_group)
   * [`cisco_snmp_server`](#type-cisco_snmp_server)
   * [`cisco_snmp_user`](#type-cisco_snmp_user)
 
-5. TACACS Types
+* TACACS Types
   * [`cisco_tacacs_server`](#type-cisco_tacacs_server)
   * [`cisco_tacacs_server_host`](#type-cisco_tacacs_server_host)
 
-6. VLAN Types
+* VLAN Types
   * [`cisco_vlan`](#type-cisco_vlan)
   * [`cisco_vtp`](#type-cisco_vtp)
 
@@ -203,6 +216,9 @@ parameters.
 
 - `description` - Descriptive label for this interface.
 
+- `encapsulation_dot1q` - Enable IEEE 802.1Q encapsulation of traffic on a
+   specified subinterface. Valid values are integer, keyword 'default'.
+
 - `shutdown` - Set to `true` to administratively shut down this interface,
   `false` to administratively enable this interface.
 
@@ -218,6 +234,9 @@ parameters.
 - `ipv4_redirects` - Set to `false` to disable ICMP redirects on this interface,
   `true` to enable them.
 
+- `mtu` - Maximum Trasnmission Unit size for frames received and sent on the specified
+   interface. Valid value is an integer.
+
 - `negotiate_auto` - Set to `true` or `false` to enable or disable
    autonegotiation of interface speed.
 
@@ -229,6 +248,12 @@ parameters.
    'trunk', 'default'. If set to 'default', the default mode for the interface
    type is used.
 
+- `switchport_trunk_allowed_vlan` - The allowed VLANs for the specified
+   Ethernet interface. Valid values are string, keyword 'default'.
+
+- `switchport_trunk_native_vlan` - The Native VLAN assigned to the switch port.
+   Valid values are integer, keyword 'default'
+
 - `switchport_vtp` - Set to `true` or `false` to enable or disable VTP on this
   interface. Default value: `false`.
 
@@ -237,6 +262,8 @@ parameters.
 
 - `svi_management` - Enable/disable SVI management. Default value: `false`.
    Only applicable to SVI (`vlan`) interfaces.
+
+- `vrf` - Specify the vrf membership of this interface.  Value must be a string.
 
 #### Actions
 
@@ -760,18 +787,32 @@ Minimum Requirements:
   * Cisco Nexus 31xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
   * Cisco Nexus 30xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
 
-## Development
-
-Contributions to cisco-cookbook are welcome and encouraged. Please follow this general workflow for new contributions. See [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
-
-1. Fork the cisco-cookbook repository on [GitHub](https://github.com/cisco/cisco-network-chef-cookbook)
-2. Create a named feature branch (like `add_component_x`)
-3. Write your change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using GitHub
-
 --
+
+## Learning Resources
+
+* Chef
+  * [https://learn.chef.io/](https://learn.chef.io/)
+  * [https://en.wikipedia.org/wiki/Chef_(software)](https://en.wikipedia.org/wiki/Chef_(software))
+* Markdown (for editing documentation)
+  * [https://help.github.com/articles/markdown-basics/](https://help.github.com/articles/markdown-basics/)
+* Ruby
+  * [https://en.wikipedia.org/wiki/Ruby_(programming_language)](https://en.wikipedia.org/wiki/Ruby_(programming_language))
+  * [https://www.codecademy.com/tracks/ruby](https://www.codecademy.com/tracks/ruby)
+  * [https://rubymonk.com/](https://rubymonk.com/)
+  * [https://www.codeschool.com/paths/ruby](https://www.codeschool.com/paths/ruby)
+* Ruby Gems
+  * [http://guides.rubygems.org/](http://guides.rubygems.org/)
+  * [https://en.wikipedia.org/wiki/RubyGems](https://en.wikipedia.org/wiki/RubyGems)
+* YAML
+  * [https://en.wikipedia.org/wiki/YAML](https://en.wikipedia.org/wiki/YAML)
+  * [http://www.yaml.org/start.html](http://www.yaml.org/start.html)
+* Yum
+  * [https://en.wikipedia.org/wiki/Yellowdog_Updater,_Modified](https://en.wikipedia.org/wiki/Yellowdog_Updater,_Modified)
+  * [https://www.centos.org/docs/5/html/yum/](https://www.centos.org/docs/5/html/yum/)
+  * [http://www.linuxcommand.org/man_pages](http://www.linuxcommand.org/man_pages/yum8.html)
+
+## License
 
 ```text
 Copyright (c) 2014-2015 Cisco and/or its affiliates.

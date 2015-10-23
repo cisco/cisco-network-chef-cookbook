@@ -1,5 +1,3 @@
-# CiscoSnmpUser provider for Chef.
-#
 # February 2015, Alex Hunsberger
 #
 # Copyright (c) 2015 Cisco and/or its affiliates.
@@ -16,65 +14,69 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-$:.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
+$LOAD_PATH.unshift(*Dir[File.expand_path('../../files/default/vendor/gems/**/lib', __FILE__)])
 
 require 'cisco_node_utils'
 
-# Uniqueness about SnmpUser:
-# 1) All properties must be configured in a single config string
-# 2) Configuring an SnmpUser of the same name/group/etc won't update
-#    an existing SnmpUser in config, you must destroy/re-create to update
-# 3) There may be >1 users with the same name configured, make the
-#    simplifying assumption the user only intends to have a single snmp
-#    user per unique name
-# 4) auth/priv passwords cannot be retrieved directly because they're
-#    hashed, can only re-hash and compare
 class Chef
-  class Provider::CiscoSnmpUser < Provider
-    provides :cisco_snmp_user
+  class Provider
+    # CiscoSnmpUser provider for Chef.
+    # Uniqueness about SnmpUser:
+    # 1) All properties must be configured in a single config string
+    # 2) Configuring an SnmpUser of the same name/group/etc won't update
+    #    an existing SnmpUser in config, you must destroy/re-create to update
+    # 3) There may be >1 users with the same name configured, make the
+    #    simplifying assumption the user only intends to have a single snmp
+    #    user per unique name
+    # 4) auth/priv passwords cannot be retrieved directly because they're
+    #    hashed, can only re-hash and compare
+    class CiscoSnmpUser < Chef::Provider
+      provides :cisco_snmp_user
 
-    def initialize(new_resource, run_context)
-      super(new_resource, run_context)
-      @user = nil
-    end
+      def initialize(new_resource, run_context)
+        super(new_resource, run_context)
+        @user = nil
+      end
 
-    def load_current_resource
-      @current_resource = Chef::Resource::CiscoSnmpUser.new(@new_resource.name)
+      def load_current_resource
+        @current_resource = Chef::Resource::CiscoSnmpUser.new(@new_resource.name)
 
-      @user = Cisco::SnmpUser.users.select { |_index, user|
-        user.name == @new_resource.user and user.engine_id == @new_resource.engine_id
-      }.values.first
+        # rubocop:disable Style/BlockDelimiters
+        @user = Cisco::SnmpUser.users.select { |_index, user|
+          user.name == @new_resource.user && user.engine_id == @new_resource.engine_id
+        }.values.first
+        # rubocop:enable Style/BlockDelimiters
 
-      unless @user.nil?
+        return if @user.nil?
         @current_resource.groups(@user.groups)
         @current_resource.auth_protocol(@user.auth_protocol.to_s)
         @current_resource.priv_protocol(@user.priv_protocol.to_s)
         @current_resource.localized_key(false) if @current_resource.localized_key.nil?
       end
-    end
 
-    def action_create
-      set_defaults
+      def action_create
+        set_defaults
 
-      if @user.nil? or (not @user.nil? and properties_differ?)
+        return unless @user.nil? || (!@user.nil? && properties_differ?)
+
         # must destroy and re-create to update
         @user.destroy unless @user.nil?
 
         # if this user doesn't exist yet, @curr_resource will just display nothing
         converge_by("user: #{@new_resource.user}, " +
-                    (@new_resource.engine_id.empty? ? "" : "engine id: #{@new_resource.engine_id}, ") +
-                    "update the following:\n" +
-                    "groups " +
-                    "#{@current_resource.groups} => #{@new_resource.groups}\n" +
-                    "auth_protocol " +
-                    "#{@current_resource.auth_protocol} => #{@new_resource.auth_protocol}\n" +
-                    "auth_password " +
-                    "#{@current_resource.auth_password} => #{@new_resource.auth_password}\n" +
-                    "priv_protocol " +
-                    "#{@current_resource.priv_protocol} => #{@new_resource.priv_protocol}\n" +
-                    "priv_password " +
-                    "#{@current_resource.priv_password} => #{@new_resource.priv_password}\n" +
-                    "localized_key " +
+                    (@new_resource.engine_id.empty? ? '' : "engine id: #{@new_resource.engine_id}, ") +
+                    "update the following:\n" \
+                    'groups ' \
+                    "#{@current_resource.groups} => #{@new_resource.groups}\n" \
+                    'auth_protocol ' \
+                    "#{@current_resource.auth_protocol} => #{@new_resource.auth_protocol}\n" \
+                    'auth_password ' \
+                    "#{@current_resource.auth_password} => #{@new_resource.auth_password}\n" \
+                    'priv_protocol ' \
+                    "#{@current_resource.priv_protocol} => #{@new_resource.priv_protocol}\n" \
+                    'priv_password ' \
+                    "#{@current_resource.priv_password} => #{@new_resource.priv_password}\n" \
+                    'localized_key ' \
                     "#{@current_resource.localized_key} => #{@new_resource.localized_key}\n") do
           # snmp user must be configured in a single command
           @user = Cisco::SnmpUser.new(@new_resource.user,
@@ -86,65 +88,64 @@ class Chef
                                       @new_resource.localized_key,
                                       @new_resource.engine_id)
         end # converge
-      end # if
-    end
-
-    def set_defaults
-      # don't select a default auth/priv protocol if the user hasn't
-      # supplied an auth/priv password
-      if (not @new_resource.auth_password.nil?) and @new_resource.auth_protocol.nil?
-        @new_resource.auth_protocol(Cisco::SnmpUser.default_auth_protocol.to_s)
-      elsif @new_resource.auth_protocol.nil?
-        @new_resource.auth_protocol('none')
-      end
-      if (not @new_resource.priv_password.nil?) and @new_resource.priv_protocol.nil?
-        @new_resource.priv_protocol(Cisco::SnmpUser.default_priv_protocol.to_s)
-      elsif @new_resource.priv_protocol.nil?
-        @new_resource.priv_protocol('none')
       end
 
-      @new_resource.auth_password(Cisco::SnmpUser.default_auth_password) if
-        @new_resource.auth_password.nil?
-      @new_resource.priv_password(Cisco::SnmpUser.default_priv_password) if
-        @new_resource.priv_password.nil?
-      if @new_resource.engine_id.empty?
-        @new_resource.groups(Cisco::SnmpUser.default_groups) if
-          @new_resource.groups.nil?
-      else
-        @new_resource.groups([])
+      def set_defaults
+        # don't select a default auth/priv protocol if the user hasn't
+        # supplied an auth/priv password
+        if (!@new_resource.auth_password.nil?) && @new_resource.auth_protocol.nil?
+          @new_resource.auth_protocol(Cisco::SnmpUser.default_auth_protocol.to_s)
+        elsif @new_resource.auth_protocol.nil?
+          @new_resource.auth_protocol('none')
+        end
+        if (!@new_resource.priv_password.nil?) && @new_resource.priv_protocol.nil?
+          @new_resource.priv_protocol(Cisco::SnmpUser.default_priv_protocol.to_s)
+        elsif @new_resource.priv_protocol.nil?
+          @new_resource.priv_protocol('none')
+        end
+
+        @new_resource.auth_password(Cisco::SnmpUser.default_auth_password) if
+          @new_resource.auth_password.nil?
+        @new_resource.priv_password(Cisco::SnmpUser.default_priv_password) if
+          @new_resource.priv_password.nil?
+        if @new_resource.engine_id.empty?
+          @new_resource.groups(Cisco::SnmpUser.default_groups) if
+            @new_resource.groups.nil?
+        else
+          @new_resource.groups([])
+        end
+
+        @new_resource.localized_key(false) if
+          @new_resource.localized_key.nil?
       end
 
-      @new_resource.localized_key(false) if
-        @new_resource.localized_key.nil?
-    end
+      def properties_differ?
+        return true if @user.nil?
+        return true if @new_resource.engine_id.empty? && @new_resource.groups.sort != @current_resource.groups.sort
+        return true if @new_resource.auth_protocol != @current_resource.auth_protocol
+        return true if @new_resource.priv_protocol != @current_resource.priv_protocol
+        return true if @new_resource.engine_id != @current_resource.engine_id
+        # auth/priv passwords can only be compared, not retrieved
+        return true unless @user.auth_password_equal?(@new_resource.auth_password,
+                                                      @new_resource.localized_key)
+        return true unless @user.priv_password_equal?(@new_resource.priv_password,
+                                                      @new_resource.localized_key)
 
-    def properties_differ?
-      return true if @user.nil?
-      return true if @new_resource.engine_id.empty? and @new_resource.groups.sort != @current_resource.groups.sort
-      return true if @new_resource.auth_protocol != @current_resource.auth_protocol
-      return true if @new_resource.priv_protocol != @current_resource.priv_protocol
-      return true if @new_resource.engine_id != @current_resource.engine_id
-      # auth/priv passwords can only be compared, not retrieved
-      return true unless @user.auth_password_equal?(@new_resource.auth_password,
-                                                    @new_resource.localized_key)
-      return true unless @user.priv_password_equal?(@new_resource.priv_password,
-                                                    @new_resource.localized_key)
+        false
+      end
 
-      return false
-    end
-
-    def action_destroy
-      unless @user.nil?
+      def action_destroy
+        return if @user.nil?
         converge_by("remove snmp user instance with name #{@user.name} " +
-                    (@user.engine_id.empty? ? "" : "engine id #{@user.engine_id}")) do
+                    (@user.engine_id.empty? ? '' : "engine id #{@user.engine_id}")) do
           @user.destroy
           @user = nil
         end
       end
-    end
 
-    def whyrun_supported?
-      true
+      def whyrun_supported?
+        true
+      end
     end
   end
 end

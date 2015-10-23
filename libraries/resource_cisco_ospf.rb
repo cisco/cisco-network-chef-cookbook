@@ -1,6 +1,3 @@
-#
-# CiscoOspf resource for Chef.
-#
 # December 2014, Chris Van Heuveln
 #
 # Copyright (c) 2014-2015 Cisco and/or its affiliates.
@@ -19,18 +16,19 @@
 
 class Chef
   class Resource
-    class Resource::CiscoOspf < Resource
+    # CiscoOspf resource for Chef.
+    class CiscoOspf < Chef::Resource
       attr_accessor :exists, :cisco_ospf
 
-      def initialize(name, run_context = nil)
+      def initialize(name, run_context=nil)
         super
         @resource_name = :cisco_ospf
         @action = :create
         @allowed_actions = [:create, :destroy]
-        @name  = name
+        @name = name
       end
 
-      def name(arg = nil)
+      def name(arg=nil)
         set_or_return(:name, arg, kind_of: String)
       end
     end

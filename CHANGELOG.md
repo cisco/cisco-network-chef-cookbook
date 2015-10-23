@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+### Added
+- Extended cisco_interface with the following attributes:
+  - encapsulation dot1q
+  - mtu
+  - switchport trunk allowed vlan
+  - switchport trunk native vlan
+  - vrf member
+- Travis-CI integration, currently running Rubocop and Foodcritic validation.
+
+### Fixed
+- Code changes to satisfy Rubocop.
+
 ## [1.0.1] - 2015-09-21
 ### Fixed
 - Fixed broken documentation links.
@@ -25,5 +38,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Please note: 0.9.0 is an EFT pre-release for a limited audience with access to NX-OS 7.0(3)I2(1). Additional code changes may occur in 0.9.x prior to the final 1.0.0 release.
 
 [unreleased]: https://github.com/cisco/cisco-network-chef-cookbook/compare/master...develop
-[1.0.0]: https://github.com/cisco/cisco-network-chef-cookbook/compare/v1.0.0...v0.9.0
+[1.0.1]: https://github.com/cisco/cisco-network-chef-cookbook/compare/v1.0.0...v1.0.1
+[1.0.0]: https://github.com/cisco/cisco-network-chef-cookbook/compare/v0.9.0...v1.0.0
 

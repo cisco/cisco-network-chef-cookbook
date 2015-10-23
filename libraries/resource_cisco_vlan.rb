@@ -1,6 +1,3 @@
-#
-# Chef Resource definition for CiscoVlan
-#
 # December 2014, Jie Yang
 #
 # Copyright (c) 2014-2015 Cisco and/or its affiliates.
@@ -19,16 +16,17 @@
 
 class Chef
   class Resource
-    class Resource::CiscoVlan < Chef::Resource
+    # Chef Resource definition for CiscoVlan
+    class CiscoVlan < Chef::Resource
       attr_accessor :exists
 
-      def initialize(name, run_context = nil)
+      def initialize(name, run_context=nil)
         super
         @resource_name = :cisco_vlan
         @action = :create
-        @allowed_actions =  [
+        @allowed_actions = [
           :create,
-          :destroy
+          :destroy,
         ]
 
         # The vlan id is the name of the Resource (@new_resource.name),
@@ -39,16 +37,16 @@ class Chef
         @shutdown = nil
       end
 
-      def vlan_name(arg = nil)
-        set_or_return(:vlan_name, arg, :kind_of => String)
+      def vlan_name(arg=nil)
+        set_or_return(:vlan_name, arg, kind_of: String)
       end
 
-      def state(arg = nil)
-        set_or_return(:state, arg, :kind_of => String)
+      def state(arg=nil)
+        set_or_return(:state, arg, kind_of: String)
       end
 
-      def shutdown(arg = nil)
-        set_or_return(:shutdown, arg, :kind_of => [TrueClass, FalseClass])
+      def shutdown(arg=nil)
+        set_or_return(:shutdown, arg, kind_of: [TrueClass, FalseClass])
       end
     end
   end
