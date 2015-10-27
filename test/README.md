@@ -6,6 +6,7 @@
  - Switch under test available via SSH
  - Switch under test needs valid /etc/resolv.conf
  - Switch under test needs Internet access (for rubygems) via some VRF
+ - Switch under test needs a user configured with bash login (Ex: username kitchen shelltype bash)
 
 ## Setup
 
@@ -17,7 +18,7 @@
 ## First run procedure
 
  - Converge test cookbook to switch and verify using serverspec using ```chef exec bundle exec kitchen converge``` from the cookbook directory
- - At this point, all tests should pass. You can cleanup by running ```chef exec bundle exec kitchen shutdown``` from the cookbook directory and removing /tmp/verifier directory on switch under test
+ - At this point, all tests should pass. You can cleanup by running ```chef exec bundle exec kitchen destroy``` from the cookbook directory and removing /tmp/verifier directory on switch under test
 
 ## Second run procedures
 
