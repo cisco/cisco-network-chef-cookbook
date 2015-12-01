@@ -1,16 +1,25 @@
 ---
 driver:
-  name: ssh_cisco
-  hostname: 192.168.122.250
-  username: kitchen
-  password: insecure
-  ssh_command_prefix: 'sudo ip netns exec management su -l kitchen -c'
+  name: vagrant
+  provider: virtualbox
+  vm_hostname: false
+  provision: true
 
 provisioner:
   name: chef_zero
+  require_chef_omnibus: 12.5.1
+  chef_omnibus_url: https://omnitruck.chef.io/install.sh
+  command_prefix: sudo ip netns exec management sudo -u vagrant
+
+verifier:
+  command_prefix: sudo ip netns exec management sudo -u vagrant
 
 platforms:
-  - name: n9kv-windriver
+  - name: nexus
+    driver:
+      box: n9kv
+      vagrantfiles:
+        - vagrantfiles/nexus.rb
 
 suites:
   - name: default

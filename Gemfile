@@ -7,7 +7,6 @@ group :test do
   gem 'rubocop', '~> 0.34'
 end
 
-gem 'test-kitchen'
-gem "kitchen-ssh_cisco"
+gem 'test-kitchen', git: 'https://github.com/test-kitchen/test-kitchen', branch: 'master'
+gem 'kitchen-vagrant'
 gem 'berkshelf'
-
