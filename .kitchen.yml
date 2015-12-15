@@ -8,7 +8,6 @@ driver:
 provisioner:
   name: chef_zero
   require_chef_omnibus: 12.5.1
-  chef_omnibus_url: https://omnitruck.chef.io/install.sh
   command_prefix: sudo ip netns exec management sudo -u vagrant
 
 verifier:
