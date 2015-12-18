@@ -14,35 +14,39 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'chef'
+# ensure cisco vendor gems are requirable by ohai
+$LOAD_PATH.unshift(*Dir[Chef::Config.file_cache_path +
+  '/cookbooks/cisco-cookbook/files/default/vendor/gems/*/lib'])
 require 'cisco_node_utils'
 
 Ohai.plugin(:Cisco) do
-  provides "cisco"
+  provides 'cisco'
 
-  collect_data(:linux) do #eventually :nexus
+  collect_data(:linux) do # eventually :nexus
     cisco Mash.new
 
-    cisco["images"] = {
-      "system_image" => Platform.system_image,
-      "packages"     => Platform.packages,
+    cisco['images'] = {
+      'system_image' => Cisco::Platform.system_image,
+      'packages'     => Cisco::Platform.packages,
     }
 
-    cisco["hardware"] = {
-      "type"         => Platform.hardware_type,
-      "cpu"          => Platform.cpu,
-      "memory"       => Platform.memory,
-      "board"        => Platform.board,
-      "uptime"       => Platform.uptime,
-      "last_reset"   => Platform.last_reset,
-      "reset_reason" => Platform.reset_reason,
+    cisco['hardware'] = {
+      'type'         => Cisco::Platform.hardware_type,
+      'cpu'          => Cisco::Platform.cpu,
+      'memory'       => Cisco::Platform.memory,
+      'board'        => Cisco::Platform.board,
+      'uptime'       => Cisco::Platform.uptime,
+      'last_reset'   => Cisco::Platform.last_reset,
+      'reset_reason' => Cisco::Platform.reset_reason,
     }
 
-    cisco["inventory"] = {}
-    cisco["inventory"]["chassis"] = Platform.chassis
-    Platform.slots.each{ |k,v| cisco["inventory"][k] = v }
-    Platform.power_supplies.each{ |k,v| cisco["inventory"][k] = v }
-    Platform.fans.each{ |k,v| cisco["inventory"][k] = v }
+    cisco['inventory'] = {}
+    cisco['inventory']['chassis'] = Cisco::Platform.chassis
+    Cisco::Platform.slots.each { |k, v| cisco['inventory'][k] = v }
+    Cisco::Platform.power_supplies.each { |k, v| cisco['inventory'][k] = v }
+    Cisco::Platform.fans.each { |k, v| cisco['inventory'][k] = v }
 
-    cisco["virtual_service"] = Platform.virtual_services
+    cisco['virtual_service'] = Cisco::Platform.virtual_services
   end
 end

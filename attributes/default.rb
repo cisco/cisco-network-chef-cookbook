@@ -18,4 +18,4 @@
 #
 
 # The list of plugins and their respective file locations
-default['ohai']['plugins']['ciscolib_nxos'] = 'plugins'
+default['ohai']['plugins']['cisco-cookbook'] = 'plugins'
