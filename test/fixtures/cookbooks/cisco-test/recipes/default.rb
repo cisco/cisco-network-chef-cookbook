@@ -4,10 +4,6 @@
 #
 # Copyright (c) 2015 The Authors, All Rights Reserved.
 
-#cisco_package 'name-of-package' do
-#  action :install
-#end
-
 file '/tmp/file_resource.txt' do
   content 'this is a file resource'
   action :create
@@ -80,27 +76,27 @@ cisco_interface_ospf 'Ethernet1/2' do
 end
 
 cisco_ospf_vrf 'Sample default' do
-  auto_cost 45000
+  auto_cost 45_000
   default_metric 5
   log_adjacency 'detail'
   timer_throttle_lsa_start 5
-  timer_throttle_lsa_hold  5500
-  timer_throttle_lsa_max   5600
+  timer_throttle_lsa_hold 5500
+  timer_throttle_lsa_max 5600
   timer_throttle_spf_start 250
-  timer_throttle_spf_hold  1500
-  timer_throttle_spf_max   5500
+  timer_throttle_spf_hold 1500
+  timer_throttle_spf_max 5500
 end
 
 cisco_ospf_vrf 'Sample management' do
-  auto_cost 46000
+  auto_cost 46_000
   default_metric 10
   log_adjacency 'log'
   timer_throttle_lsa_start 8
-  timer_throttle_lsa_hold  5600
-  timer_throttle_lsa_max   5800
+  timer_throttle_lsa_hold 5600
+  timer_throttle_lsa_max 5800
   timer_throttle_spf_start 277
-  timer_throttle_spf_hold  1700
-  timer_throttle_spf_max   5700
+  timer_throttle_spf_hold 1700
+  timer_throttle_spf_max 5700
 end
 
 cisco_ospf_vrf 'Sample novrf' do
@@ -130,13 +126,13 @@ cisco_snmp_community 'nocommunity' do
 end
 
 cisco_snmp_server 'default' do
-    aaa_user_cache_timeout 1000
-    contact 'user1'
-    global_enforce_priv true
-    location 'rtp'
-    packet_size 2500
-    protocol false
-    tcp_session_auth false
+  aaa_user_cache_timeout 1000
+  contact 'user1'
+  global_enforce_priv true
+  location 'rtp'
+  packet_size 2500
+  protocol false
+  tcp_session_auth false
 end
 
 cisco_snmp_user 'withengine 128:128:127:127:124:2' do

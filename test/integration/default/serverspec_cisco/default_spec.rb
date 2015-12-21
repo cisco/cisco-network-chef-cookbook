@@ -58,7 +58,7 @@ describe 'cisco-test::default' do
       end
 
       it 'has a properly-configured IP address' do
-        expect(@running_config).to match(/^  ip address 10.1.1.1\/24/)
+        expect(@running_config).to match(%r{^  ip address 10.1.1.1/24})
       end
 
       it 'has a proxy ARP enabled' do
@@ -247,7 +247,7 @@ describe 'cisco-test::default' do
 
   describe 'cisco_snmp_user' do
     it 'configures the withengine user' do
-      expect(@running_config).to match(/snmp-server user withengine auth md5 0x9fafd204728f5ccdb1cde2ca3f722863 priv 0x71be02b03d6ff0140cb6e9796f6d2ab4 localizedkey engineID 128:128:127:127:124:2/)
+      expect(@running_config).to match(/snmp-server user withengine auth md5 0x9fafd204728f5ccdb1cde2ca3f722863 priv 0x71be02b03d6ff0140cb6e9796f6d2ab4 localizedkey engineID 128:128:127:127:124:2/) # rubocop:disable Metrics/LineLength
     end
   end
 
@@ -261,7 +261,7 @@ describe 'cisco-test::default' do
     end
 
     it 'sets the source interface' do
-      expect(@running_config).to match(/^ip tacacs source-interface Ethernet1\/1/)
+      expect(@running_config).to match(%r{^ip tacacs source-interface Ethernet1/1})
     end
 
     it 'sets the timeout' do
