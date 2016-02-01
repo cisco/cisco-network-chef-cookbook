@@ -1,21 +1,21 @@
 # -*- encoding: utf-8 -*-
-# stub: cisco_nxapi 1.0.0 ruby lib
+# stub: cisco_nxapi 1.0.1 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "cisco_nxapi"
-  s.version = "1.0.0"
+  s.version = "1.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Alex Hunsberger", "Glenn Matthews", "Chris Van Heuveln", "Mike Wiebe", "Jie Yang"]
-  s.date = "2015-08-25"
+  s.date = "2016-02-08"
   s.description = "Utilities for working with the Cisco NX-OS NX-API.\nDesigned to be used with Puppet and Chef and the cisco_node_utils gem.\n"
   s.email = "cisco_agent_gem@cisco.com"
   s.licenses = ["Apache-2.0"]
-  s.rubygems_version = "2.2.2"
+  s.rubygems_version = "2.5.0"
   s.summary = "Utilities for working with Cisco NX-OS NX-API"
 
-  s.installed_by_version = "2.2.2" if s.respond_to? :installed_by_version
+  s.installed_by_version = "2.5.0" if s.respond_to? :installed_by_version
 
   if s.respond_to? :specification_version then
     s.specification_version = 4

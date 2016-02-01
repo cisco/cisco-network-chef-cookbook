@@ -210,11 +210,20 @@ module CiscoNxapi
       end
     end
 
+    # Sends a request to the NX API and returns the body of the request or
+    # handles errors that happen.
     # @raise CiscoNxapi::ConnectionRefused if NXAPI is disabled
     # @raise CiscoNxapi::HTTPUnauthorized if username/password are invalid
     # @raise CiscoNxapi::HTTPBadRequest (should never occur)
     # @raise CiscoNxapi::RequestNotSupported
     # @raise CiscoNxapi::CliError if any command is rejected as invalid
+    #
+    # @param type ["cli_show", "cli_show_ascii"] Specifies the type of command
+    #             to be executed.
+    # @param command_or_list [String, Array<String>] The command or array of
+    #                        commands which should be run.
+    # @return [Hash, Array<Hash>] output when type == "cli_show"
+    # @return [String, Array<String>] output when type == "cli_show_ascii"
     def req(type, command_or_list)
       if command_or_list.is_a?(Array)
         # NXAPI wants config lines to be separated by ' ; '
@@ -274,10 +283,20 @@ module CiscoNxapi
           handle_output(prev_cmds, cmd, o)
           prev_cmds << cmd
         end
-        output = output.each { |o| o['body'] }
+        output = output.collect do |o|
+          if type == 'cli_show_ascii' && o['body'].empty?
+            ''
+          else
+            o['body']
+          end
+        end
       else
         handle_output(prev_cmds, command, output)
-        output = output['body']
+        if type == 'cli_show_ascii' && output['body'].empty?
+          output = ''
+        else
+          output = output['body']
+        end
       end
 
       @cache_hash[type][command] = output if cache_enable?

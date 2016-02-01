@@ -105,6 +105,11 @@ class TestNxapi < TestCase
     assert_equal(result.strip, s.split("\n")[1].strip)
   end
 
+  def test_show_ascii_empty
+    result = client.show('show hostname | include foo | exclude foo', :ascii)
+    assert_equal('', result)
+  end
+
   def test_show_structured
     result = client.show('show hostname', :structured)
     s = @device.cmd('show hostname')
