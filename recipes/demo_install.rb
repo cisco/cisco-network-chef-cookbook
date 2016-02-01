@@ -118,7 +118,6 @@ end
 
 cisco_interface 'Ethernet1/1.1' do
   encapsulation_dot1q 10
-  negotiate_auto false
 end
 
 cisco_interface 'Ethernet1/2' do
