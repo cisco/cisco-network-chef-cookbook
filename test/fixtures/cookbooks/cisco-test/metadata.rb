@@ -7,4 +7,3 @@ long_description 'Installs/Configures cisco-test'
 version '0.1.0'
 
 depends 'cisco-cookbook'
-
