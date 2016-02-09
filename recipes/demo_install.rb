@@ -150,7 +150,7 @@ cisco_ospf 'Sample' do
   action :create
 end
 
-cisco_interface_ospf 'Ethernet1/2' do
+cisco_interface_ospf 'Ethernet1/4' do
   action                         :create
   ospf                           'Sample'
   area                           200
