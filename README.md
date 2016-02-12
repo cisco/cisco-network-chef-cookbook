@@ -103,10 +103,10 @@ See the recipes directory for example usage of cisco providers and resources.
 * ✅ = Supported
 * ❌ = Unsupported
 
-|   | N9k | N30xx | N31xx | N56xx | N6k | N7k |
-|---|:---:|:-----:|:-----:|:-----:|:---:|:---:|
+|   | N9k | N30xx | N31xx | N56xx | N6k | N7k | Caveats |
+|---|:---:|:-----:|:-----:|:-----:|:---:|:---:|:-------:|
 | [cisco_command_config](#type-cisco_command_config) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [cisco_interface](#type-cisco_interface) | ✅ | ✅ | ✅ | ✅<br>[Caveat](#cisco-interface-caveats) | ✅<br>[Caveat](#cisco-interface-caveats) | ✅ |
+| [cisco_interface](#type-cisco_interface) | ✅ | ✅ | ✅ | ✅* | ✅* | ✅ | [Caveat](#cisco-interface-caveats) |
 | [cisco_interface_ospf](#type-cisco_interface_ospf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [cisco_ospf](#type-cisco_ospf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [cisco_ospf_vrf](#type-cisco_ospf_vrf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
@@ -218,8 +218,8 @@ end
 
 #### <a name="cisco-interface-caveats">Caveats<a>
 
-| Caveats | Description |
-|---------|-------------|
+| Property | Caveat Description |
+|----------|--------------------|
 | svi_autostate | Not supported on N56xx and N6k |
 
 The `cisco_interface` resource is used to manage general configuration of all
