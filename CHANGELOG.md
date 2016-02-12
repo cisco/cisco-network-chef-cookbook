@@ -2,18 +2,26 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.1.0] - 2016-02-12
 ### Added
-- Extended cisco_interface with the following attributes:
+- Extended cisco_interface (@robert-w-gries)
   - encapsulation dot1q
   - mtu
   - switchport trunk allowed vlan
   - switchport trunk native vlan
   - vrf member
-- Travis-CI integration, currently running Rubocop and Foodcritic validation.
+- Travis-CI integration, currently running Rubocop and Foodcritic validation (@glennmatthews)
+- Documentation workflow map to guide users, developers, and maintainers to the proper docs (@mikewiebe)
+- Doc updates for examples, templates, and install instructions (@chrisvanheuveln)
+- Test Kitchen integration (@adamleff, @edolnx)
+- Serverspec tests (@adamleff)
+- Added support for Chef 12.6.0 (@adamleff)
+- Updated documentation with platform support for providers and required software versions (@robert-w-gries)
 
 ### Fixed
-- Code changes to satisfy Rubocop.
+- Code changes to satisfy Rubocop. (@glennmatthews)
+- Updated cisco ohai plugin to use correct load path for vendor gems (Alex Hunsberger)
+- Cleaned up demo recipes for N5k, N6k, and N7k platforms (@robert-w-gries)
 
 ## [1.0.1] - 2015-09-21
 ### Fixed
