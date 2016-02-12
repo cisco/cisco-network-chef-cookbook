@@ -106,7 +106,7 @@ See the recipes directory for example usage of cisco providers and resources.
 |   | N9k | N30xx | N31xx | N56xx | N6k | N7k | Caveats |
 |---|:---:|:-----:|:-----:|:-----:|:---:|:---:|:-------:|
 | [cisco_command_config](#type-cisco_command_config) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [cisco_interface](#type-cisco_interface) | ✅ | ✅ | ✅ | ✅* | ✅* | ✅ | [Caveat](#cisco-interface-caveats) |
+| [cisco_interface](#type-cisco_interface) | ✅ | ✅ | ✅ | ✅* | ✅* | ✅ | [Caveat](#cisco_interface-caveats) |
 | [cisco_interface_ospf](#type-cisco_interface_ospf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [cisco_ospf](#type-cisco_ospf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [cisco_ospf_vrf](#type-cisco_ospf_vrf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
@@ -211,19 +211,19 @@ end
 
 ### Type: cisco_interface
 
+The `cisco_interface` resource is used to manage general configuration of all
+interface types, including ethernet, port-channel, loopback, and SVI (vlan).
+
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
 | Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
-#### <a name="cisco-interface-caveats">Caveats</a>
+#### <a name="cisco_interface-caveats">Caveats</a>
 
 | Property | Caveat Description |
 |----------|--------------------|
 | svi_autostate | Not supported on N56xx and N6k |
-
-The `cisco_interface` resource is used to manage general configuration of all
-interface types, including ethernet, port-channel, loopback, and SVI (vlan).
 
 #### Examples
 
