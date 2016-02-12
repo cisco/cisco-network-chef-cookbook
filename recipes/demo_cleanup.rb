@@ -64,15 +64,20 @@ cisco_interface 'loopback2' do
   action :destroy
 end
 
-cisco_interface 'Ethernet1/1' do
-  switchport_mode 'default'
-end
-
+# destroy sub-if first because of mtu dependency
 cisco_interface 'Ethernet1/1.1' do
   action :destroy
 end
 
+cisco_interface 'Ethernet1/1' do
+  switchport_mode 'default'
+end
+
 cisco_interface 'Ethernet1/3' do
+  switchport_mode 'default'
+end
+
+cisco_interface 'Ethernet1/4' do
   switchport_mode 'default'
 end
 
