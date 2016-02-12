@@ -93,12 +93,12 @@ See the recipes directory for example usage of cisco providers and resources.
 
 ## Requirements
 
-### <a name="chef-ruby-requirements">Chef and Ruby Requirements<a>
+### <a name="chef-ruby-requirements">Chef and Ruby Requirements</a>
 
 * Cisco NX-OS Chef implementation requires Chef version 12.6.1
 * Ruby 2.0 or higher (preferably from the Chef full-stack installer)
 
-### <a name="provider-platform-support">Provider Support Across Platforms<a>
+### <a name="provider-platform-support">Provider Support Across Platforms</a>
 
 * ✅ = Supported
 * ❌ = Unsupported
@@ -121,7 +121,7 @@ See the recipes directory for example usage of cisco providers and resources.
 
 ## Resource Reference
 
-### <a name="resource-by-tech">Resource Catalog (by Technology)<a>
+### <a name="resource-by-tech">Resource Catalog (by Technology)</a>
 
 * Miscellaneous Types
   * [`cisco_command_config`](#type-cisco_command_config)
@@ -150,7 +150,7 @@ See the recipes directory for example usage of cisco providers and resources.
   * [`cisco_vtp`](#type-cisco_vtp)
 
 --
-### <a name="resource-by-name">Resource Catalog (by Name)<a>
+### <a name="resource-by-name">Resource Catalog (by Name)</a>
 
 * [`cisco_command_config`](#type-cisco_command_config)
 * [`cisco_interface`](#type-cisco_interface)
@@ -216,7 +216,7 @@ end
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
 | Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
-#### <a name="cisco-interface-caveats">Caveats<a>
+#### <a name="cisco-interface-caveats">Caveats</a>
 
 | Property | Caveat Description |
 |----------|--------------------|
