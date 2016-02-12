@@ -11,7 +11,6 @@
 7. [(optional) chef-client Persistence](#persistence)
 8. [(optional) Automated Installation Options](#auto-install)
 9. [References](#references)
-10. [Limitations](#limitations)
 
 ## Overview
 
@@ -22,9 +21,7 @@ This document describes chef-client installation and setup on Cisco Nexus switch
 ## Pre-Install Tasks
 
 #### Platform and Software Requirements
-* Chef 12.4 or higher
-* Cisco NX-OS release 7.0(3)I2(1) or later
-* Platforms: Cisco Nexus 95xx, Nexus 93xx, Nexus 30xx, Nexus 31xx
+See [Requirements](../README.md#requirements) for details on platform and software requirements.
 
 Please note: A virtual Nexus N9000/N3000 may be helpful for development and testing. Users with a valid [cisco.com](http://cisco.com) user ID can obtain a copy of a virtual Nexus N9000/N3000 by sending their [cisco.com](http://cisco.com) user ID in an email to <get-n9kv@cisco.com>. If you do not have a [cisco.com](http://cisco.com) user ID please register for one at [https://tools.cisco.com/IDREG/guestRegistration](https://tools.cisco.com/IDREG/guestRegistration)
 
@@ -438,18 +435,6 @@ systemctl start my_chef
 [Cisco Nexus Chef Modules](../README.md) - Resources, Providers, Utilities
 
 [Cisco Nexus Programmability Guide](http://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus9000/sw/6-x/programmability/guide/b_Cisco_Nexus_9000_Series_NX-OS_Programmability_Guide/b_Cisco_Nexus_9000_Series_NX-OS_Programmability_Guide_chapter_01010.html) - Guestshell Documentation
-
---
-
-## Limitations
-
-Minimum Requirements:
-* Cisco NX-OS Chef implementation requires Chef version 12.4.1
-* Supported Platforms:
-  * Cisco Nexus 95xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
-  * Cisco Nexus 93xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
-  * Cisco Nexus 31xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
-  * Cisco Nexus 30xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
 
 --
 
