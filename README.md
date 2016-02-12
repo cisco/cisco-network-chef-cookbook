@@ -906,6 +906,8 @@ end
   * [https://www.centos.org/docs/5/html/yum/](https://www.centos.org/docs/5/html/yum/)
   * [http://www.linuxcommand.org/man_pages](http://www.linuxcommand.org/man_pages/yum8.html)
 
+--
+
 ## License
 
 ```text
