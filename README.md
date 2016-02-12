@@ -29,13 +29,12 @@ Please see [Learning Resources](#learning-resources) for additional references.
 2. [Cookbook Description](#cookbook-description)
 3. [Setup](#setup)
 4. [Usage](#usage)
-5. [Platform Support](#platform-support)
+5. [Platform Support](#requirements)
    * [Provider Support Across Platforms](#provider-platform-support)
 6. [Resource Reference](#resource-reference)
    * [Resource Catalog (by Technology)](#resource-by-tech)
    * [Resource Catalog (by Name)](#resource-by-name)
-7. [Limitations](#limitations)
-8. [Learning Resources](#learning-resources)
+7. [Learning Resources](#learning-resources)
 
 
 
@@ -91,7 +90,12 @@ depends 'cisco-cookbook', '~> 1.0'
 
 See the recipes directory for example usage of cisco providers and resources.
 
-## Platform Support
+## Requirements
+
+### Chef and Ruby Requirements
+
+* Cisco NX-OS Chef implementation requires Chef version 12.6.1
+* Ruby 2.0 or higher (preferably from the Chef full-stack installer)
 
 ### <a name="provider-platform-support">Provider Support Across Platforms<a>
 
