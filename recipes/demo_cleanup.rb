@@ -77,6 +77,10 @@ cisco_interface 'Ethernet1/3' do
   switchport_mode 'default'
 end
 
+cisco_interface 'Ethernet1/4' do
+  switchport_mode 'default'
+end
+
 cisco_ospf_vrf 'SAMPLE foo' do
   action :destroy
 end
