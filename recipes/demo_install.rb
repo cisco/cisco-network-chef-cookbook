@@ -19,6 +19,7 @@
 # In our recipes, due to the number of different parameters, we prefer to align
 # the arguments in a single column rather than following rubocop's style.
 
+# Uncomment the following resources to run on N3k or N9k
 # Only N3k and N9k support cisco_package, file, and service
 # Chef::Log.info('Install cisco package:')
 
