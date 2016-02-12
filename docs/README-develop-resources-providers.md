@@ -82,7 +82,7 @@ Note. There may be additional instructions within the template.
 This is the completed tunnel resource file based on `template-resource-feature.rb`. This is a very simple resource to write since it has no additional properties.
 
 ~~~chef
-# Copyright (c) 2015 Cisco and/or its affiliates.
+# Copyright (c) 2015-2016 Cisco and/or its affiliates.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -145,7 +145,7 @@ cp  docs/template-provider-feature.rb  libraries/provider_cisco_tunnel.rb
 This is the completed tunnel provider based on `template-provider-feature.rb`:
 
 ~~~chef
-# Copyright (c) 2015 Cisco and/or its affiliates.
+# Copyright (c) 2015-2016 Cisco and/or its affiliates.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -377,7 +377,7 @@ Note: There may be additional steps to follow in the template.
 This is the completed router_eigrp resource based on `template-resource-router.rb`:
 
 ~~~chef
-# Copyright (c) 2015 Cisco and/or its affiliates.
+# Copyright (c) 2015-2016 Cisco and/or its affiliates.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -449,7 +449,7 @@ Note: There may be additional steps to follow in the template.
 This is the completed router_eigrp provider based on `template-provider-router.rb`:
 
 ~~~chef
-# Copyright (c) 2015 Cisco and/or its affiliates.
+# Copyright (c) 2015-2016 Cisco and/or its affiliates.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
