@@ -176,7 +176,7 @@ The following resources are listed alphabetically.
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_command_config` resource allows raw configurations to be managed by chef. It serves as a stopgap until specialized resources are created. It has the following limitations:
 
@@ -217,7 +217,7 @@ interface types, including ethernet, port-channel, loopback, and SVI (vlan).
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 #### <a name="cisco_interface-caveats">Caveats</a>
 
@@ -326,7 +326,7 @@ The same actions apply regardless.
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_interface_ospf` resource is used to manage per-interface OSPF
 configuration properties. More broadly applicable OSPF configuration is
@@ -401,7 +401,7 @@ end
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_ospf` resource is used to enable/disable OSPF on the switch.
 More detailed OSPF configuration is managed by the `cisco_ospf_vrf` and
@@ -432,7 +432,7 @@ end
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_ospf_vrf` resource is used to manage per-VRF OSPF configuration,
 including the `default` VRF.
@@ -514,7 +514,7 @@ end
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_package` resource is a subclass of the Chef `yum_package` resource.
 Unlike `yum_package`, it will always install packages into the NX-OS native
@@ -549,7 +549,7 @@ See https://docs.chef.io/resource_package.html
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_snmp_community` resource is used to manage SNMP communities.
 
@@ -584,7 +584,7 @@ end
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_snmp_group` resource is used to manage SNMP groups. Cisco NX-OS
 defines SNMP groups based on user roles, so this resource is unable to create
@@ -613,7 +613,7 @@ end
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_snmp_server` resource is used to manage the SNMP server configuration
 on a node. There can only be one instance of this resource per node.
@@ -662,7 +662,7 @@ end
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_snmp_user` resource is used to manage SNMP user configuration.
 
@@ -719,7 +719,7 @@ end
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_tacacs_server` resource is used to manage global TACACS+ server
 configuration. There can only be one instance of this resource per node.
@@ -768,7 +768,7 @@ end
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_tacacs_server_host` resource is used to manage per-host TACACS+
 configuration.
@@ -810,7 +810,7 @@ end
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_vlan` resource is used to manage VLAN configuration.
 
@@ -848,7 +848,7 @@ end
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_vtp` resource is used to manage VLAN Trunking Protocol (VTP)
 configuration. There can only be one instance of this resource per node.
