@@ -18,56 +18,59 @@
 
 # In our recipes, due to the number of different parameters, we prefer to align
 # the arguments in a single column rather than following rubocop's style.
-Chef::Log.info('Install cisco package:')
 
-cookbook_file '/bootflash/n9000_sample-1.0.0-7.0.3.x86_64.rpm' do
-  owner  'root'
-  group  'root'
-  mode   '0775'
-  source 'rpm-store/n9000_sample-1.0.0-7.0.3.x86_64.rpm'
-end
+# Uncomment the following resources to run on N3k or N9k
+# Only N3k and N9k support cisco_package, file, and service
+# Chef::Log.info('Install cisco package:')
 
-cisco_package 'n9000_sample' do
-  action :install
-  # action :remove
-  # package_settings {'target' => 'host'}
-  source '/bootflash/n9000_sample-1.0.0-7.0.3.x86_64.rpm'
-end
+# cookbook_file '/bootflash/n9000_sample-1.0.0-7.0.3.x86_64.rpm' do
+#   owner  'root'
+#   group  'root'
+#   mode   '0775'
+#   source 'rpm-store/n9000_sample-1.0.0-7.0.3.x86_64.rpm'
+# end
 
-Chef::Log.info('Install third party package:')
+# cisco_package 'n9000_sample' do
+#   action :install
+#   # action :remove
+#   # package_settings {'target' => 'host'}
+#   source '/bootflash/n9000_sample-1.0.0-7.0.3.x86_64.rpm'
+# end
 
-cookbook_file '/bootflash/demo-one-1.0-1.x86_64.rpm' do
-  owner  'root'
-  group  'root'
-  mode   '0775'
-  source 'rpm-store/demo-one-1.0-1.x86_64.rpm'
-end
+# Chef::Log.info('Install third party package:')
 
-cisco_package 'demo-one' do
-  # demo-one-1.0-1.x86_64.rpm:
-  #  /usr/bin/demo-one            # binary
-  #  /etc/demo-one/demo-one.conf  # configuration file
-  #  /tmp/demo-one.log            # writes a timestamp to log
-  action :install
-  source '/bootflash/demo-one-1.0-1.x86_64.rpm'
-end
+# cookbook_file '/bootflash/demo-one-1.0-1.x86_64.rpm' do
+#   owner  'root'
+#   group  'root'
+#   mode   '0775'
+#   source 'rpm-store/demo-one-1.0-1.x86_64.rpm'
+# end
 
-Chef::Log.info('Install and start a service:')
+# cisco_package 'demo-one' do
+#   # demo-one-1.0-1.x86_64.rpm:
+#   #  /usr/bin/demo-one            # binary
+#   #  /etc/demo-one/demo-one.conf  # configuration file
+#   #  /tmp/demo-one.log            # writes a timestamp to log
+#   action :install
+#   source '/bootflash/demo-one-1.0-1.x86_64.rpm'
+# end
 
-# TODO: Add platform check to distinguish between native and guestshell
-# cookbook_file '/usr/lib/systemd/system/demo-one.service' do
-cookbook_file '/etc/init.d/demo-one' do
-  owner  'root'
-  group  'root'
-  mode   '0775'
-  source 'demo-one.initd'
-  # source 'demo-one.service'
-end
+# Chef::Log.info('Install and start a service:')
 
-service 'demo-one' do
-  # see above note: This is not compatible with GS
-  action :start
-end
+# # TODO: Add platform check to distinguish between native and guestshell
+# # cookbook_file '/usr/lib/systemd/system/demo-one.service' do
+# cookbook_file '/etc/init.d/demo-one' do
+#   owner  'root'
+#   group  'root'
+#   mode   '0775'
+#   source 'demo-one.initd'
+#   # source 'demo-one.service'
+# end
+
+# service 'demo-one' do
+#   # see above note: This is not compatible with GS
+#   action :start
+# end
 
 Chef::Log.info('Demo cisco_command_config provider')
 
