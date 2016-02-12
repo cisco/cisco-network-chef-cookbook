@@ -100,19 +100,19 @@ See the recipes directory for example usage of cisco providers and resources.
 
 |   | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |---|:---:|:-----:|:-----:|:-----:|:---:|:---:|
-| [command_config](#type-cisco_command_config) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [interface](#type-cisco_interface) | ✅ | ✅ | ✅ | ✅<br>[Caveat](#cisco-interface-caveats) | ✅<br>[Caveat](#cisco-interface-caveats) | ✅ |
-| [interface_ospf](#type-cisco_interface_ospf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [ospf](#type-cisco_ospf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [ospf_vrf](#type-cisco_ospf_vrf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [snmp_community](#type-cisco_snmp_community) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [snmp_group](#type-cisco_snmp_group) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [snmp_server](#type-cisco_snmp_server) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [snmp_user](#type-cisco_snmp_user) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [tacacs_server](#type-cisco_tacacs_server) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [tacacs_server\_host](#type-cisco_tacacs_server_host) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [vlan](#type-cisco_vlan) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [vtp](#type-cisco_vtp) | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ |
+| [cisco_command_config](#type-cisco_command_config) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_interface](#type-cisco_interface) | ✅ | ✅ | ✅ | ✅<br>[Caveat](#cisco-interface-caveats) | ✅<br>[Caveat](#cisco-interface-caveats) | ✅ |
+| [cisco_interface_ospf](#type-cisco_interface_ospf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_ospf](#type-cisco_ospf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_ospf_vrf](#type-cisco_ospf_vrf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_snmp_community](#type-cisco_snmp_community) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_snmp_group](#type-cisco_snmp_group) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_snmp_server](#type-cisco_snmp_server) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_snmp_user](#type-cisco_snmp_user) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_tacacs_server](#type-cisco_tacacs_server) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_tacacs_server_host](#type-cisco_tacacs_server_host) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_vlan](#type-cisco_vlan) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_vtp](#type-cisco_vtp) | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ |
 
 ## Resource Reference
 
