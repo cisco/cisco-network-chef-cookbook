@@ -1,8 +1,0 @@
-# Use Docker infrastructure
-sudo: false
-
-language: ruby
-cache: bundler
-rvm:
-  - 1.9.3
-  - 2.1.6
