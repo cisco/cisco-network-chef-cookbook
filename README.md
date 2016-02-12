@@ -29,7 +29,8 @@ Please see [Learning Resources](#learning-resources) for additional references.
 2. [Cookbook Description](#cookbook-description)
 3. [Setup](#setup)
 4. [Usage](#usage)
-5. [Platform Support](#requirements)
+5. [Requirements](#requirements)
+   * [Chef and Ruby Requirements](#chef-ruby-requirements)
    * [Provider Support Across Platforms](#provider-platform-support)
 6. [Resource Reference](#resource-reference)
    * [Resource Catalog (by Technology)](#resource-by-tech)
@@ -42,7 +43,7 @@ Please see [Learning Resources](#learning-resources) for additional references.
 
 The `cisco-cookbook` allows a network administrator to manage Cisco Network Elements using Chef. This cookbook bundles a set of Chef Resources, providers, Sample Recipes and installation Tools for effective network management.  The resources and capabilities provided by this cookbook will grow with contributions from Cisco, Chef Software Inc., and the open source community.
 
-The Cisco Network Elements and Operating Systems managed by this cookbook are continuously expanding. Please refer to the [Limitations](#limitations) section for details on currently supported hardware and software. The Limitations section also provides details on compatible Chef client and Chef Server versions.
+The Cisco Network Elements and Operating Systems managed by this cookbook are continuously expanding. Please refer to the [Provider Support Across Platforms](#provider-platform-support) section for details on currently supported hardware and software. The [Chef and Ruby Requirements](#chef-ruby-requirements) section also provides details on compatible Chef client and Ruby versions.
 
 This GitHub repository contains the latest version of the cisco-cookbook source code. Supported versions of the cisco-cookbook are available at Chef Supermarket. Please refer to [SUPPORT.md](SUPPORT.md) for additional details.
 
@@ -52,7 +53,7 @@ Contributions to this cookbook are welcome. Guidelines on contributions to the c
 
 This cookbook enables management of supported Cisco Network Elements using Chef. This cookbook enhances the Chef DSL by introducing new Chef Resources and Providers capable of managing network elements.
 
-The set of supported network element platforms is continuously expanding. Please refer to the [Limitations](#limitations) section for a list of currently supported platforms.
+The set of supported network element platforms is continuously expanding. Please refer to the [Provider Support Across Platforms](#provider-platform-support) section for an overview of currently supported platforms.
 
 ## Setup
 
@@ -92,7 +93,7 @@ See the recipes directory for example usage of cisco providers and resources.
 
 ## Requirements
 
-### Chef and Ruby Requirements
+### <a name="chef-ruby-requirements">Chef and Ruby Requirements<a>
 
 * Cisco NX-OS Chef implementation requires Chef version 12.6.1
 * Ruby 2.0 or higher (preferably from the Chef full-stack installer)
@@ -879,18 +880,6 @@ end
 - `:create` - Enable `feature vtp` and apply VTP configuration as requested.
 
 - `:destroy` - Disable VTP.
-
-## Limitations
-
-Minimum Requirements:
-
-* Cisco NX-OS Chef implementation requires Chef version 12.4.1
-* Ruby 1.9 or higher (preferably from the Chef full-stack installer)
-* Supported Platforms:
-  * Cisco Nexus 95xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
-  * Cisco Nexus 93xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
-  * Cisco Nexus 31xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
-  * Cisco Nexus 30xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
 
 --
 
