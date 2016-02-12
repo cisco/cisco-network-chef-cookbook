@@ -64,15 +64,6 @@ The `cisco-cookbook` is installed on the Chef server. Please see [The Chef Serve
 #### Chef Client
 The Chef Client (agent) requires installation and setup on each device. Agent setup can be performed as a manual process or it may be automated. For more information please see the [README-agent-install.md](docs/README-agent-install.md) document for detailed instructions on agent installation and configuration on Cisco Nexus devices.
 
-##### Artifacts
-
-As noted in the agent installation guide, these are the current RPM versions for use with cisco-cookbook:
-
-* `bash-shell`
-  * http://s3.amazonaws.com/alpha-builds/chef-12.4.1.cisco%2B20150826000706-1.nexus5.x86_64.rpm
-* `guestshell`
-  * https://s3.amazonaws.com/alpha-builds/chef-12.4.1.cisco%2B20150826204615-1.el7.x86_64.rpm
-
 ##### Gems
 
 The cisco-cookbook has dependencies on a few ruby gems. These gems are already installed in the cookbook as vendored gems so there are no additional steps required for installing these gems. The gems are shown here for reference only:
