@@ -95,7 +95,7 @@ See the recipes directory for example usage of cisco providers and resources.
 
 ### <a name="chef-ruby-requirements">Chef and Ruby Requirements</a>
 
-* Cisco NX-OS Chef implementation requires Chef version 12.6.1
+* Cisco NX-OS Chef implementation requires Chef version 12.6.0
 * Ruby 2.0 or higher (preferably from the Chef full-stack installer)
 
 ### <a name="provider-platform-support">Provider Support Across Platforms</a>
