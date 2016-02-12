@@ -199,19 +199,13 @@ EOF
 
 This section is common to both `bash-shell` and `guestshell`.
 
-#### chef RPM Install
+#### Chef Installation
 
 ##### Run Chef Install Script
 
 ```bash
 curl 'https://www.chef.io/chef/install.sh' | bash
 ````
-
-##### Update PATH var
-
-```bash
-export PATH=/opt/chef/bin:$PATH
-```
 
 #### validation.pem
 
