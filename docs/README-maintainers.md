@@ -9,7 +9,7 @@ Guidelines for the core maintainers of the cisco-cookbook project - above and be
 * Is `CHANGELOG.md` updated appropriately?
 * Are new spec tests added? Do they provide sufficient coverage and consistent results?
 * Are `demo_install.rb` and `demo_cleanup.rb` updated appropriately? 
-* Do tests pass on both N9K and N3K? (In particular, N3048 often has unique behavior.)
+* [Do tests pass on all supported platforms?](#test-platforms)
 
 ## Setting up git-flow
 
@@ -42,10 +42,13 @@ When we are considering publishing a new release, all of the following steps mus
     gem install --install-dir files/default/vendor --no-document cisco_nxapi cisco_node_utils
     ```
 
-2. Run all tests (demo recipes, serverspec, kitchen, etc.) against the latest software release or release candidate for each supported platform:
+2. <a name="test-platforms">Run all tests (demo recipes, serverspec, kitchen, etc.) against the latest software release or release candidate for each supported platform:</a>
   * N30xx
   * N31xx
   * N9xxx
+  * N56xx
+  * N60xx
+  * N7xxx
 
 3. Triage any test failures.
 

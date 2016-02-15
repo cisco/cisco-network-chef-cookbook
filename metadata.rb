@@ -1,6 +1,6 @@
 #
 # metadata.rb
-# Copyright (c) 2014-2015 Cisco and/or its affiliates.
+# Copyright (c) 2014-2016 Cisco and/or its affiliates.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,4 +24,4 @@ issues_url       'https://github.com/cisco/cisco-network-chef-cookbook/issues'
 source_url       'https://github.com/cisco/cisco-network-chef-cookbook'
 supports         'nexus'
 supports         'nexus_centos'
-version          '1.0.1'
+version          '1.1.0'

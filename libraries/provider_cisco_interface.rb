@@ -1,6 +1,6 @@
 # Author: Alex Hunsberger
 #
-# Copyright (c) 2015 Cisco and/or its affiliates.
+# Copyright (c) 2015-2016 Cisco and/or its affiliates.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -130,6 +130,8 @@ class Chef
       def set_layer2_properties
         # Disable switchport
         set_switchport_mode
+        @new_resource.switchport_trunk_allowed_vlan.gsub!(/, */, ',') unless
+          @new_resource.switchport_trunk_allowed_vlan.nil?
         prop_set([:access_vlan, :switchport_autostate_exclude,
                   :switchport_trunk_allowed_vlan, :switchport_trunk_native_vlan,
                   :switchport_vtp
