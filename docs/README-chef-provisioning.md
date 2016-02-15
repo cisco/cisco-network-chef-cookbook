@@ -16,12 +16,12 @@ This document describes automated Chef client installation and setup on Cisco Ne
 
 ### Platform and Software Support
 
-To use this workflow, all of the following software versions are required:
+See [Requirements](../README.md#requirements) for details on platform and software requirements.
 
-* Cisco NX-OS 7.0(3)I2(1) or later
+Additionally, all of the following software versions are required:
+
 * Chef Provisioning 1.3.0 or later
 * Chef Provisioning SSH 0.0.10 or later
-* Chef 12.4.0 or later
 
 ### Disk space
 
@@ -51,7 +51,6 @@ Install both gems on your Chef workstation. You may need to use `sudo` depending
 
 ```bash
 chefws$ sudo /opt/chef/embedded/bin/gem install chef-provisioning chef-provisioning-ssh
-chefws$
 ```
 
 ### Chef server certificate

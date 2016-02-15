@@ -29,10 +29,12 @@ Please see [Learning Resources](#learning-resources) for additional references.
 2. [Cookbook Description](#cookbook-description)
 3. [Setup](#setup)
 4. [Usage](#usage)
-5. [Resource Reference](#resource-reference)
+5. [Requirements](#requirements)
+   * [Chef and Ruby Requirements](#chef-ruby-requirements)
+   * [Provider Support Across Platforms](#provider-platform-support)
+6. [Resource Reference](#resource-reference)
    * [Resource Catalog (by Technology)](#resource-by-tech)
    * [Resource Catalog (by Name)](#resource-by-name)
-6. [Limitations](#limitations)
 7. [Learning Resources](#learning-resources)
 
 
@@ -41,7 +43,7 @@ Please see [Learning Resources](#learning-resources) for additional references.
 
 The `cisco-cookbook` allows a network administrator to manage Cisco Network Elements using Chef. This cookbook bundles a set of Chef Resources, providers, Sample Recipes and installation Tools for effective network management.  The resources and capabilities provided by this cookbook will grow with contributions from Cisco, Chef Software Inc., and the open source community.
 
-The Cisco Network Elements and Operating Systems managed by this cookbook are continuously expanding. Please refer to the [Limitations](#limitations) section for details on currently supported hardware and software. The Limitations section also provides details on compatible Chef client and Chef Server versions.
+The Cisco Network Elements and Operating Systems managed by this cookbook are continuously expanding. Please refer to the [Provider Support Across Platforms](#provider-platform-support) section for details on currently supported hardware and software. The [Chef and Ruby Requirements](#chef-ruby-requirements) section also provides details on compatible Chef client and Ruby versions.
 
 This GitHub repository contains the latest version of the cisco-cookbook source code. Supported versions of the cisco-cookbook are available at Chef Supermarket. Please refer to [SUPPORT.md](SUPPORT.md) for additional details.
 
@@ -51,7 +53,7 @@ Contributions to this cookbook are welcome. Guidelines on contributions to the c
 
 This cookbook enables management of supported Cisco Network Elements using Chef. This cookbook enhances the Chef DSL by introducing new Chef Resources and Providers capable of managing network elements.
 
-The set of supported network element platforms is continuously expanding. Please refer to the [Limitations](#limitations) section for a list of currently supported platforms.
+The set of supported network element platforms is continuously expanding. Please refer to the [Provider Support Across Platforms](#provider-platform-support) section for an overview of currently supported platforms.
 
 ## Setup
 
@@ -61,15 +63,6 @@ The `cisco-cookbook` is installed on the Chef server. Please see [The Chef Serve
 
 #### Chef Client
 The Chef Client (agent) requires installation and setup on each device. Agent setup can be performed as a manual process or it may be automated. For more information please see the [README-agent-install.md](docs/README-agent-install.md) document for detailed instructions on agent installation and configuration on Cisco Nexus devices.
-
-##### Artifacts
-
-As noted in the agent installation guide, these are the current RPM versions for use with cisco-cookbook:
-
-* `bash-shell`
-  * http://s3.amazonaws.com/alpha-builds/chef-12.4.1.cisco%2B20150826000706-1.nexus5.x86_64.rpm
-* `guestshell`
-  * https://s3.amazonaws.com/alpha-builds/chef-12.4.1.cisco%2B20150826204615-1.el7.x86_64.rpm
 
 ##### Gems
 
@@ -89,9 +82,37 @@ depends 'cisco-cookbook', '~> 1.0'
 
 See the recipes directory for example usage of cisco providers and resources.
 
+## Requirements
+
+### <a name="chef-ruby-requirements">Chef and Ruby Requirements</a>
+
+* Cisco NX-OS Chef implementation requires Chef version 12.6.0
+* Ruby 2.0 or higher (preferably from the Chef full-stack installer)
+
+### <a name="provider-platform-support">Provider Support Across Platforms</a>
+
+* ✅ = Supported
+* ❌ = Unsupported
+
+|   | N9k | N30xx | N31xx | N56xx | N6k | N7k | Caveats |
+|---|:---:|:-----:|:-----:|:-----:|:---:|:---:|:-------:|
+| [cisco_command_config](#type-cisco_command_config) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_interface](#type-cisco_interface) | ✅ | ✅ | ✅ | ✅* | ✅* | ✅ | [Caveat](#cisco_interface-caveats) |
+| [cisco_interface_ospf](#type-cisco_interface_ospf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_ospf](#type-cisco_ospf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_ospf_vrf](#type-cisco_ospf_vrf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_snmp_community](#type-cisco_snmp_community) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_snmp_group](#type-cisco_snmp_group) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_snmp_server](#type-cisco_snmp_server) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_snmp_user](#type-cisco_snmp_user) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_tacacs_server](#type-cisco_tacacs_server) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_tacacs_server_host](#type-cisco_tacacs_server_host) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_vlan](#type-cisco_vlan) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [cisco_vtp](#type-cisco_vtp) | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ |
+
 ## Resource Reference
 
-### <a name="resource-by-tech">Resource Catalog (by Technology)<a>
+### <a name="resource-by-tech">Resource Catalog (by Technology)</a>
 
 * Miscellaneous Types
   * [`cisco_command_config`](#type-cisco_command_config)
@@ -120,7 +141,7 @@ See the recipes directory for example usage of cisco providers and resources.
   * [`cisco_vtp`](#type-cisco_vtp)
 
 --
-### <a name="resource-by-name">Resource Catalog (by Name)<a>
+### <a name="resource-by-name">Resource Catalog (by Name)</a>
 
 * [`cisco_command_config`](#type-cisco_command_config)
 * [`cisco_interface`](#type-cisco_interface)
@@ -142,6 +163,11 @@ See the recipes directory for example usage of cisco providers and resources.
 The following resources are listed alphabetically.
 
 ### Type: cisco_command_config
+
+| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+|----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_command_config` resource allows raw configurations to be managed by chef. It serves as a stopgap until specialized resources are created. It has the following limitations:
 
@@ -178,6 +204,17 @@ end
 
 The `cisco_interface` resource is used to manage general configuration of all
 interface types, including ethernet, port-channel, loopback, and SVI (vlan).
+
+| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+|----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+
+#### <a name="cisco_interface-caveats">Caveats</a>
+
+| Property | Caveat Description |
+|----------|--------------------|
+| svi_autostate | Not supported on N56xx and N6k |
 
 #### Examples
 
@@ -277,6 +314,11 @@ The same actions apply regardless.
 
 ### Type: cisco_interface_ospf
 
+| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+|----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+
 The `cisco_interface_ospf` resource is used to manage per-interface OSPF
 configuration properties. More broadly applicable OSPF configuration is
 managed by the `cisco_ospf` and `cisco_ospf_vrf` resources.
@@ -347,6 +389,11 @@ end
 
 ### Type: cisco_ospf
 
+| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+|----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+
 The `cisco_ospf` resource is used to enable/disable OSPF on the switch.
 More detailed OSPF configuration is managed by the `cisco_ospf_vrf` and
 `cisco_interface_ospf` resources.
@@ -372,6 +419,11 @@ end
   remains, will also disable `feature ospf`.
 
 ### Type: cisco_ospf_vrf
+
+| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+|----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_ospf_vrf` resource is used to manage per-VRF OSPF configuration,
 including the `default` VRF.
@@ -450,6 +502,11 @@ end
 
 ### Type: cisco_package
 
+| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+|----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+
 The `cisco_package` resource is a subclass of the Chef `yum_package` resource.
 Unlike `yum_package`, it will always install packages into the NX-OS native
 environment, even if the Chef agent is running within `guestshell`.
@@ -479,6 +536,11 @@ See https://docs.chef.io/resource_package.html
 See https://docs.chef.io/resource_package.html
 
 ### Type: cisco_snmp_community
+
+| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+|----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_snmp_community` resource is used to manage SNMP communities.
 
@@ -510,6 +572,11 @@ end
 
 ### Type: cisco_snmp_group
 
+| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+|----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+
 The `cisco_snmp_group` resource is used to manage SNMP groups. Cisco NX-OS
 defines SNMP groups based on user roles, so this resource is unable to create
 or delete groups but can only be used to validate that the group exists or not.
@@ -533,6 +600,11 @@ end
 - `:destroy` - Ensure that the given group does not exist, or raise an error.
 
 ### Type: cisco_snmp_server
+
+| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+|----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_snmp_server` resource is used to manage the SNMP server configuration
 on a node. There can only be one instance of this resource per node.
@@ -577,6 +649,11 @@ end
 - `:update` - Apply changes to the SNMP server configuration as necessary.
 
 ### Type: cisco_snmp_user
+
+| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+|----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
 
 The `cisco_snmp_user` resource is used to manage SNMP user configuration.
 
@@ -630,6 +707,11 @@ end
 
 ### Type: cisco_tacacs_server
 
+| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+|----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+
 The `cisco_tacacs_server` resource is used to manage global TACACS+ server
 configuration. There can only be one instance of this resource per node.
 
@@ -674,6 +756,11 @@ end
 
 ### Type: cisco_tacacs_server_host
 
+| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+|----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+
 The `cisco_tacacs_server_host` resource is used to manage per-host TACACS+
 configuration.
 
@@ -711,6 +798,11 @@ end
 
 ### Type: cisco_vlan
 
+| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+|----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+
 The `cisco_vlan` resource is used to manage VLAN configuration.
 
 #### Examples
@@ -744,6 +836,11 @@ end
 
 ### Type: cisco_vtp
 
+| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+|----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | Unsupported | Unsupported | 1.1.0 |
+
 The `cisco_vtp` resource is used to manage VLAN Trunking Protocol (VTP)
 configuration. There can only be one instance of this resource per node.
 
@@ -774,18 +871,6 @@ end
 - `:create` - Enable `feature vtp` and apply VTP configuration as requested.
 
 - `:destroy` - Disable VTP.
-
-## Limitations
-
-Minimum Requirements:
-
-* Cisco NX-OS Chef implementation requires Chef version 12.4.1
-* Ruby 1.9 or higher (preferably from the Chef full-stack installer)
-* Supported Platforms:
-  * Cisco Nexus 95xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
-  * Cisco Nexus 93xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
-  * Cisco Nexus 31xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
-  * Cisco Nexus 30xx, OS Version 7.0(3)I2(1), Environments: Bash-shell, Guestshell
 
 --
 
