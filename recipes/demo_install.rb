@@ -2,7 +2,7 @@
 # Cookbook Name:: cisco-cookbook
 # Recipe:: demo_install
 #
-# Copyright (c) 2014-2015 Cisco and/or its affiliates.
+# Copyright (c) 2014-2016 Cisco and/or its affiliates.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,57 +18,59 @@
 
 # In our recipes, due to the number of different parameters, we prefer to align
 # the arguments in a single column rather than following rubocop's style.
-# rubocop:disable Style/SingleSpaceBeforeFirstArg
-Chef::Log.info('Install cisco package:')
 
-cookbook_file '/bootflash/n9000_sample-1.0.0-7.0.3.x86_64.rpm' do
-  owner  'root'
-  group  'root'
-  mode   '0775'
-  source 'rpm-store/n9000_sample-1.0.0-7.0.3.x86_64.rpm'
-end
+# Uncomment the following resources to run on N3k or N9k
+# Only N3k and N9k support cisco_package, file, and service
+# Chef::Log.info('Install cisco package:')
 
-cisco_package 'n9000_sample' do
-  action :install
-  # action :remove
-  # package_settings {'target' => 'host'}
-  source '/bootflash/n9000_sample-1.0.0-7.0.3.x86_64.rpm'
-end
+# cookbook_file '/bootflash/n9000_sample-1.0.0-7.0.3.x86_64.rpm' do
+#   owner  'root'
+#   group  'root'
+#   mode   '0775'
+#   source 'rpm-store/n9000_sample-1.0.0-7.0.3.x86_64.rpm'
+# end
 
-Chef::Log.info('Install third party package:')
+# cisco_package 'n9000_sample' do
+#   action :install
+#   # action :remove
+#   # package_settings {'target' => 'host'}
+#   source '/bootflash/n9000_sample-1.0.0-7.0.3.x86_64.rpm'
+# end
 
-cookbook_file '/bootflash/demo-one-1.0-1.x86_64.rpm' do
-  owner  'root'
-  group  'root'
-  mode   '0775'
-  source 'rpm-store/demo-one-1.0-1.x86_64.rpm'
-end
+# Chef::Log.info('Install third party package:')
 
-cisco_package 'demo-one' do
-  # demo-one-1.0-1.x86_64.rpm:
-  #  /usr/bin/demo-one            # binary
-  #  /etc/demo-one/demo-one.conf  # configuration file
-  #  /tmp/demo-one.log            # writes a timestamp to log
-  action :install
-  source '/bootflash/demo-one-1.0-1.x86_64.rpm'
-end
+# cookbook_file '/bootflash/demo-one-1.0-1.x86_64.rpm' do
+#   owner  'root'
+#   group  'root'
+#   mode   '0775'
+#   source 'rpm-store/demo-one-1.0-1.x86_64.rpm'
+# end
 
-Chef::Log.info('Install and start a service:')
+# cisco_package 'demo-one' do
+#   # demo-one-1.0-1.x86_64.rpm:
+#   #  /usr/bin/demo-one            # binary
+#   #  /etc/demo-one/demo-one.conf  # configuration file
+#   #  /tmp/demo-one.log            # writes a timestamp to log
+#   action :install
+#   source '/bootflash/demo-one-1.0-1.x86_64.rpm'
+# end
 
-# TODO: Add platform check to distinguish between native and guestshell
-# cookbook_file '/usr/lib/systemd/system/demo-one.service' do
-cookbook_file '/etc/init.d/demo-one' do
-  owner  'root'
-  group  'root'
-  mode   '0775'
-  source 'demo-one.initd'
-  # source 'demo-one.service'
-end
+# Chef::Log.info('Install and start a service:')
 
-service 'demo-one' do
-  # see above note: This is not compatible with GS
-  action :start
-end
+# # TODO: Add platform check to distinguish between native and guestshell
+# # cookbook_file '/usr/lib/systemd/system/demo-one.service' do
+# cookbook_file '/etc/init.d/demo-one' do
+#   owner  'root'
+#   group  'root'
+#   mode   '0775'
+#   source 'demo-one.initd'
+#   # source 'demo-one.service'
+# end
+
+# service 'demo-one' do
+#   # see above note: This is not compatible with GS
+#   action :start
+# end
 
 Chef::Log.info('Demo cisco_command_config provider')
 
@@ -113,10 +115,22 @@ cisco_interface 'Ethernet1/1' do
   description         'managed by chef'
   ipv4_address        '192.0.2.43'
   ipv4_netmask_length 24
+  mtu                 1600
+  vrf                 'vrf_member'
+end
+
+cisco_interface 'Ethernet1/1.1' do
+  encapsulation_dot1q 10
 end
 
 cisco_interface 'Ethernet1/2' do
   # set all props to default
+end
+
+cisco_interface 'Ethernet1/3' do
+  switchport_mode 'trunk'
+  switchport_trunk_allowed_vlan '20, 30'
+  switchport_trunk_native_vlan 40
 end
 
 cisco_interface 'Vlan22' do
@@ -129,7 +143,7 @@ Chef::Log.info('Demo cisco_vlan provider')
 cisco_vlan '220' do
   action    :create
   vlan_name 'newtest'
-  shutdown   true
+  shutdown  true
   state     'active'
 end
 
@@ -139,7 +153,7 @@ cisco_ospf 'Sample' do
   action :create
 end
 
-cisco_interface_ospf 'Ethernet1/2' do
+cisco_interface_ospf 'Ethernet1/4' do
   action                         :create
   ospf                           'Sample'
   area                           200
@@ -204,7 +218,7 @@ cisco_vtp 'default' do
   action      :create
   domain      'cisco1234'
   password    'test1234'
-  version      2
+  version     2
   filename    'bootflash:/vlan.dat'
 end
 
@@ -233,4 +247,3 @@ end
 cisco_snmp_user 'v3test' do
   groups ['network-admin']
 end
-# rubocop:enable Style/SingleSpaceBeforeFirstArg

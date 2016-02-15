@@ -1,8 +1,6 @@
-# CiscoTacacsServerHost resource for Chef.
-#
 # March 2015, Alex Hunsberger
 #
-# Copyright (c) 2015 Cisco and/or its affiliates.
+# Copyright (c) 2015-2016 Cisco and/or its affiliates.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,10 +16,11 @@
 
 class Chef
   class Resource
-    class Resource::CiscoTacacsServerHost < Resource
+    # CiscoTacacsServerHost resource for Chef.
+    class CiscoTacacsServerHost < Chef::Resource
       attr_accessor :cisco_tacacs_server_host
 
-      def initialize(name, run_context = nil)
+      def initialize(name, run_context=nil)
         super
         @resource_name = :cisco_tacacs_server_host
         @action = :create
@@ -29,21 +28,21 @@ class Chef
         @provider = Chef::Provider::CiscoTacacsServerHost
       end
 
-      def port(arg = nil)
-        set_or_return(:port, arg, :kind_of => Fixnum)
+      def port(arg=nil)
+        set_or_return(:port, arg, kind_of: Fixnum)
       end
 
-      def encryption_type(arg = nil)
+      def encryption_type(arg=nil)
         set_or_return(:encryption_type, arg,
-                      :equal_to => ['none', 'clear', 'encrypted', 'default'])
+                      equal_to: %w(none clear encrypted default))
       end
 
-      def encryption_password(arg = nil)
-        set_or_return(:encryption_password, arg, :kind_of => String)
+      def encryption_password(arg=nil)
+        set_or_return(:encryption_password, arg, kind_of: String)
       end
 
-      def timeout(arg = nil)
-        set_or_return(:timeout, arg, :kind_of => Fixnum)
+      def timeout(arg=nil)
+        set_or_return(:timeout, arg, kind_of: Fixnum)
       end
     end
   end

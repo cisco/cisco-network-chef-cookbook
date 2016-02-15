@@ -5,11 +5,11 @@ Guidelines for the core maintainers of the cisco-cookbook project - above and be
 ## Accepting Pull Requests
 
 * Is the pull request correctly submitted against the `develop` branch?
-* Does `rubocop` pass? (TODO - this will be part of our CI integration to run automatically)
+* Does `rubocop` pass? (This is automatically checked by Travis-CI)
 * Is `CHANGELOG.md` updated appropriately?
 * Are new spec tests added? Do they provide sufficient coverage and consistent results?
 * Are `demo_install.rb` and `demo_cleanup.rb` updated appropriately? 
-* Do tests pass on both N9K and N3K? (In particular, N3048 often has unique behavior.)
+* [Do tests pass on all supported platforms?](#test-platforms)
 
 ## Setting up git-flow
 
@@ -31,24 +31,45 @@ Either run `git flow init` from the repository root directory, or manually edit 
 
 Most of these are default for git-flow except for the `versiontag` setting.
 
-## Release Process
+## Release Checklist
 
-When we agree as a team that a new release should be published, the process is as follows:
+When we are considering publishing a new release, all of the following steps must be carried out (using the latest code base in `develop`):
 
-1. Ensure that [vendor gems](https://sethvargo.com/using-gems-with-chef/) included in the cookbook are up-to-date and reflect an official release version (development code in `develop` is OK, development code in a release is not!).
+1. Ensure that [vendor gems](https://sethvargo.com/using-gems-with-chef/) included in the cookbook are up-to-date and reflect an official release version (development code in `develop` is OK, development code in a release candidate is not!). Do a new gem release first if needed!
 
     ```
     gem uninstall --install-dir files/default/vendor cisco_node_utils cisco_nxapi
     gem install --install-dir files/default/vendor --no-document cisco_nxapi cisco_node_utils
     ```
 
-2. Create a release branch. Follow [semantic versioning](http://semver.org) - a bugfix release is a 0.0.x version bump, a new feature is a 0.x.0 bump, and a backward-incompatible change is a new x.0.0 version. 
+2. <a name="test-platforms">Run all tests (demo recipes, serverspec, kitchen, etc.) against the latest software release or release candidate for each supported platform:</a>
+  * N30xx
+  * N31xx
+  * N9xxx
+  * N56xx
+  * N60xx
+  * N7xxx
+
+3. Triage any test failures.
+
+4. Make sure CHANGELOG.md accurately reflects all changes since the last release.
+  * Add any significant changes that weren't documented in the changelog
+  * Clean up any entries that are overly verbose, unclear, or otherwise could be improved.
+
+## Release Process
+
+When the release checklist above has been fully completed, the process for publishing a new release is as follows:
+
+1. Create a release branch. Follow [semantic versioning](http://semver.org):
+    * 0.0.x - a bugfix release
+    * 0.x.0 - new feature(s)
+    * x.0.0 - backward-incompatible change (only if unavoidable!)
 
     ```
     git flow release start 1.0.1
     ```
 
-3. In the newly created release branch, update `CHANGELOG.md`:
+2. In the newly created release branch, update `CHANGELOG.md`:
 
     ```diff
      Changelog
@@ -67,13 +88,13 @@ When we agree as a team that a new release should be published, the process is a
     +  version '1.0.1'
     ```
     
-4. Commit your changes and push the release branch to GitHub for review by Cisco and Chef Inc.:
+3. Commit your changes and push the release branch to GitHub for review by Cisco and Chef Inc.:
 
 	```
 	git flow release publish 1.0.1
 	```
 	
-5. Once Cisco and Chef Inc. are in agreement that the release branch is sane, finish the release and push the finished release to GitHub:
+4. Once Cisco and Chef Inc. are in agreement that the release branch is sane, finish the release and push the finished release to GitHub:
 
     ```
     git flow release finish 1.0.1
@@ -82,4 +103,6 @@ When we agree as a team that a new release should be published, the process is a
     git push --tags
     ```
 
-6. Add release notes on GitHub, for example `https://github.com/cisco/cisco-network-chef-cookbook/releases/new?tag=v1.0.1`. Usually this will just be a copy-and-paste of the relevant section of the `CHANGELOG.md`.
+5. Add release notes on GitHub, for example `https://github.com/cisco/cisco-network-chef-cookbook/releases/new?tag=v1.0.1`. Usually this will just be a copy-and-paste of the relevant section of the `CHANGELOG.md`.
+
+6. Reach out to Chef Inc. to publish the new version of the cookbook to Chef Supermarket.

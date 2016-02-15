@@ -1,17 +1,27 @@
 ---
 driver:
   name: vagrant
+  provider: virtualbox
+  vm_hostname: false
+  provision: true
 
 provisioner:
   name: chef_zero
+  require_chef_omnibus: 12.6.0
+  command_prefix: sudo ip netns exec management sudo -u vagrant
+
+verifier:
+  command_prefix: sudo ip netns exec management sudo -u vagrant
 
 platforms:
-  - name: packer-wrl-x86_64
-  driver_config:
-    box: packer-wrl-x86_64
-    box_url: /Users/rkailas/packer/packer-wrl.box
+  - name: nexus
+    driver:
+      box: n9kv
+      vagrantfiles:
+        - vagrantfiles/nexus.rb
+
 suites:
   - name: default
     run_list:
-      - recipe[ciscolib_nxos::cisco_package_test_all]
+      - recipe[cisco-test::default]
     attributes:
