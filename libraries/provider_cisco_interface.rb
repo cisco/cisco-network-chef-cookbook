@@ -130,7 +130,7 @@ class Chef
       def set_layer2_properties
         # Disable switchport
         set_switchport_mode
-        @new_resource.switchport_trunk_allowed_vlan.delete!(' ') unless
+        @new_resource.switchport_trunk_allowed_vlan.gsub!(/, */, ',') unless
           @new_resource.switchport_trunk_allowed_vlan.nil?
         prop_set([:access_vlan, :switchport_autostate_exclude,
                   :switchport_trunk_allowed_vlan, :switchport_trunk_native_vlan,
