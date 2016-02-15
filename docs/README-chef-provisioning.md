@@ -29,17 +29,26 @@ Additionally, all of the following software versions are required:
 Chef client software on the target agent node.
 
 ### Environment
-NX-OS supports two possible environments for running 3rd party software:
-`bash-shell` and `guestshell`. Choose one environment for running the
-Chef client software. You may run puppet from either environment but not both
-at the same time.
+NX-OS supports three possible environments for running third party software:
+`bash-shell`, `guestshell` and the `open agent container (OAC)`.
 
-* `bash-shell`
-   * This is the native WRL linux environment underlying NX-OS. It is disabled by default.
-* `guestshell`
-   * This is a secure linux container environment running CentOS. It is enabled by default on most NX-OS platforms.
+Environment                  | Supported Platforms                      |
+-----------------------------|------------------------------------------|
+`bash-shell` | Cisco Nexus 30xx, 31xx, 93xx, 95xx, N9Kv |
+`guestshell` | Cisco Nexus 30xx, 31xx, 93xx, 95xx, N9Kv |
+`open agent container (OAC)` | Cisco Nexus 56xx, 60xx, 7xxx             |
+
+You may run chef-client in any of the three supported environments but not simultaneously.
+
+ Environment                 | Description |
+-----------------------------|------------------------------------------|
+`bash-shell` | This is the native WRL Linux environment underlying NX-OS. It is disabled by default.
+`guestshell` | This is a secure Linux container environment running CentOS. It is enabled by default in most platforms that support it.
+`open agent container (OAC)` <sup>1</sup> | <li> This is a 32-bit CentOS-based container created specifically for running Puppet Agent software. </li><li> OAC containers are created for specific platforms and must be downloaded from Cisco.</li><li> The OAC must be installed before the Puppet Agent can be installed.</li>
 
 Access the following [link](README-agent-install.md) for more information on enabling these environments.
+
+<sup>1</sup>*Automated chef-client installation is currently not supported in the `open agent container (OAC)` environment. This may change in future releases.*
 
 ## <a name="workstation">Workstation Setup</a>
 
