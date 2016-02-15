@@ -202,7 +202,7 @@ This section is common to both `bash-shell` and `guestshell`.
 
 ```bash
 curl 'https://www.chef.io/chef/install.sh' | bash
-````
+```
 
 #### validation.pem
 
