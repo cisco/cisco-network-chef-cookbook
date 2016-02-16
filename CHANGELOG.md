@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [1.1.1] - 2016-02-16
 ### Fixed
 - Update README-agent-install.md to reflect higher minimum memory requirement for guestshell
+- Update README-agent-install.md to include workaround for certificate problems in bash-shell
 
 ## [1.1.0] - 2016-02-12
 ### Added
