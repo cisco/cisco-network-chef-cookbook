@@ -126,7 +126,7 @@ The `guestshell` container environment is enabled by default on most platforms; 
 The recommended minimum values are currently:
 ```bash
   Disk   : 400MB
-  Memory : 300MB
+  Memory : 400MB
 ```
 
 Use the `show guestshell detail` command to display the current state of the guestshell:
@@ -144,7 +144,7 @@ Virtual service guestshell+ detail
 
 Use the `guestshell resize rootfs` command to resize the guestshell filesystem. Use the `guestshell resize memory` command to resize the guestshell memory allocation. These commands may be executed even when the guestshell is not yet enabled. Note that the resize command does not take effect until after the guestshell container is (re)started with the `guestshell reboot` or `guestshell enable` command.
 
-**Example.** Guestshell is currently enabled. Resize guestshell filesystem to 400MB and memory to 300MB
+**Example.** Guestshell is currently enabled. Resize guestshell filesystem to 400MB and memory to 400MB
 
 ```
 n3k# guestshell resize rootfs ?
@@ -153,7 +153,7 @@ n3k# guestshell resize rootfs ?
 n3k# guestshell resize rootfs 400
 Note: Please disable/enable or reboot the Guest shell for root filesystem to be resized
 
-n3k# guestshell resize memory 300
+n3k# guestshell resize memory 400
 Note: Please disable/enable or reboot the Guest shell for system memory to be resized
 
 n3k# guestshell reboot
@@ -161,13 +161,13 @@ Access to the guest shell will be temporarily disabled while it reboots.
 Are you sure you want to reboot the guest shell? (y/n) [n] y
 ```
 
-**Example.** Guestshell is currently disabled. Resize guestshell filesystem to 400MB and memory to 300MB
+**Example.** Guestshell is currently disabled. Resize guestshell filesystem to 400MB and memory to 400MB
 
 ```
 n3k# guestshell resize rootfs 400
 Note: Root filesystem will be resized on Guest shell enable
 
-n3k# guestshell resize memory 300
+n3k# guestshell resize memory 400
 Note: System memory will be resized on Guest shell enable
 
 n3k# guestshell enable
@@ -207,7 +207,7 @@ This section is only necessary if chef-client will run from the `open agent cont
 
 #### Set Up NX-OS
 
-Download the `OAC` `oac.1.1.0.ova` file.
+Download the `OAC` `oac.1.0.0.ova` file.
 
 | Platform | OAC Download Link |
 |----------|-------------------|
@@ -246,11 +246,11 @@ The recommended minimum values are currently:
 **NOTE:** If insufficent `bootflash:` resources are available, remove unneeded files from `bootflash:` to free up space.
 
 Install the `OAC` Virtual Service using the `virtual-service install` command:
-`virtual-service install name oac package bootflash:oac.1.1.0.ova`
+`virtual-service install name oac package bootflash:oac.1.0.0.ova`
 
 ~~~
-n7k# virtual-service install name oac package bootflash:oac.1.1.0.ova
-Note: Installing package 'bootflash:/oac.1.1.0.ova' for virtual service 'oac'. Once the install has finished, the VM may be activated. Use 'show virtual-service list' for progress.
+n7k# virtual-service install name oac package bootflash:oac.1.0.0.ova
+Note: Installing package 'bootflash:/oac.1.0.0.ova' for virtual service 'oac'. Once the install has finished, the VM may be activated. Use 'show virtual-service list' for progress.
 
 n7k# 2016 Feb 12 19:51:14 n7k %$ VDC-1 %$ %VMAN-2-INSTALL_STATE: Successfully installed virtual service 'oac'
 
@@ -260,7 +260,7 @@ Virtual Service List:
 
 Name                    Status             Package Name
 -----------------------------------------------------------------------
-oac                     Installed          oac.1.1.0.ova
+oac                     Installed          oac.1.0.0.ova
 
 n7k# 
 ~~~
@@ -288,7 +288,7 @@ Virtual Service List:
 
 Name                    Status             Package Name
 -----------------------------------------------------------------------
-oac                     Activated          oac.1.1.0.ova
+oac                     Activated          oac.1.0.0.ova
 
 n7k# 
 ~~~
@@ -361,10 +361,18 @@ export http_proxy="http://proxy.yourdomain.com:<port>"
 export https_proxy="https://proxy.yourdomain.com:<port>"
 ~~~
 
-##### Run Chef Install Script
+##### Run Chef Install Script <sup>1</sup>
 
 ```bash
 curl 'https://www.chef.io/chef/install.sh' | bash
+```
+
+<sup>1</sup> *Note: At the time of release 1.1.0 it appears that the `bash-shell` environment may encounter a certificate error on some platforms during chef-client install. The workaround for this problem is to use `wget` and manually install the chef-client rpm as shown:*
+
+```bash
+wget https://opscode-omnibus-packages.s3.amazonaws.com/nexus/7/x86_64/chef-12.7.2-1.nexus7.x86_64.rpm —no-check-certificate
+
+yum localinstall chef-12.7.2-1.nexus7.x86_64.rpm
 ```
 
 #### validation.pem
