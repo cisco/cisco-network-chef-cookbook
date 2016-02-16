@@ -246,11 +246,11 @@ The recommended minimum values are currently:
 **NOTE:** If insufficent `bootflash:` resources are available, remove unneeded files from `bootflash:` to free up space.
 
 Install the `OAC` Virtual Service using the `virtual-service install` command:
-`virtual-service install name oac package bootflash:oac.1.1.0.ova`
+`virtual-service install name oac package bootflash:oac.1.0.0.ova`
 
 ~~~
-n7k# virtual-service install name oac package bootflash:oac.1.1.0.ova
-Note: Installing package 'bootflash:/oac.1.1.0.ova' for virtual service 'oac'. Once the install has finished, the VM may be activated. Use 'show virtual-service list' for progress.
+n7k# virtual-service install name oac package bootflash:oac.1.0.0.ova
+Note: Installing package 'bootflash:/oac.1.0.0.ova' for virtual service 'oac'. Once the install has finished, the VM may be activated. Use 'show virtual-service list' for progress.
 
 n7k# 2016 Feb 12 19:51:14 n7k %$ VDC-1 %$ %VMAN-2-INSTALL_STATE: Successfully installed virtual service 'oac'
 
@@ -260,7 +260,7 @@ Virtual Service List:
 
 Name                    Status             Package Name
 -----------------------------------------------------------------------
-oac                     Installed          oac.1.1.0.ova
+oac                     Installed          oac.1.0.0.ova
 
 n7k# 
 ~~~
@@ -288,7 +288,7 @@ Virtual Service List:
 
 Name                    Status             Package Name
 -----------------------------------------------------------------------
-oac                     Activated          oac.1.1.0.ova
+oac                     Activated          oac.1.0.0.ova
 
 n7k# 
 ~~~
