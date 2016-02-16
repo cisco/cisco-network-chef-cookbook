@@ -126,7 +126,7 @@ The `guestshell` container environment is enabled by default on most platforms; 
 The recommended minimum values are currently:
 ```bash
   Disk   : 400MB
-  Memory : 300MB
+  Memory : 400MB
 ```
 
 Use the `show guestshell detail` command to display the current state of the guestshell:
@@ -144,7 +144,7 @@ Virtual service guestshell+ detail
 
 Use the `guestshell resize rootfs` command to resize the guestshell filesystem. Use the `guestshell resize memory` command to resize the guestshell memory allocation. These commands may be executed even when the guestshell is not yet enabled. Note that the resize command does not take effect until after the guestshell container is (re)started with the `guestshell reboot` or `guestshell enable` command.
 
-**Example.** Guestshell is currently enabled. Resize guestshell filesystem to 400MB and memory to 300MB
+**Example.** Guestshell is currently enabled. Resize guestshell filesystem to 400MB and memory to 400MB
 
 ```
 n3k# guestshell resize rootfs ?
@@ -153,7 +153,7 @@ n3k# guestshell resize rootfs ?
 n3k# guestshell resize rootfs 400
 Note: Please disable/enable or reboot the Guest shell for root filesystem to be resized
 
-n3k# guestshell resize memory 300
+n3k# guestshell resize memory 400
 Note: Please disable/enable or reboot the Guest shell for system memory to be resized
 
 n3k# guestshell reboot
@@ -161,13 +161,13 @@ Access to the guest shell will be temporarily disabled while it reboots.
 Are you sure you want to reboot the guest shell? (y/n) [n] y
 ```
 
-**Example.** Guestshell is currently disabled. Resize guestshell filesystem to 400MB and memory to 300MB
+**Example.** Guestshell is currently disabled. Resize guestshell filesystem to 400MB and memory to 400MB
 
 ```
 n3k# guestshell resize rootfs 400
 Note: Root filesystem will be resized on Guest shell enable
 
-n3k# guestshell resize memory 300
+n3k# guestshell resize memory 400
 Note: System memory will be resized on Guest shell enable
 
 n3k# guestshell enable
