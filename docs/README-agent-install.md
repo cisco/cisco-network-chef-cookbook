@@ -207,7 +207,7 @@ This section is only necessary if chef-client will run from the `open agent cont
 
 #### Set Up NX-OS
 
-Download the `OAC` `oac.1.1.0.ova` file.
+Download the `OAC` `oac.1.0.0.ova` file.
 
 | Platform | OAC Download Link |
 |----------|-------------------|
