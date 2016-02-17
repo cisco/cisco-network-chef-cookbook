@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### New feature support
+*
+
+### Added
+*
+
+### Removed
+*
+
 ## [1.1.1] - 2016-02-16
 ### Fixed
 - Update README-agent-install.md to reflect higher minimum memory requirement for guestshell
