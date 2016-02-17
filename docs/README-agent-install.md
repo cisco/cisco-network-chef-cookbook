@@ -3,14 +3,15 @@
 #### Table of Contents
 
 1. [Overview](#overview)
-2. [Pre-Install Tasks](#pre-install-tasks)
-3. [chef-client Environment: bash-shell](#env-bs)
-4. [chef-client Environment: guestshell](#env-gs)
-5. [chef-client Installation, Configuration and Usage](#agent-config)
-6. [(optional) guestshell & High Availability (HA) Platforms](#ha)
-7. [(optional) chef-client Persistence](#persistence)
-8. [(optional) Automated Installation Options](#auto-install)
-9. [References](#references)
+1. [Pre-Install Tasks](#pre-install-tasks)
+1. [chef-client Environment: bash-shell](#env-bs)
+1. [chef-client Environment: guestshell](#env-gs)
+1. [chef-client Environment: open agent container (OAC)](#env-oac)
+1. [chef-client Installation, Configuration and Usage](#agent-config)
+1. [(optional) guestshell & High Availability (HA) Platforms](#ha)
+1. [(optional) chef-client Persistence](#persistence)
+1. [(optional) Automated Installation Options](#auto-install)
+1. [References](#references)
 
 ## Overview
 
@@ -201,7 +202,7 @@ EOF
 
 ```
 
-## <a name="env-gs">chef-client Environment: open agent container</a>
+## <a name="env-oac">chef-client Environment: open agent container (OAC)</a>
 
 This section is only necessary if chef-client will run from the `open agent container`.
 
