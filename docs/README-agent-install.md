@@ -371,7 +371,7 @@ curl 'https://www.chef.io/chef/install.sh' | bash
 <sup>1</sup> *Note: At the time of release 1.1.0 it appears that the `bash-shell` environment may encounter a certificate error on some platforms during chef-client install. The workaround for this problem is to use `wget` and manually install the chef-client rpm as shown:*
 
 ```bash
-wget https://opscode-omnibus-packages.s3.amazonaws.com/nexus/7/x86_64/chef-12.7.2-1.nexus7.x86_64.rpm —no-check-certificate
+wget https://opscode-omnibus-packages.s3.amazonaws.com/nexus/7/x86_64/chef-12.7.2-1.nexus7.x86_64.rpm --no-check-certificate
 
 yum localinstall chef-12.7.2-1.nexus7.x86_64.rpm
 ```
