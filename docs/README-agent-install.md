@@ -3,14 +3,15 @@
 #### Table of Contents
 
 1. [Overview](#overview)
-2. [Pre-Install Tasks](#pre-install-tasks)
-3. [chef-client Environment: bash-shell](#env-bs)
-4. [chef-client Environment: guestshell](#env-gs)
-5. [chef-client Installation, Configuration and Usage](#agent-config)
-6. [(optional) guestshell & High Availability (HA) Platforms](#ha)
-7. [(optional) chef-client Persistence](#persistence)
-8. [(optional) Automated Installation Options](#auto-install)
-9. [References](#references)
+1. [Pre-Install Tasks](#pre-install-tasks)
+1. [chef-client Environment: bash-shell](#env-bs)
+1. [chef-client Environment: guestshell](#env-gs)
+1. [chef-client Environment: open agent container (OAC)](#env-oac)
+1. [chef-client Installation, Configuration and Usage](#agent-config)
+1. [(optional) guestshell & High Availability (HA) Platforms](#ha)
+1. [(optional) chef-client Persistence](#persistence)
+1. [(optional) Automated Installation Options](#auto-install)
+1. [References](#references)
 
 ## Overview
 
@@ -201,7 +202,7 @@ EOF
 
 ```
 
-## <a name="env-gs">chef-client Environment: open agent container</a>
+## <a name="env-oac">chef-client Environment: open agent container (OAC)</a>
 
 This section is only necessary if chef-client will run from the `open agent container`.
 
@@ -211,8 +212,8 @@ Download the `OAC` `oac.1.0.0.ova` file.
 
 | Platform | OAC Download Link |
 |----------|-------------------|
-| Nexus 7xxx | [Nexus 7xxx Download Link](https://software.cisco.com/download/release.html?i=!y&mdfid=283748960&softwareid=282088129&release=7.3%280%29D1%281%29&os=)|
-| Nexus 56xx and 60xx | [**TODO**]|
+| Nexus 7xxx | [Download Link](https://software.cisco.com/download/release.html?i=!y&mdfid=283748960&softwareid=282088129&release=7.3%280%29D1%281%29&os=)|
+| Nexus 56xx and 60xx | [Download Link](https://software.cisco.com/download/release.html?i=!y&mdfid=284360574&softwareid=282088130&release=7.3%280%29N1%281%29&os=)|
 
 Copy the `ova` file to the `bootflash:` device.
 
@@ -320,7 +321,7 @@ Retype new password:
 [root@localhost ~]# 
 ~~~
 
-See [References](#references) for more OAC documentation *TODO*.
+See [References](#references) for more OAC documentation.
 
 #### Set Up OAC Network
 
@@ -601,11 +602,15 @@ systemctl start my_chef
 
 [Chef Provisioning](README-chef-provisioning.md) - Installing & Configuring chef-client using the Chef Provisioning tool
 
-## References
+## <a name="references">References
 
 [Cisco Nexus Chef Modules](../README.md) - Resources, Providers, Utilities
 
-[Cisco Nexus Programmability Guide](http://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus9000/sw/6-x/programmability/guide/b_Cisco_Nexus_9000_Series_NX-OS_Programmability_Guide/b_Cisco_Nexus_9000_Series_NX-OS_Programmability_Guide_chapter_01010.html) - Guestshell Documentation
+[Cisco Nexus 9000 Programmability Guide](http://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus9000/sw/6-x/programmability/guide/b_Cisco_Nexus_9000_Series_NX-OS_Programmability_Guide/b_Cisco_Nexus_9000_Series_NX-OS_Programmability_Guide_chapter_01010.html) - Guestshell Documentation
+
+[Cisco Nexus 5000 and 6000 Programmability Guide](http://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus5000/sw/programmability/guide/b_Cisco_Nexus_5K6K_Series_NX-OS_Programmability_Guide/b_Cisco_Nexus_5K6K_Series_NX-OS_Programmability_Guide_chapter_01001.html) - Open Agent Container Documentation
+
+[Cisco Nexus 7000 Programmability Guide](http://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus7000/sw/programmability/guide/b_Cisco_Nexus_7000_Series_NX-OS_Programmability_Guide/b_Cisco_Nexus_7000_Series_NX-OS_Programmability_Guide_chapter_01001.html) - Open Agent Container Documentation
 
 --
 
