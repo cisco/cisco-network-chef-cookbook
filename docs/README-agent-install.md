@@ -602,7 +602,7 @@ systemctl start my_chef
 
 [Chef Provisioning](README-chef-provisioning.md) - Installing & Configuring chef-client using the Chef Provisioning tool
 
-## <a name="references">References
+## References
 
 [Cisco Nexus Chef Modules](../README.md) - Resources, Providers, Utilities
 
