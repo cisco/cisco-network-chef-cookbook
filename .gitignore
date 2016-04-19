@@ -5,3 +5,4 @@
 .kitchen.local.yml
 Gemfile.lock
 vendor/bundle/
+Berksfile.lock

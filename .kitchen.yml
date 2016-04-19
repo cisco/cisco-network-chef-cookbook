@@ -7,11 +7,6 @@ driver:
 
 provisioner:
   name: chef_zero
-  require_chef_omnibus: 12.6.0
-  command_prefix: sudo ip netns exec management sudo -u vagrant
-
-verifier:
-  command_prefix: sudo ip netns exec management sudo -u vagrant
 
 platforms:
   - name: nexus
@@ -19,9 +14,26 @@ platforms:
       box: n9kv
       vagrantfiles:
         - vagrantfiles/nexus.rb
+    provisioner:
+      command_prefix: sudo ip netns exec management sudo -u vagrant
+    verifier:
+      command_prefix: sudo ip netns exec management sudo -u vagrant
+  - name: ios_xr
+    driver:
+      box: ucs-fullk9
+      vagrantfiles:
+        - vagrantfiles/ios_xr.rb
 
 suites:
-  - name: default
+  - name: full
+    includes:
+      - nexus
     run_list:
-      - recipe[cisco-test::default]
+      - recipe[cisco-test::full]
+    attributes:
+  - name: basic
+    includes:
+      - ios_xr
+    run_list:
+      - recipe[cisco-test::basic]
     attributes:

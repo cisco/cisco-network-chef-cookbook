@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'cisco-test::default' do
+describe 'cisco-test::full' do
   before(:all) do
     @running_config = get_running_config
   end
