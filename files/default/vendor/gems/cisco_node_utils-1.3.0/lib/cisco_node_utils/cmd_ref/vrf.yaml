@@ -1,0 +1,84 @@
+# vrf.yaml
+---
+_template:
+  nexus:
+    get_command: "show running all | section '^vrf context'"
+    context:
+      - 'vrf context <vrf>'
+  ios_xr:
+    get_command: "show run vrf"
+    context:
+      - 'vrf <vrf>'
+
+address_family:
+  set_value: '<state> address-family <afi> <safi>'
+
+all_vrfs:
+  multiple: true
+  context: ~
+  nexus:
+    get_value: '/^vrf context (.*)/'
+  ios_xr:
+    get_value: '/^vrf (.*)/'
+
+create:
+  context: ~
+  nexus:
+    set_value:  'vrf context <vrf>'
+  ios_xr:
+    set_value:  'vrf <vrf>'
+
+description:
+  get_value: '/^description (.*)/'
+  set_value: '<state> description <desc>'
+  kind: string
+  default_value: ''
+
+destroy:
+  context: ~
+  nexus:
+    set_value: 'no vrf context <vrf>'
+  ios_xr:
+    set_value: 'no vrf <vrf>'
+
+mhost_default_interface:
+  _exclude: [nexus]
+  get_value: '/^mhost <afi> default-interface (\S+)$/'
+  set_value: '<state> mhost <afi> default-interface <intf>'
+  default_value: ''
+
+remote_route_filtering:
+  _exclude: [nexus]
+  kind: boolean
+  get_value: '/^remote-route-filtering disable$/'
+  set_value: '<state> remote-route-filtering disable'
+  default_value: true
+
+route_distinguisher:
+  # Only configurable under BGP in IOS XR, not under VRF context
+  _exclude: [ios_xr]
+  get_value: '/^rd (\S+)$/'
+  set_value: '<state> rd <rd>'
+  default_value: ''
+
+shutdown:
+  _exclude: [ios_xr]
+  kind: boolean
+  get_value: '/^shutdown$/'
+  set_value: '<state> shutdown'
+  default_value: false
+
+vni: # TBD Should this move to the vni provider as vrf_vni?
+  # MT-lite only
+  N9k:
+    kind: int
+    get_value: '/^vni (\d+)$/'
+    set_value: '<state> vni <id>'
+    default_value: false
+
+vpn_id:
+  _exclude: [nexus]
+  get_value: '/^vpn id (\S+)$/'
+  set_value: '<state> vpn id <vpnid>'
+  default_value: ''
+
