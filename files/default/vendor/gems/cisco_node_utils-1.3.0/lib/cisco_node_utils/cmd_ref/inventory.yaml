@@ -1,0 +1,40 @@
+# inventory
+---
+_template:
+  get_command: 'show inventory'
+  ios_xr:
+    data_format: cli
+  nexus:
+    data_format: nxapi_structured
+
+all:
+  multiple: true
+  nexus:
+    get_context: ["TABLE_inv", "ROW_inv"]
+
+chassis:
+  nexus:
+    # Get all the inventory and we'll filter it down to the chassis
+    multiple: true
+    get_context: ["TABLE_inv", "ROW_inv"]
+
+productid:
+  ios_xr:
+    get_value: '/"Rack 0".*\n.*PID: ([^ ,]+)/'
+  nexus:
+    get_context: ["TABLE_inv", "ROW_inv", '0']
+    get_value: "productid"
+
+serialnum:
+  ios_xr:
+    get_value: '/"Rack 0".*\n.*SN: ([^ ,]+)/'
+  nexus:
+    get_context: ["TABLE_inv", "ROW_inv", '0']
+    get_value: "serialnum"
+
+versionid:
+  ios_xr:
+    get_value: '/"Rack 0".*\n.*VID: ([^ ,]+)/'
+  nexus:
+    get_context: ["TABLE_inv", "ROW_inv", '0']
+    get_value: "vendorid"
