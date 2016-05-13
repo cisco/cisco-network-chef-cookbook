@@ -52,7 +52,7 @@ class Chef
         Chef::Log.debug 'Load current resource for free-form configuration'
         @current_resource = Chef::Resource::CiscoCommandConfig.new(@name)
 
-        running_config_str = @node.show('show running-config all')
+        running_config_str = @node.get(command: 'show running-config all')
 
         # Sanitize new config (from recipe)
         @new_resource.command.gsub!(/^\s*$\n/, '')
@@ -87,7 +87,7 @@ class Chef
         else
           converge_by("apply CommandConfig changes (minimum changeset):\n" +
                       @min_config_str) do
-            @node.config(@min_config_str)
+            @node.set(values: @min_config_str)
           end
         end
       rescue Cisco::CliError => e

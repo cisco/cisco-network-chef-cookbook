@@ -40,12 +40,12 @@ class Chef
       end
 
       def action_create
-        if Cisco::Vtp.enabled
+        if Cisco::Feature.vtp_enabled?
           Chef::Log.debug 'feature vtp already enabled'
         else
           converge_by('enable feature vtp') {}
           return if whyrun_mode?
-          @vtp.enable
+          Cisco::Feature.vtp_enable
         end
         @vtp = Cisco::Vtp.new if @vtp.nil?
 
@@ -54,7 +54,7 @@ class Chef
       end
 
       def action_destroy
-        if Cisco::Vtp.enabled
+        if Cisco::Feature.vtp_enabled?
           converge_by('disable vtp') do
             @vtp.destroy
             @vtp = nil

@@ -37,13 +37,6 @@ class Chef
       class CiscoPackage < Chef::Provider::Package::Yum
         provides :cisco_package, os: 'linux'
 
-        # ex: chef-12.0.0alpha.2+20150319.git.1.b6f-1.el5.x86_64.rpm
-        @name_ver_arch_regex = /^([\w\-\+]+)-(\d+\..*)\.(\w{4,})(?:\.rpm)?$/
-        # ex n9000-dk9.LIBPROCMIBREST-1.0.0-7.0.3.x86_64.rpm
-        @name_ver_arch_regex_nxos = /^(.*)-([\d\.]+-[\d\.]+)\.(\w{4,})\.rpm$/
-        # ex: b+z-ip2.x64_64
-        @name_arch_regex = /^([\w\-\+]+)\.(\w+)$/
-
         def whyrun_supported?
           true
         end
@@ -72,6 +65,12 @@ class Chef
             end
 
             # check for most complex pattern first (filename)
+            # ex: chef-12.0.0alpha.2+20150319.git.1.b6f-1.el5.x86_64.rpm
+            @name_ver_arch_regex = /^([\w\-\+]+)-(\d+\..*)\.(\w{4,})(?:\.rpm)?$/
+            # ex n9000-dk9.LIBPROCMIBREST-1.0.0-7.0.3.x86_64.rpm
+            @name_ver_arch_regex_nxos = /^(.*)-([\d\.]+-[\d\.]+)\.(\w{4,})\.rpm$/
+            # ex: b+z-ip2.x64_64
+            @name_arch_regex = /^([\w\-\+]+)\.(\w+)$/
             if @new_resource.package_name =~ @name_ver_arch_regex ||
                @new_resource.package_name =~ @name_ver_arch_regex_nxos
               @pkg_nm = Regexp.last_match(1)
