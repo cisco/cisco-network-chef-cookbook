@@ -45,9 +45,9 @@ class Chef
         set_or_return(:name, arg, kind_of: String, callbacks: {
                         'user must be string of word characters and ' \
                         'Engine ID should be either empty string or ' \
-                        '5 to 32 octets separated by colons'                                                                                                                                                 => lambda do |name|
+                        '5 to 32 octets separated by colons' => lambda do |name|
                           !@@title_pattern.match(name).nil?
-                        end
+                        end,
                       })
       end
 
@@ -75,7 +75,7 @@ class Chef
         set_or_return(:groups, arg, kind_of: Array, callbacks: {
                         'must be kind of String' => lambda do |groups|
                           groups.select { |group| !group.kind_of? String }.empty?
-                        end
+                        end,
                       })
       end
 
