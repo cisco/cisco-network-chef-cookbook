@@ -100,12 +100,12 @@ A note about support for specific platform models:
   * "**N7k**" support includes all N7xxx models.
   * "**N8k**" support includes all N8xxx models.
 
-* ✅ = Supported
+ ✅ = Supported
 
 |   | N9k | N3k | N5k | N6k | N7k | N8k |Caveats |
 |---|:---:|:-----:|:-----:|:-----:|:---:|:---:|:-------:|
 | [cisco_command_config](#type-cisco_command_config) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [cisco_interface](#type-cisco_interface) | ✅ | ✅ | ✅ | ✅* | ✅* | ✅ | [Caveat](#cisco_interface-caveats) |
+| [cisco_interface](#type-cisco_interface) | ✅ | ✅ | ✅* | ✅* | ✅ | ✅ | [Caveat](#cisco_interface-caveats) |
 | [cisco_interface_ospf](#type-cisco_interface_ospf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [cisco_ospf](#type-cisco_ospf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [cisco_ospf_vrf](#type-cisco_ospf_vrf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
