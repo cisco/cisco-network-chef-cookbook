@@ -9,14 +9,14 @@ This workflow map aids *users*, *developers* and *maintainers* of the cisco-cook
 
 * User Guides
   * [README-agent-install] : Agent Installation and Configuration Guide
-  * [README-chef-provisioning.md](https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-chef-provisioning.md) : Automated Agent Installation and Configuration
-  * [README-package-provider.md](https://github.com/cisco/cisco-network-chef-cookbook/blob/rel120/recipe_doc_updates/docs/README-package-provider.md) : Cisco Nexus Package Management using the Package Provider
+  * [README-chef-provisioning] : Automated Agent Installation and Configuration
+  * [README-package-provider] : Cisco Nexus Package Management using the Package Provider
   * The remainder of this document is aimed at end users
 * Developer Guides
-  * [CONTRIBUTING.md](https://github.com/cisco/cisco-network-chef-cookbook/blob/master/CONTRIBUTING.md) : Contribution guidelines
-  * [README-develop-resources-providers.md](https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-develop-resources-providers.md) : Developing New cisco-cookbook Resources and Providers
+  * [CONTRIBUTING] : Contribution guidelines
+  * [README-develop-resources-providers] : Developing New cisco-cookbook Resources and Providers
 * Maintainers Guides
-  * [README-maintainers.md](https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-maintainers.md) : Guidelines for core maintainers of the cisco-cookbook project
+  * [README-maintainers] : Guidelines for core maintainers of the cisco-cookbook project
   * All developer guides apply to maintainers as well
 
 
@@ -45,9 +45,9 @@ The `cisco-cookbook` allows a network administrator to manage Cisco Network Elem
 
 The Cisco Network Elements and Operating Systems managed by this cookbook are continuously expanding. Please refer to the [Provider Support Across Platforms](#provider-platform-support) section for details on currently supported hardware and software. The [Chef and Ruby Requirements](#chef-ruby-requirements) section also provides details on compatible Chef client and Ruby versions.
 
-This GitHub repository contains the latest version of the cisco-cookbook source code. Supported versions of the cisco-cookbook are available at Chef Supermarket. Please refer to [SUPPORT.md](SUPPORT.md) for additional details.
+This GitHub repository contains the latest version of the cisco-cookbook source code. Supported versions of the cisco-cookbook are available at Chef Supermarket. Please refer to [SUPPORT] for additional details.
 
-Contributions to this cookbook are welcome. Guidelines on contributions to the cookbook are captured in [CONTRIBUTING.md](CONTRIBUTING.md)
+Contributions to this cookbook are welcome. Guidelines on contributions to the cookbook are captured in [CONTRIBUTING]
 
 ## Cookbook Description
 
@@ -916,3 +916,9 @@ limitations under the License.
 ```
 
 [README-agent-install]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-agent-install.md
+[README-chef-provisioning]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-chef-provisioning.md
+[README-develop-resources-providers]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-develop-resources-providers.md
+[README-package-provider]: https://github.com/cisco/cisco-network-chef-cookbook/blob/rel120/recipe_doc_updates/docs/README-package-provider.md
+[README-maintainers]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-maintainers.md
+[CONTRIBUTING]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/CONTRIBUTING.md
+[SUPPORT]: https://github.com/cisco/cisco-network-chef-cookbook/blob/rel120/recipe_doc_updates/SUPPORT.md
