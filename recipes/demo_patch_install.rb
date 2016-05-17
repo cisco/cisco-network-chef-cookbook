@@ -20,19 +20,19 @@
 # the arguments in a single column rather than following rubocop's style.
 
 # Uncomment the following resources to run on N3k, N8k, or N9k
- cookbook_file '/bootflash/CSCuxdublin-1.0.0-7.0.3.I3.1.lib32_n9000.rpm' do
-   owner  'root'
-   group  'root'
-   mode   '0775'
-   source 'rpm-store/CSCuxdublin-1.0.0-7.0.3.I3.1.lib32_n9000.rpm'
- end
+cookbook_file '/bootflash/CSCuxdublin-1.0.0-7.0.3.I3.1.lib32_n9000.rpm' do
+  owner  'root'
+  group  'root'
+  mode   '0775'
+  source 'rpm-store/CSCuxdublin-1.0.0-7.0.3.I3.1.lib32_n9000.rpm'
+end
 
- cisco_package 'CSCuxdublin' do
-   action :install
-   # action :remove
-   # package_settings {'target' => 'host'}
-   source '/bootflash/CSCuxdublin-1.0.0-7.0.3.I3.1.lib32_n9000.rpm'
- end
+cisco_package 'CSCuxdublin' do
+  action :install
+  # action :remove
+  # package_settings {'target' => 'host'}
+  source '/bootflash/CSCuxdublin-1.0.0-7.0.3.I3.1.lib32_n9000.rpm'
+end
 
 Chef::Log.info('Install third party package:')
 
