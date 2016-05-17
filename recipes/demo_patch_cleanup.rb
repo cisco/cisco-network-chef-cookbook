@@ -24,7 +24,7 @@ cisco_package 'bgp-dev' do
   action :remove
 end
 
-cisco_package 'n9000_sample' do
+cisco_package 'CSCuxdublin' do
   action :remove
 end
 
