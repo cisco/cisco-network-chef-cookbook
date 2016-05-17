@@ -92,7 +92,6 @@ See the recipes directory for example usage of cisco providers and resources.
 ### <a name="provider-platform-support">Provider Support Across Platforms</a>
 
 * ✅ = Supported
-* ❌ = Unsupported
 
 |   | N9k | N30xx | N31xx | N56xx | N6k | N7k | Caveats |
 |---|:---:|:-----:|:-----:|:-----:|:---:|:---:|:-------:|
@@ -108,7 +107,7 @@ See the recipes directory for example usage of cisco providers and resources.
 | [cisco_tacacs_server](#type-cisco_tacacs_server) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [cisco_tacacs_server_host](#type-cisco_tacacs_server_host) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [cisco_vlan](#type-cisco_vlan) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [cisco_vtp](#type-cisco_vtp) | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ |
+| [cisco_vtp](#type-cisco_vtp) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ## Resource Reference
 
@@ -839,7 +838,7 @@ end
 | Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | Unsupported | Unsupported | 1.1.0 |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.2.0 | 1.2.0 | 1.1.0 |
 
 The `cisco_vtp` resource is used to manage VLAN Trunking Protocol (VTP)
 configuration. There can only be one instance of this resource per node.
