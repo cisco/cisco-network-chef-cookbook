@@ -4,14 +4,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.2.0] - TBD 
 
-### New feature support
-*
-
 ### Added
-*
-
-### Removed
-*
+- Enabled cisco_vtp support on N5k and N6k platforms.
 
 ## [1.1.2] - 2016-02-24
 ### Added
