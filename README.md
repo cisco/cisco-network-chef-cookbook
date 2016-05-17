@@ -8,15 +8,15 @@
 This workflow map aids *users*, *developers* and *maintainers* of the cisco-cookbook project in selecting the appropriate document(s) for their task.
 
 * User Guides
-  * [README-agent-install.md](docs/README-agent-install.md) : Agent Installation and Configuration Guide
-  * [README-chef-provisioning.md](docs/README-chef-provisioning.md) : Automated Agent Installation and Configuration
-  * [README-package-provider.md](docs/README-package-provider.md) : Cisco Nexus Package Management using the Package Provider
+  * [README-agent-install] : Agent Installation and Configuration Guide
+  * [README-chef-provisioning.md](https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-chef-provisioning.md) : Automated Agent Installation and Configuration
+  * [README-package-provider.md](https://github.com/cisco/cisco-network-chef-cookbook/blob/rel120/recipe_doc_updates/docs/README-package-provider.md) : Cisco Nexus Package Management using the Package Provider
   * The remainder of this document is aimed at end users
 * Developer Guides
-  * [CONTRIBUTING.md](CONTRIBUTING.md) : Contribution guidelines
-  * [README-develop-resources-providers.md](docs/README-develop-resources-providers.md) : Developing New cisco-cookbook Resources and Providers
+  * [CONTRIBUTING.md](https://github.com/cisco/cisco-network-chef-cookbook/blob/master/CONTRIBUTING.md) : Contribution guidelines
+  * [README-develop-resources-providers.md](https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-develop-resources-providers.md) : Developing New cisco-cookbook Resources and Providers
 * Maintainers Guides
-  * [README-maintainers.md](docs/README-maintainers.md) : Guidelines for core maintainers of the cisco-cookbook project
+  * [README-maintainers.md](https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-maintainers.md) : Guidelines for core maintainers of the cisco-cookbook project
   * All developer guides apply to maintainers as well
 
 
@@ -62,7 +62,7 @@ The set of supported network element platforms is continuously expanding. Please
 The `cisco-cookbook` is installed on the Chef server. Please see [The Chef Server](https://docs.chef.io/server/) for information on Chef server setup. See Chef's [knife cookbook site](https://docs.chef.io/knife_cookbook_site.html) for general information on Chef cookbook installation.
 
 #### Chef Client
-The Chef Client (agent) requires installation and setup on each device. Agent setup can be performed as a manual process or it may be automated. For more information please see the [README-agent-install.md](docs/README-agent-install.md) document for detailed instructions on agent installation and configuration on Cisco Nexus devices.
+The Chef Client (agent) requires installation and setup on each device. Agent setup can be performed as a manual process or it may be automated. For more information please see the [README-agent-install] document for detailed instructions on agent installation and configuration on Cisco Nexus devices.
 
 ##### Gems
 
@@ -914,3 +914,5 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+
+[README-agent-install]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-agent-install.md
