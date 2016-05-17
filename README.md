@@ -924,10 +924,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
+[CONTRIBUTING]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/CONTRIBUTING.md
 [README-agent-install]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-agent-install.md
 [README-chef-provisioning]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-chef-provisioning.md
 [README-develop-resources-providers]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-develop-resources-providers.md
 [README-package-provider]: https://github.com/cisco/cisco-network-chef-cookbook/blob/rel120/recipe_doc_updates/docs/README-package-provider.md
 [README-maintainers]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-maintainers.md
-[CONTRIBUTING]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/CONTRIBUTING.md
 [SUPPORT]: https://github.com/cisco/cisco-network-chef-cookbook/blob/rel120/recipe_doc_updates/SUPPORT.md
