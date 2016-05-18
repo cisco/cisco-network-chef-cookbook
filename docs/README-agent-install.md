@@ -145,7 +145,7 @@ Virtual service guestshell+ detail
 
 Use the `guestshell resize rootfs` command to resize the guestshell filesystem. Use the `guestshell resize memory` command to resize the guestshell memory allocation. These commands may be executed even when the guestshell is not yet enabled. Note that the resize command does not take effect until after the guestshell container is (re)started with the `guestshell reboot` or `guestshell enable` command.
 
-**Example.** Guestshell is currently enabled. Resize guestshell filesystem to 400MB and memory to 400MB
+**Example.** Guestshell is currently enabled. Resize guestshell filesystem to 500MB and memory to 500MB
 
 ```
 n3k# guestshell resize rootfs ?
@@ -162,13 +162,13 @@ Access to the guest shell will be temporarily disabled while it reboots.
 Are you sure you want to reboot the guest shell? (y/n) [n] y
 ```
 
-**Example.** Guestshell is currently disabled. Resize guestshell filesystem to 400MB and memory to 400MB
+**Example.** Guestshell is currently disabled. Resize guestshell filesystem to 500MB and memory to 500MB
 
 ```
-n3k# guestshell resize rootfs 400
+n3k# guestshell resize rootfs 500
 Note: Root filesystem will be resized on Guest shell enable
 
-n3k# guestshell resize memory 400
+n3k# guestshell resize memory 500
 Note: System memory will be resized on Guest shell enable
 
 n3k# guestshell enable
