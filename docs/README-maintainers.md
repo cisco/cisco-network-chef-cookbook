@@ -43,12 +43,12 @@ When we are considering publishing a new release, all of the following steps mus
     ```
 
 2. <a name="test-platforms">Run all tests (demo recipes, serverspec, kitchen, etc.) against the latest software release or release candidate for each supported platform:</a>
-  * N30xx
-  * N31xx
-  * N9xxx
-  * N56xx
-  * N60xx
-  * N7xxx
+  * N3k
+  * N5k
+  * N6k
+  * N7k
+  * N8k
+  * N9k
 
 3. Triage any test failures.
 

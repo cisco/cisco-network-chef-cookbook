@@ -24,7 +24,7 @@ This document describes chef-client installation and setup on Cisco Nexus switch
 #### Platform and Software Requirements
 See [Requirements](../README.md#requirements) for details on platform and software requirements.
 
-Please note: A virtual Nexus N9000/N3000 may be helpful for development and testing. Users with a valid [cisco.com](http://cisco.com) user ID can obtain a copy of a virtual Nexus N9000/N3000 by sending their [cisco.com](http://cisco.com) user ID in an email to <get-n9kv@cisco.com>. If you do not have a [cisco.com](http://cisco.com) user ID please register for one at [https://tools.cisco.com/IDREG/guestRegistration](https://tools.cisco.com/IDREG/guestRegistration)
+Please note: A virtual Nexus N9k/N3k may be helpful for development and testing. Users with a valid [cisco.com](http://cisco.com) user ID can obtain a copy of a virtual Nexus N9k/N3k by sending their [cisco.com](http://cisco.com) user ID in an email to <get-n9kv@cisco.com>. If you do not have a [cisco.com](http://cisco.com) user ID please register for one at [https://tools.cisco.com/IDREG/guestRegistration](https://tools.cisco.com/IDREG/guestRegistration)
 
 #### Disk space
 
@@ -35,10 +35,10 @@ chef-client software.
 NX-OS supports three possible environments for running third party software:
 `bash-shell`, `guestshell` and the `open agent container (OAC)`.
 
-|Environment                  | Supported Platforms                      |
-|-----------------------------|------------------------------------------|
-|`bash-shell` or `guestshell` | Cisco Nexus 30xx, 31xx, 93xx, 95xx, N9Kv |
-|`open agent container (OAC)` | Cisco Nexus 56xx, 60xx, 7xxx             |
+|Environment                  | Supported Platforms       |
+|-----------------------------|---------------------------|
+|`bash-shell` or `guestshell` | Cisco Nexus N3k, N8k, N9k |
+|`open agent container (OAC)` | Cisco Nexus N5k, N6k, N7k |
 
 You may run chef-client from either `bash-shell` or `guestshell` on supported platforms but not from both at the same time.
 
@@ -126,8 +126,8 @@ The `guestshell` container environment is enabled by default on most platforms; 
 
 The recommended minimum values are currently:
 ```bash
-  Disk   : 400MB
-  Memory : 400MB
+  Disk   : 500MB
+  Memory : 500MB
 ```
 
 Use the `show guestshell detail` command to display the current state of the guestshell:
@@ -151,10 +151,10 @@ Use the `guestshell resize rootfs` command to resize the guestshell filesystem. 
 n3k# guestshell resize rootfs ?
   <158-600>  New root filesystem size (in MB)
 
-n3k# guestshell resize rootfs 400
+n3k# guestshell resize rootfs 500
 Note: Please disable/enable or reboot the Guest shell for root filesystem to be resized
 
-n3k# guestshell resize memory 400
+n3k# guestshell resize memory 500
 Note: Please disable/enable or reboot the Guest shell for system memory to be resized
 
 n3k# guestshell reboot
@@ -371,9 +371,9 @@ curl 'https://www.chef.io/chef/install.sh' | bash
 <sup>1</sup> *Note: At the time of release 1.1.0 it appears that the `bash-shell` environment may encounter a certificate error on some platforms during chef-client install. The workaround for this problem is to use `wget` and manually install the chef-client rpm as shown:*
 
 ```bash
-wget https://opscode-omnibus-packages.s3.amazonaws.com/nexus/7/x86_64/chef-12.7.2-1.nexus7.x86_64.rpm --no-check-certificate
+wget https://packages.chef.io/stable/nexus/7/chef-12.10.24-1.nexus7.x86_64.rpm --no-check-certificate
 
-yum localinstall chef-12.7.2-1.nexus7.x86_64.rpm
+yum localinstall chef-12.10.24-1.nexus7.x86_64.rpm
 ```
 
 #### validation.pem

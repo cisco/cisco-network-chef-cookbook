@@ -19,29 +19,6 @@
 # This is just a cleanup for the demo_install recipe.
 # ----------------------------------------------------
 
-Chef::Log.info('Case 1. Package Mgmt: Cisco RPM, Cisco RPM Patch')
-cisco_package 'bgp-dev' do
-  action :remove
-end
-
-cisco_package 'n9000_sample' do
-  action :remove
-end
-
-# ----------------------------------------------------
-
-Chef::Log.info('Case 2. Package Mgmt: 3rd Party RPM')
-
-service 'demo-one' do
-  action :stop
-end
-
-cisco_package 'demo-one' do
-  action :remove
-end
-
-# ----------------------------------------------------
-
 Chef::Log.info('Case 3. Cisco Command Config')
 
 cisco_command_config 'cleanup-all' do

@@ -8,15 +8,15 @@
 This workflow map aids *users*, *developers* and *maintainers* of the cisco-cookbook project in selecting the appropriate document(s) for their task.
 
 * User Guides
-  * [README-agent-install.md](docs/README-agent-install.md) : Agent Installation and Configuration Guide
-  * [README-chef-provisioning.md](docs/README-chef-provisioning.md) : Automated Agent Installation and Configuration
-  * [README-package-provider.md](docs/README-package-provider.md) : Cisco Nexus Package Management using the Package Provider
+  * [README-agent-install] : Agent Installation and Configuration Guide
+  * [README-chef-provisioning] : Automated Agent Installation and Configuration
+  * [README-package-provider] : Cisco Nexus Package Management using the Package Provider
   * The remainder of this document is aimed at end users
 * Developer Guides
-  * [CONTRIBUTING.md](CONTRIBUTING.md) : Contribution guidelines
-  * [README-develop-resources-providers.md](docs/README-develop-resources-providers.md) : Developing New cisco-cookbook Resources and Providers
+  * [CONTRIBUTING] : Contribution guidelines
+  * [README-develop-resources-providers] : Developing New cisco-cookbook Resources and Providers
 * Maintainers Guides
-  * [README-maintainers.md](docs/README-maintainers.md) : Guidelines for core maintainers of the cisco-cookbook project
+  * [README-maintainers] : Guidelines for core maintainers of the cisco-cookbook project
   * All developer guides apply to maintainers as well
 
 
@@ -45,9 +45,9 @@ The `cisco-cookbook` allows a network administrator to manage Cisco Network Elem
 
 The Cisco Network Elements and Operating Systems managed by this cookbook are continuously expanding. Please refer to the [Provider Support Across Platforms](#provider-platform-support) section for details on currently supported hardware and software. The [Chef and Ruby Requirements](#chef-ruby-requirements) section also provides details on compatible Chef client and Ruby versions.
 
-This GitHub repository contains the latest version of the cisco-cookbook source code. Supported versions of the cisco-cookbook are available at Chef Supermarket. Please refer to [SUPPORT.md](SUPPORT.md) for additional details.
+This GitHub repository contains the latest version of the cisco-cookbook source code. Supported versions of the cisco-cookbook are available at Chef Supermarket. Please refer to [SUPPORT] for additional details.
 
-Contributions to this cookbook are welcome. Guidelines on contributions to the cookbook are captured in [CONTRIBUTING.md](CONTRIBUTING.md)
+Contributions to this cookbook are welcome. Guidelines on contributions to the cookbook are captured in [CONTRIBUTING]
 
 ## Cookbook Description
 
@@ -62,7 +62,7 @@ The set of supported network element platforms is continuously expanding. Please
 The `cisco-cookbook` is installed on the Chef server. Please see [The Chef Server](https://docs.chef.io/server/) for information on Chef server setup. See Chef's [knife cookbook site](https://docs.chef.io/knife_cookbook_site.html) for general information on Chef cookbook installation.
 
 #### Chef Client
-The Chef Client (agent) requires installation and setup on each device. Agent setup can be performed as a manual process or it may be automated. For more information please see the [README-agent-install.md](docs/README-agent-install.md) document for detailed instructions on agent installation and configuration on Cisco Nexus devices.
+The Chef Client (agent) requires installation and setup on each device. Agent setup can be performed as a manual process or it may be automated. For more information please see the [README-agent-install] document for detailed instructions on agent installation and configuration on Cisco Nexus devices.
 
 ##### Gems
 
@@ -91,12 +91,22 @@ See the recipes directory for example usage of cisco providers and resources.
 
 ### <a name="provider-platform-support">Provider Support Across Platforms</a>
 
-* ✅ = Supported
+A note about support for specific platform models:
 
-|   | N9k | N30xx | N31xx | N56xx | N6k | N7k | Caveats |
+  * "**N9k**" support includes all N9xxx models.
+  * "**N3k**" support includes N30xx and N31xx models only. **_The N35xx model is not supported_.**
+  * "**N5k**" support includes N56xx models only. **_The N50xx and N55xx models are not supported at this time_.**
+  * "**N6k**" support includes all N6xxx models.
+  * "**N7k**" support includes all N7xxx models.
+  * "**N8k**" support includes all N8xxx models.
+
+
+✅ = Supported
+
+|   | N9k | N3k | N5k | N6k | N7k | N8k |Caveats |
 |---|:---:|:-----:|:-----:|:-----:|:---:|:---:|:-------:|
 | [cisco_command_config](#type-cisco_command_config) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [cisco_interface](#type-cisco_interface) | ✅ | ✅ | ✅ | ✅* | ✅* | ✅ | [Caveat](#cisco_interface-caveats) |
+| [cisco_interface](#type-cisco_interface) | ✅ | ✅ | ✅* | ✅* | ✅ | ✅ | [Caveat](#cisco_interface-caveats) |
 | [cisco_interface_ospf](#type-cisco_interface_ospf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [cisco_ospf](#type-cisco_ospf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [cisco_ospf_vrf](#type-cisco_ospf_vrf) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
@@ -163,10 +173,10 @@ The following resources are listed alphabetically.
 
 ### Type: cisco_command_config
 
-| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
-| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
 
 The `cisco_command_config` resource allows raw configurations to be managed by chef. It serves as a stopgap until specialized resources are created. It has the following limitations:
 
@@ -204,10 +214,10 @@ end
 The `cisco_interface` resource is used to manage general configuration of all
 interface types, including ethernet, port-channel, loopback, and SVI (vlan).
 
-| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
-| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
 
 #### <a name="cisco_interface-caveats">Caveats</a>
 
@@ -313,10 +323,10 @@ The same actions apply regardless.
 
 ### Type: cisco_interface_ospf
 
-| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
-| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
 
 The `cisco_interface_ospf` resource is used to manage per-interface OSPF
 configuration properties. More broadly applicable OSPF configuration is
@@ -388,10 +398,10 @@ end
 
 ### Type: cisco_ospf
 
-| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
-| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
 
 The `cisco_ospf` resource is used to enable/disable OSPF on the switch.
 More detailed OSPF configuration is managed by the `cisco_ospf_vrf` and
@@ -419,10 +429,10 @@ end
 
 ### Type: cisco_ospf_vrf
 
-| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
-| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
 
 The `cisco_ospf_vrf` resource is used to manage per-VRF OSPF configuration,
 including the `default` VRF.
@@ -501,10 +511,10 @@ end
 
 ### Type: cisco_package
 
-| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
-| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
 
 The `cisco_package` resource is a subclass of the Chef `yum_package` resource.
 Unlike `yum_package`, it will always install packages into the NX-OS native
@@ -536,10 +546,10 @@ See https://docs.chef.io/resource_package.html
 
 ### Type: cisco_snmp_community
 
-| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
-| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
 
 The `cisco_snmp_community` resource is used to manage SNMP communities.
 
@@ -571,10 +581,10 @@ end
 
 ### Type: cisco_snmp_group
 
-| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
-| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
 
 The `cisco_snmp_group` resource is used to manage SNMP groups. Cisco NX-OS
 defines SNMP groups based on user roles, so this resource is unable to create
@@ -600,10 +610,10 @@ end
 
 ### Type: cisco_snmp_server
 
-| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
-| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
 
 The `cisco_snmp_server` resource is used to manage the SNMP server configuration
 on a node. There can only be one instance of this resource per node.
@@ -649,10 +659,10 @@ end
 
 ### Type: cisco_snmp_user
 
-| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
-| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
 
 The `cisco_snmp_user` resource is used to manage SNMP user configuration.
 
@@ -706,10 +716,10 @@ end
 
 ### Type: cisco_tacacs_server
 
-| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
-| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
 
 The `cisco_tacacs_server` resource is used to manage global TACACS+ server
 configuration. There can only be one instance of this resource per node.
@@ -755,10 +765,10 @@ end
 
 ### Type: cisco_tacacs_server_host
 
-| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
-| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
 
 The `cisco_tacacs_server_host` resource is used to manage per-host TACACS+
 configuration.
@@ -797,10 +807,10 @@ end
 
 ### Type: cisco_vlan
 
-| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
-| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 |
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
 
 The `cisco_vlan` resource is used to manage VLAN configuration.
 
@@ -835,10 +845,10 @@ end
 
 ### Type: cisco_vtp
 
-| Minimum Requirements | N9k | N30xx | N31xx | N56xx | N6k | N7k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
-| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) |
-| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.0.1 | 1.2.0 | 1.2.0 | 1.1.0 |
+| OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
+| Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.2.0 | 1.2.0 | 1.1.0 | 1.2.0 |
 
 The `cisco_vtp` resource is used to manage VLAN Trunking Protocol (VTP)
 configuration. There can only be one instance of this resource per node.
@@ -913,3 +923,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+
+[CONTRIBUTING]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/CONTRIBUTING.md
+[README-agent-install]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-agent-install.md
+[README-chef-provisioning]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-chef-provisioning.md
+[README-develop-resources-providers]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-develop-resources-providers.md
+[README-package-provider]: https://github.com/cisco/cisco-network-chef-cookbook/blob/rel120/recipe_doc_updates/docs/README-package-provider.md
+[README-maintainers]: https://github.com/cisco/cisco-network-chef-cookbook/blob/master/docs/README-maintainers.md
+[SUPPORT]: https://github.com/cisco/cisco-network-chef-cookbook/blob/rel120/recipe_doc_updates/SUPPORT.md
