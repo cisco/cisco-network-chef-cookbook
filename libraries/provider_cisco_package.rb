@@ -46,6 +46,76 @@ class Chef
           true # temporarily force use of nxapi yum cli in native
         end
 
+        def decompose_metadata(pkg)
+          puts "\nCalling decompose_metadata"
+          # Sample output from 'rpm -qip' command
+          #
+          # Name        : nxos.sample-n9k_EOR
+          # Version     : 1.0.0
+          # Release     : 7.0.3.I4.1
+          # Architecture: lib32_n9000
+          # Install Date: (not installed)
+          # Group       : Patch-RPM/swid-inseor-system/restart/none
+          # Size        : 452807
+          # License     : Cisco proprietary
+          # Signature   : (none)
+          # Source RPM  : nxos.sample-n9k_EOR-1.0.0-7.0.3.I4.1.src.rpm
+          # Build Date  : Mon May 23 18:18:44 2016
+          # Build Host  : rtp-ads-432
+          # Relocations : (not relocatable)
+          # Packager    : Wind River <info@windriver.com>
+          # URL         : http://cisco.com/
+          # Summary     : This is patch for sample-n9k_EOR
+          # Description :
+          # This is a patch for sample-n9k_EOR.The build type is final.
+
+          # Assume package is on bootflash if path not provided.
+          pkg = pkg[/bootflash/] ? pkg : "/bootflash/#{pkg}"
+          rpm_data = `rpm -qip #{pkg}` 
+          n_re = /Name(?:\s+ )?:\s+(\S+)/
+          v_re = /Version(?:\s+ )?:\s+(\S+)/
+          r_re = /Release(?:\s+ )?:\s+(\S+)/
+          a_re = /Architecture(?:\s+ )?:\s+(\S+)/
+          name = n_re.match(rpm_data) ? Regexp.last_match(1) : nil
+          ver  = v_re.match(rpm_data) ? Regexp.last_match(1) : nil
+          rel  = r_re.match(rpm_data) ? Regexp.last_match(1) : nil
+          arch = a_re.match(rpm_data) ? Regexp.last_match(1) : nil
+          
+          fail "Unable to parse rpm data from #{pkg}\n#{rpm_data}" if
+            [name, ver, rel, arch].include?(nil)
+
+          @pkg_nm = name
+          @ver = "#{ver}-#{rel}"
+          @arch_nm = arch   
+        end
+
+        def decompose_filename
+          puts "\nCalling decompose_filename"
+          # RPM filename patterns.
+          # 1) chef-12.0.0alpha.2+20150319.git.1.b6f-1.el5.x86_64.rpm
+          @name_ver_arch_regex = /^([\w\-\+]+)-(\d+\..*)\.(\w{4,})(?:\.rpm)?$/ 
+          # 2) n9000-dk9.LIBPROCMIBREST-1.0.0-7.0.3.x86_64.rpm
+          @name_ver_arch_regex_nxos = /^(.*)-([\d\.]+-[\d\.]+)\.(\w{4,})\.rpm$/
+          # 3) b+z-ip2.x64_64
+          @name_arch_regex = /^([\w\-\+]+)\.(\w+)$/
+
+          if @new_resource.package_name =~ @name_ver_arch_regex ||
+             @new_resource.package_name =~ @name_ver_arch_regex_nxos
+            @pkg_nm = Regexp.last_match(1)
+            @ver = Regexp.last_match(2)
+            @arch_nm = Regexp.last_match(3)
+          # next, second most complex (name.arch)
+          elsif @new_resource.package_name =~ @name_arch_regex
+            @pkg_nm = Regexp.last_match(1)
+            @arch_nm = Regexp.last_match(2)
+          # otherwise must be shortname
+          else
+            @pkg_nm = @new_resource.package_name
+          end
+          # try to set version via new_resource.version if it wasn't parsed
+          @ver ||= @new_resource.version
+        end
+
         def load_current_resource
           if detect_gs
             Chef::Log.debug 'load_current_resource (GS, use nxapi yum)'
@@ -57,36 +127,14 @@ class Chef
             # 4. ios-path, e.g. bootflash:/home/bgp-dev.1.2.3.x86_64.rpm
             # 5. unix-path, e.g. /bootflash/home/bgp-dev.1.2.3.x86_64.rpm
 
-            # if it's a path, it will be in new_resource.source. convert to
-            # unix-style path and store just the package name in package_name
+            # Decompose the name, version and architecture 
             if @new_resource.source
-              @new_resource.package_name(
-                @new_resource.source.strip.tr(':', '/').split('/').last)
-            end
-
-            # check for most complex pattern first (filename)
-            # ex: chef-12.0.0alpha.2+20150319.git.1.b6f-1.el5.x86_64.rpm
-            @name_ver_arch_regex = /^([\w\-\+]+)-(\d+\..*)\.(\w{4,})(?:\.rpm)?$/
-            # ex n9000-dk9.LIBPROCMIBREST-1.0.0-7.0.3.x86_64.rpm
-            @name_ver_arch_regex_nxos = /^(.*)-([\d\.]+-[\d\.]+)\.(\w{4,})\.rpm$/
-            # ex: b+z-ip2.x64_64
-            @name_arch_regex = /^([\w\-\+]+)\.(\w+)$/
-            if @new_resource.package_name =~ @name_ver_arch_regex ||
-               @new_resource.package_name =~ @name_ver_arch_regex_nxos
-              @pkg_nm = Regexp.last_match(1)
-              @ver = Regexp.last_match(2)
-              @arch_nm = Regexp.last_match(3)
-            # next, second most complex (name.arch)
-            elsif @new_resource.package_name =~ @name_arch_regex
-              @pkg_nm = Regexp.last_match(1)
-              @arch_nm = Regexp.last_match(2)
-            # otherwise must be shortname
+              decompose_metadata(@new_resource.source)
+            elsif @new_resource.package_name[/\.rpm/]
+              decompose_metadata(@new_resource.package_name)
             else
-              @pkg_nm = @new_resource.package_name
+              decompose_filename
             end
-
-            # try to set version via new_resource.version if it wasn't parsed
-            @ver ||= @new_resource.version
 
             # replace /bootflash/path with bootflash:path
             @new_resource.source.gsub!(%r{^/([^/]+)/}, '\1:') if
