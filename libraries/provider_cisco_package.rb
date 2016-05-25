@@ -47,7 +47,6 @@ class Chef
         end
 
         def decompose_metadata(pkg)
-          puts "\nCalling decompose_metadata"
           # Sample output from 'rpm -qip' command
           #
           # Name        : nxos.sample-n9k_EOR
@@ -89,9 +88,10 @@ class Chef
           @arch_nm = arch   
         end
 
-        def decompose_filename
-          puts "\nCalling decompose_filename"
+        def decompose_package_name
           # RPM filename patterns.
+          # TBD: Pattern 1 and 2 are likely dead code but will only remove
+          #      in Cisco Chef release 1.3.0 when this fact is established.
           # 1) chef-12.0.0alpha.2+20150319.git.1.b6f-1.el5.x86_64.rpm
           @name_ver_arch_regex = /^([\w\-\+]+)-(\d+\..*)\.(\w{4,})(?:\.rpm)?$/ 
           # 2) n9000-dk9.LIBPROCMIBREST-1.0.0-7.0.3.x86_64.rpm
@@ -133,7 +133,7 @@ class Chef
             elsif @new_resource.package_name[/\.rpm/]
               decompose_metadata(@new_resource.package_name)
             else
-              decompose_filename
+              decompose_package_name
             end
 
             # replace /bootflash/path with bootflash:path
