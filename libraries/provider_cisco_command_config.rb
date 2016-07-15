@@ -91,8 +91,9 @@ class Chef
           end
         end
       rescue Cisco::CliError => e
-        Chef::Log.info "Successfully updated:\n#{e.previous.join("\n")}" \
-          unless e.previous.empty?
+        unless e.successful_input.empty?
+          Chef::Log.info "Successfully updated:\n#{e.successful_input.join("\n")}"
+        end
         raise
       end
     end
