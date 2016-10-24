@@ -25,7 +25,9 @@ cisco_command_config 'cleanup-all' do
   action :update
   command '
     no interface loopback42
+    no interface port-channel55
     no feature bgp
+    no feature bfd
     no ip route 10.42.42.42/32 Null0'
 end
 

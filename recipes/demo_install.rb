@@ -55,6 +55,29 @@ cisco_command_config 'route42' do
   command ' ip route 10.42.42.42/32 Null0 '
 end
 
+# The following tests 'no' commands that do not
+# nvgen when enabled.
+# We need to first configure the port-channel interface
+# so that it exists before applying the 'no' commands.
+
+cisco_command_config 'port-channel55-setup' do
+  action :update
+  command '
+    feature bfd
+    interface port-channel55
+  '
+end
+
+cisco_command_config 'port-channel55' do
+  action :update
+  command '
+    interface port-channel55
+      no switchport
+      no bfd echo
+      no ip redirects
+  '
+end
+
 Chef::Log.info('Demo cisco_interface provider')
 
 cisco_interface 'Ethernet1/1' do
