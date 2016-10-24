@@ -3,7 +3,7 @@ cache: bundler
 language: ruby
 bundler_args: --without kitchen_vagrant
 rvm:
-  - 2.1.2
+  - 2.2.0
 script:
   - bundle exec rubocop
   - bundle exec foodcritic --exclude spec ./
