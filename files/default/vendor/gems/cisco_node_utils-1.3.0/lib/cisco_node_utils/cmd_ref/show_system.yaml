@@ -1,9 +1,0 @@
-# show_system
----
-uptime:
-  # TODO: redundant with show_version, uptime?
-  nexus:
-    get_command: 'show system uptime'
-  ios_xr:
-    get_command: 'show version'
-  get_value: '/.*System uptime.*(?:(\d+) days, )?(?:(\d+) hours, )?(?:(\d+) minutes, )?(?:(\d+) seconds)?/'

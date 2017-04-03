@@ -1,8 +1,0 @@
-# images
----
-packages:
-  _exclude: [ios_xr]
-  multiple: true
-  get_command: 'show install patches'
-  # Package state should always be some variant of Active or Inactive
-  get_value: '/^(\S+)\s+(\S*[aA]ctive.*)\s*$/'
