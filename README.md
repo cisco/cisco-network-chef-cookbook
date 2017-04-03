@@ -98,12 +98,12 @@ A note about support for specific platform models:
   * "**N5k**" support includes N56xx models only. **_The N50xx and N55xx models are not supported at this time_.**
   * "**N6k**" support includes all N6xxx models.
   * "**N7k**" support includes all N7xxx models.
-  * "**N8k**" support includes all N8xxx models.
+  * "**N9k-F**" support includes all N95xx models.
 
 
 ✅ = Supported
 
-|   | N9k | N3k | N5k | N6k | N7k | N8k |Caveats |
+|   | N9k | N3k | N5k | N6k | N7k | N9k-F |Caveats |
 |---|:---:|:-----:|:-----:|:-----:|:---:|:---:|:-------:|
 | [cisco_command_config](#type-cisco_command_config) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | [cisco_interface](#type-cisco_interface) | ✅ | ✅ | ✅* | ✅* | ✅ | ✅ | [Caveat](#cisco_interface-caveats) |
@@ -173,7 +173,7 @@ The following resources are listed alphabetically.
 
 ### Type: cisco_command_config
 
-| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N9k-F |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
 | Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
@@ -214,7 +214,7 @@ end
 The `cisco_interface` resource is used to manage general configuration of all
 interface types, including ethernet, port-channel, loopback, and SVI (vlan).
 
-| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N9k-F |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
 | Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
@@ -323,7 +323,7 @@ The same actions apply regardless.
 
 ### Type: cisco_interface_ospf
 
-| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N9k-F |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
 | Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
@@ -398,7 +398,7 @@ end
 
 ### Type: cisco_ospf
 
-| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N9k-F |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
 | Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
@@ -429,7 +429,7 @@ end
 
 ### Type: cisco_ospf_vrf
 
-| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N9k-F |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
 | Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
@@ -511,7 +511,7 @@ end
 
 ### Type: cisco_package
 
-| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N9k-F |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
 | Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
@@ -546,7 +546,7 @@ See https://docs.chef.io/resource_package.html
 
 ### Type: cisco_snmp_community
 
-| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N9k-F |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
 | Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
@@ -581,7 +581,7 @@ end
 
 ### Type: cisco_snmp_group
 
-| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N9k-F |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
 | Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
@@ -610,7 +610,7 @@ end
 
 ### Type: cisco_snmp_server
 
-| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N9k-F |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
 | Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
@@ -659,7 +659,7 @@ end
 
 ### Type: cisco_snmp_user
 
-| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N9k-F |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
 | Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
@@ -716,7 +716,7 @@ end
 
 ### Type: cisco_tacacs_server
 
-| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N9k-F |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
 | Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
@@ -765,7 +765,7 @@ end
 
 ### Type: cisco_tacacs_server_host
 
-| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N9k-F |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
 | Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
@@ -807,7 +807,7 @@ end
 
 ### Type: cisco_vlan
 
-| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N9k-F |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
 | Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.1.0 | 1.1.0 | 1.1.0 | 1.2.0 |
@@ -845,7 +845,7 @@ end
 
 ### Type: cisco_vtp
 
-| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N8k |
+| Minimum Requirements | N9k | N3k | N5k | N6k | N7k | N9k-F |
 |----------------------|:---:|:-----:|:-----:|:-----:|:---:|:---:|
 | OS Image | 7.0(3)I2(1) | 7.0(3)I2(1) | 7.3(0)N1(1) | 7.3(0)N1(1) | 7.3(0)D1(1) | 7.0(3)F1(1) |
 | Cisco Cookbook Version | 1.0.1 | 1.0.1 | 1.2.0 | 1.2.0 | 1.1.0 | 1.2.0 |
