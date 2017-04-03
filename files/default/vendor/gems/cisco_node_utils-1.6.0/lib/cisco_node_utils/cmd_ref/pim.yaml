@@ -1,0 +1,43 @@
+# pim
+---
+_exclude: [ios_xr]
+
+_template:
+  get_command: "show run pim all"
+  get_context:
+    - '(?)/^vrf context <vrf>$/'
+  set_context:
+    - '(?)vrf context <vrf>'
+
+all_group_lists:
+  multiple:
+  get_value : '/^<afi> pim rp-address ([0-9\.]+) group-list (\S+)/'
+
+all_rp_addresses:
+  multiple:
+  get_value: '/^<afi> pim rp-address ([0-9\.]+)/'
+
+all_ssm_ranges:
+  multiple:
+  get_value : '/^<afi> pim ssm range (.*)$/'
+
+bfd:
+  kind: boolean
+  get_value: '/^<afi> pim bfd$/'
+  set_value: "<state> <afi> pim bfd"
+  default_value: false
+
+group_list:
+  default_value: ~
+  get_value: '/^<afi> pim rp-address (\S+) group-list (\S+)/'
+  set_value: "<state> <afi> pim rp-address <addr> group-list <group>"
+
+rp_address:
+  multiple:
+  get_value: '/^<afi> pim rp-address (\S+)/'
+  set_value: "<state> <afi> pim rp-address <addr>"
+  default_value: ~
+
+ssm_range:
+  get_value: '/^<afi> pim ssm range (.*)/'
+  set_value: "<state> <afi> pim ssm range <ssm_range>"
