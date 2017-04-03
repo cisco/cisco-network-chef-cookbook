@@ -46,7 +46,8 @@ cisco_command_config 'router_bgp_42' do
       address-family ipv4 unicast
         network 1.0.0.0/8
         redistribute static route-map bgp-statics
-      neighbor 10.1.1.1 remote-as 99
+      neighbor 10.1.1.1
+        remote-as 99
   '
 end
 
