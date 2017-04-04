@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 group :test do
   gem 'foodcritic'
+  gem 'buff-extension', '~> 1.0.0'
   gem 'rake', '~> 10.0'
   gem 'rspec'
   gem 'rubocop', '= 0.34'
