@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [1.2.0] - TBD 
+## [1.2.0] - 2017-04-04
 
 ### Added
 - Enabled all providers on the N9k-F platform.
