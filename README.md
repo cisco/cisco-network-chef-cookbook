@@ -93,13 +93,16 @@ See the recipes directory for example usage of cisco providers and resources.
 
 A note about support for specific platform models:
 
-  * "**N9k**" support includes all N9xxx models.
-  * "**N3k**" support includes N30xx and N31xx models only. **_The N35xx model is not supported_.**
-  * "**N5k**" support includes N56xx models only. **_The N50xx and N55xx models are not supported at this time_.**
-  * "**N6k**" support includes all N6xxx models.
-  * "**N7k**" support includes all N7xxx models.
-  * "**N9k-F**" support includes all N95xx models.
+**Platform Models**
 
+Platform | Description | Environments
+:--|:--|:--
+**N9k**   | Support includes all N9xxx models  | bash-shell, guestshell
+**N3k**   | Support includes N30xx and N31xx models only.<br>**_The N35xx model is not supported._**   | bash-shell, guestshell
+**N5k**   | Support includes N56xx models only.<br>**_The N50xx and N55xx models are not supported at this time._** | Open Agent Container (OAC)
+**N6k**   | Support includes all N6xxx models  | Open Agent Container (OAC)
+**N7k**   | Support includes all N7xxx models  | Open Agent Container (OAC)
+**N9k-F** | Support includes all N95xx models running os version 7.0(3)Fx(x) | bash-shell, guestshell
 
 ✅ = Supported
 
@@ -909,7 +912,7 @@ end
 ## License
 
 ```text
-Copyright (c) 2014-2016 Cisco and/or its affiliates.
+Copyright (c) 2014-2017 Cisco and/or its affiliates.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
