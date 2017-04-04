@@ -19,7 +19,7 @@
 # In our recipes, due to the number of different parameters, we prefer to align
 # the arguments in a single column rather than following rubocop's style.
 
-# Uncomment the following resources to run on N3k, N8k, or N9k
+# Uncomment the following resources to run on N3k, N9k-F, or N9k
 cookbook_file '/bootflash/CSCuxdublin-1.0.0-7.0.3.I3.1.lib32_n9000.rpm' do
   owner  'root'
   group  'root'

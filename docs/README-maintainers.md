@@ -47,8 +47,8 @@ When we are considering publishing a new release, all of the following steps mus
   * N5k
   * N6k
   * N7k
-  * N8k
   * N9k
+  * N9k-F
 
 3. Triage any test failures.
 
