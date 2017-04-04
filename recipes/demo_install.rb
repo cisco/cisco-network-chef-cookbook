@@ -2,7 +2,7 @@
 # Cookbook Name:: cisco-cookbook
 # Recipe:: demo_install
 #
-# Copyright (c) 2014-2016 Cisco and/or its affiliates.
+# Copyright (c) 2014-2017 Cisco and/or its affiliates.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,59 +18,6 @@
 
 # In our recipes, due to the number of different parameters, we prefer to align
 # the arguments in a single column rather than following rubocop's style.
-
-# Uncomment the following resources to run on N3k or N9k
-# Only N3k and N9k support cisco_package, file, and service
-# Chef::Log.info('Install cisco package:')
-
-# cookbook_file '/bootflash/n9000_sample-1.0.0-7.0.3.x86_64.rpm' do
-#   owner  'root'
-#   group  'root'
-#   mode   '0775'
-#   source 'rpm-store/n9000_sample-1.0.0-7.0.3.x86_64.rpm'
-# end
-
-# cisco_package 'n9000_sample' do
-#   action :install
-#   # action :remove
-#   # package_settings {'target' => 'host'}
-#   source '/bootflash/n9000_sample-1.0.0-7.0.3.x86_64.rpm'
-# end
-
-# Chef::Log.info('Install third party package:')
-
-# cookbook_file '/bootflash/demo-one-1.0-1.x86_64.rpm' do
-#   owner  'root'
-#   group  'root'
-#   mode   '0775'
-#   source 'rpm-store/demo-one-1.0-1.x86_64.rpm'
-# end
-
-# cisco_package 'demo-one' do
-#   # demo-one-1.0-1.x86_64.rpm:
-#   #  /usr/bin/demo-one            # binary
-#   #  /etc/demo-one/demo-one.conf  # configuration file
-#   #  /tmp/demo-one.log            # writes a timestamp to log
-#   action :install
-#   source '/bootflash/demo-one-1.0-1.x86_64.rpm'
-# end
-
-# Chef::Log.info('Install and start a service:')
-
-# # TODO: Add platform check to distinguish between native and guestshell
-# # cookbook_file '/usr/lib/systemd/system/demo-one.service' do
-# cookbook_file '/etc/init.d/demo-one' do
-#   owner  'root'
-#   group  'root'
-#   mode   '0775'
-#   source 'demo-one.initd'
-#   # source 'demo-one.service'
-# end
-
-# service 'demo-one' do
-#   # see above note: This is not compatible with GS
-#   action :start
-# end
 
 Chef::Log.info('Demo cisco_command_config provider')
 
@@ -99,13 +46,37 @@ cisco_command_config 'router_bgp_42' do
       address-family ipv4 unicast
         network 1.0.0.0/8
         redistribute static route-map bgp-statics
-      neighbor 10.1.1.1 remote-as 99
+      neighbor 10.1.1.1
+        remote-as 99
   '
 end
 
 cisco_command_config 'route42' do
   action :update
   command ' ip route 10.42.42.42/32 Null0 '
+end
+
+# The following tests 'no' commands that do not
+# nvgen when enabled.
+# We need to first configure the port-channel interface
+# so that it exists before applying the 'no' commands.
+
+cisco_command_config 'port-channel55-setup' do
+  action :update
+  command '
+    feature bfd
+    interface port-channel55
+  '
+end
+
+cisco_command_config 'port-channel55' do
+  action :update
+  command '
+    interface port-channel55
+      no switchport
+      no bfd echo
+      no ip redirects
+  '
 end
 
 Chef::Log.info('Demo cisco_interface provider')

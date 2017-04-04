@@ -1,0 +1,55 @@
+# dnsclient
+---
+_template:
+  get_command: "show running-config all"
+
+domain_list:
+  multiple: true
+  nexus:
+    get_value: '/^ip domain-list (\S+)$/'
+    set_value: '<state> ip domain-list <name>'
+  ios_xr:
+    get_value: '/^domain list (\S+)$/'
+    set_value: '<state> domain list <name>'
+  default_value: []
+
+domain_list_vrf:
+  multiple: true
+  nexus:
+    context: ['vrf context <vrf>']
+    get_value: '/ip domain-list (\S+)/'
+    set_value: '<state> ip domain-list <name>'
+  ios_xr:
+    get_value: '/^domain vrf <vrf> list (\S+)/'
+    set_value: '<state> domain vrf <vrf> list <name>'
+  default_value: []
+
+domain_name:
+  default_value: ''
+  nexus:
+    set_value: '<state> ip domain-name <name>'
+    get_value: '/^ip domain-name (\S+)$/'
+  ios_xr:
+    set_value: '<state> domain name <name>'
+    get_value: '/^domain name (\S+)$/'
+
+domain_name_vrf:
+  nexus:
+    context: ['vrf context <vrf>']
+    get_value: '/ip domain-name (\S+)/'
+    set_value: '<state> ip domain-name <name>'
+  ios_xr:
+    get_value: '/^domain vrf <vrf> name (\S+)$/'
+    set_value: '<state> domain vrf <vrf> name <name>'
+  default_value: ''
+
+name_server:
+  multiple: true
+  default_value: []
+  nexus:
+    get_command: "show running-config all | include 'ip name-server' | exclude 'use-vrf'"
+    get_value: '/^ip name-server ([\s\d\.:]+)$/'
+    set_value: '<state> ip name-server <ip>'
+  ios_xr:
+    get_value: '/^domain name-server (\S+)$/'
+    set_value: '<state> domain name-server <ip>'

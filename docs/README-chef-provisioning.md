@@ -32,11 +32,11 @@ Chef client software on the target agent node.
 NX-OS supports three possible environments for running third party software:
 `bash-shell`, `guestshell` and the `open agent container (OAC)`.
 
-Environment                  | Supported Platforms                      |
------------------------------|------------------------------------------|
-`bash-shell` | Cisco Nexus 30xx, 31xx, 93xx, 95xx, N9Kv |
-`guestshell` | Cisco Nexus 30xx, 31xx, 93xx, 95xx, N9Kv |
-`open agent container (OAC)` | Cisco Nexus 56xx, 60xx, 7xxx             |
+Environment                  | Supported Platforms       |
+-----------------------------|---------------------------|
+`bash-shell`                 | Cisco Nexus N3k, N9k, N9k-F |
+`guestshell`                 | Cisco Nexus N3k, N9k, N9k-F |
+`open agent container (OAC)` | Cisco Nexus N5k, N6k, N7k |
 
 You may run chef-client in any of the three supported environments but not simultaneously.
 

@@ -1,3 +1,0 @@
-# Rubocop configuration file
-
-inherit_from: .rubocop_todo.yml

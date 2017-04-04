@@ -1,0 +1,131 @@
+# Evpn Vni Unit Tests
+#
+# Andi Shen, December, 2015
+#
+# Copyright (c) 2015-2016 Cisco and/or its affiliates.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+require_relative 'ciscotest'
+require_relative '../lib/cisco_node_utils/evpn_vni'
+
+# TestEvpnVni - Minitest for EvpnVni class
+class TestEvpnVni < CiscoTestCase
+  @skip_unless_supported = 'evpn_vni'
+
+  def setup
+    # Disable feature bgp and no overlay evpn before each test to
+    # ensure we are starting with a clean slate for each test.
+    super
+    config('no feature bgp')
+
+    # Some platforms complain when nv overlay is not configured
+    config_no_warn('no nv overlay evpn')
+
+    # Some platforms remove the 'evpn' command when 'no nv overlay evpn'
+    # is processed, while others must remove it explicitly.
+    config_no_warn('no evpn')
+
+  rescue RuntimeError => e
+    hardware_supports_feature?(e.message)
+  end
+
+  def test_create_and_destroy
+    vni = EvpnVni.new(4096)
+    vni_list = EvpnVni.vnis
+    assert(vni_list.key?('4096'), 'Error: failed to create evpn vni 4096')
+
+    vni.destroy
+    vni_list = EvpnVni.vnis
+    refute(vni_list.key?('4096'), 'Error: failed to destroy evpn vni 4096')
+
+  rescue RuntimeError => e
+    hardware_supports_feature?(e.message)
+  end
+
+  def test_route_distinguisher
+    vni = EvpnVni.new(4096)
+    vni.route_distinguisher = 'auto'
+    assert_equal('auto', vni.route_distinguisher,
+                 "vni route_distinguisher should be set to 'auto'")
+    vni.route_distinguisher = '1:1'
+    assert_equal('1:1', vni.route_distinguisher,
+                 "vni route_distinguisher should be set to '1:1'")
+    vni.route_distinguisher = vni.default_route_distinguisher
+    assert_empty(vni.route_distinguisher,
+                 'vni route_distinguisher should *NOT* be configured')
+    vni.destroy
+
+  rescue RuntimeError => e
+    hardware_supports_feature?(e.message)
+  end
+
+  # test route_target
+  def test_route_target
+    vni = EvpnVni.new(4096)
+    opts = [:both, :import, :export]
+
+    # 'route_target_both' has limited support with I2.5 and later images.
+    # The Puppet README states:
+    # Caveat: The route_target_both property is discouraged due to the
+    # inconsistent behavior of the property across Nexus platforms and image
+    # versions. The 'both' keyword has a transformative behavior on some
+    # platforms/versions in which it creates two cli configurations: one for
+    # import targets, a second for export targets, while the 'both' command
+    # itself may not appear at all. When the 'both' keyword does not appear
+    # in the configuration it causes an idempotency problem for puppet. For
+    # this reason it is recommended to use explicit 'route_target_export' and
+    # 'route_target_import' properties instead of route_target_both.
+    opts.delete(:both)
+
+    # Master list of communities to test against
+    master = ['1.2.3.4:55', '2:2', '55:33', 'auto']
+
+    # Test 1: both/import/export when no commands are present. Each target
+    should = master.clone
+    route_target_tester(vni, opts, should, 'Test 1')
+
+    # Test 2: remove half of the entries
+    should = ['2:2', 'auto']
+    route_target_tester(vni, opts, should, 'Test 2')
+
+    # Test 3: restore the removed entries
+    should = master.clone
+    route_target_tester(vni, opts, should, 'Test 3')
+
+    # Test 4: 'default'
+    should = vni.default_route_target_import
+    route_target_tester(vni, opts, should, 'Test 4')
+
+    vni .destroy
+
+  rescue RuntimeError => e
+    hardware_supports_feature?(e.message)
+  end
+
+  def route_target_tester(vni, opts, should, test_id)
+    # First configure all four property types
+    opts.each do |opt|
+      # non-evpn
+      vni.send("route_target_#{opt}=", should)
+    end
+
+    # Now check the results
+    opts.each do |opt|
+      # non-evpn
+      result = vni.send("route_target_#{opt}")
+      assert_equal(should, result,
+                   "#{test_id} : route_target_#{opt}")
+    end
+  end
+end

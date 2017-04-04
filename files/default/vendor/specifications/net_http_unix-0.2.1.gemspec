@@ -1,10 +1,12 @@
 # -*- encoding: utf-8 -*-
+# stub: net_http_unix 0.2.1 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "net_http_unix"
   s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.require_paths = ["lib"]
   s.authors = ["Jeff McCune"]
   s.date = "2014-11-25"
   s.description = "Wrapper around Net::HTTP with AF_UNIX support"
@@ -13,9 +15,10 @@ Gem::Specification.new do |s|
   s.files = ["bin/net_http_unix"]
   s.homepage = "http://github.com/puppetlabs/net_http_unix"
   s.licenses = ["Apache 2.0"]
-  s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.29"
+  s.rubygems_version = "2.4.6"
   s.summary = "Wrapper around Net::HTTP with AF_UNIX support"
+
+  s.installed_by_version = "2.4.6" if s.respond_to? :installed_by_version
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
