@@ -98,7 +98,7 @@ class Chef
         set_or_return(:ipv4_address, arg, kind_of: String, callbacks: {
                         'must be a valid ipv4 address' => lambda do |addr|
                           addr == 'default' || IPAddress.valid_ipv4?(addr)
-                        end
+                        end,
                       })
       end
 
@@ -106,7 +106,7 @@ class Chef
         set_or_return(:ipv4_netmask_length, arg, kind_of: Fixnum, callbacks: {
                         'netmask length must be between 0 and 32' => lambda do |mask|
                           mask == 'default' || mask.between?(0, 32)
-                        end
+                        end,
                       })
       end
 

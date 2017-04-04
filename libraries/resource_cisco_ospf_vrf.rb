@@ -38,7 +38,7 @@ class Chef
                         "name must be of the form '<ospf name> <vrf name>'" => lambda do |name|
                           m = @@title_pattern.match(name)
                           !m.nil? && m.size == 3
-                        end
+                        end,
                       })
       end
 
@@ -60,7 +60,7 @@ class Chef
         set_or_return(:router_id, arg, kind_of: String, callbacks: {
                         'must be a valid IPv4 address' => lambda do |addr|
                           addr.empty? || IPAddress.valid_ipv4?(addr)
-                        end
+                        end,
                       })
       end
 
