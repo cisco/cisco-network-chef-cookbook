@@ -35,8 +35,7 @@ class Chef
 
       def validate_name(arg=nil)
         set_or_return(:name, arg, kind_of: String, callbacks: {
-                        "name must be of the form '<ospf name> <vrf name>'" =>
-                        lambda do |name|
+                        "name must be of the form '<ospf name> <vrf name>'" => lambda do |name|
                           m = @@title_pattern.match(name)
                           !m.nil? && m.size == 3
                         end,

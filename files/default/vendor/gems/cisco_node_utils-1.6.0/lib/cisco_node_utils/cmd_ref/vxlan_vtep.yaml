@@ -1,0 +1,76 @@
+# vxlan_vtep
+---
+_exclude: [N3k, ios_xr]
+
+_template:
+  get_command: "show running-config interface all | section 'interface nve'"
+  context:
+    - 'interface <name>'
+
+all_interfaces:
+  multiple:
+  get_context: ~
+  get_value: '/^interface (.*)$/'
+
+host_reachability:
+  get_value: '/^host-reachability protocol (\S+)/'
+  set_value: '<state> host-reachability protocol <proto>'
+  default_value: 'flood'
+
+mt_full_support:
+  # This is only used for determining support for Multi-Tenancy Full
+  kind: boolean
+  N7k:
+    default_only: true
+  else:
+    # this feature is always off on these platforms and cannot be changed
+    default_only: false
+
+mt_lite_support:
+  # This is only used for determining support for Multi-Tenancy Lite
+  kind: boolean
+  N9k: &mt_lite_default
+    default_only: true
+  N9k-F: *mt_lite_default
+  N6k: *mt_lite_default
+  N5k: *mt_lite_default
+  else:
+    # this feature is always off on these platforms and cannot be changed
+    default_only: false
+
+shutdown:
+  kind: boolean
+  get_value: '/^no shutdown$/'
+  set_value: '<state> shutdown'
+  default_value: true
+
+source_intf:
+  get_value: '/^source\-interface (\S+)$/'
+  set_value: '<state> source-interface <lpbk_intf>'
+  default_value: ''
+
+source_intf_hold_down_time:
+  _exclude: [N5k, N6k, N7k]
+  kind: int
+  get_value: '/^source-interface hold-down-time (\d+)$/'
+  set_value: '<state> source-interface hold-down-time <time>'
+  # This property is dependent on 'source-intf' and will not nvgen unless that
+  # command is also present. In I4 and older images the default_value was ''
+  # because the command did not nvgen with 'sh run int nve1 all'; in I4+ images
+  # this was changed and now the command appears (with 'show run all') with
+  # a value of 180. This is the correct behavior but it means that I4 and older
+  # images may experience an idempotence problem.
+  default_value: 180
+
+vni:
+  set_value: '<state> member vni <vni> <assoc_vrf>'
+
+vni_with_vrf:
+  kind: boolean
+  get_value: '/^member vni <vni> associate-vrf$/'
+  default_value: false
+
+vni_without_vrf:
+  kind: boolean
+  get_value: '/^member vni <vni>$/'
+  default_value: false

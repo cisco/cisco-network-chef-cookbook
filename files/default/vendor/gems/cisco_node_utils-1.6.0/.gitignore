@@ -1,0 +1,10 @@
+.bundle/*
+pkg/*
+vendor/*
+coverage
+ext/Rakefile
+tests/tacacs_server.yaml
+Gemfile.lock
+*.gem
+*.swp
+TAGS

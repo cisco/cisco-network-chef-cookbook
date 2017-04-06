@@ -1,0 +1,23 @@
+# snmpnotification
+---
+_template:
+  nexus:
+    get_command: "sh run snmp all | include 'snmp-server enable traps'"
+  ios_xr:
+    get_command: "show running-config snmp"
+
+enable:
+  nexus:
+    get_value: '/^snmp-server enable traps <trap_name> ?$/'
+    set_value: "<state> snmp-server enable traps <trap_name>"
+  ios_xr:
+    get_value: '/^snmp-server traps <trap_name> ?$/'
+    set_value: "<state> snmp-server traps <trap_name>"
+
+notifications:
+  nexus:
+    get_value: '/.*snmp-server enable traps (.*)?$/'
+    multiple:
+  ios_xr:
+    get_value: '/.*snmp-server traps (.*)?$/'
+    multiple:
