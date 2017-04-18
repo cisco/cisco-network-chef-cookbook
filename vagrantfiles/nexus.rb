@@ -1,6 +1,6 @@
 Vagrant.configure(2) do |config|
   config.ssh.insert_key = false
-  config.vm.boot_timeout = 420
+  config.vm.boot_timeout = 600
   config.vm.synced_folder '.', '/vagrant', disabled: true
   config.vm.network 'private_network', ip: '192.168.1.2', auto_config: false, virtualbox__intnet: 'nxosv_network1'
   config.vm.network 'private_network', auto_config: false, virtualbox__intnet: 'nxosv_network2'

@@ -1,18 +1,10 @@
 #
 # Cookbook Name:: cisco-test
-# Recipe:: default
+# Recipe:: full
 #
-# Copyright (c) 2015 The Authors, All Rights Reserved.
+# Copyright (c) 2015-2016, Cisco, Apache 2.0
 
-file '/tmp/file_resource.txt' do
-  content 'this is a file resource'
-  action :create
-end
-
-template '/tmp/template_resource.txt' do
-  source 'template_resource.erb'
-  action :create
-end
+include_recipe 'cisco-test::basic'
 
 cookbook_file '/bootflash/demo-one-1.0-1.x86_64.rpm' do
   source 'rpm-store/demo-one-1.0-1.x86_64.rpm'
