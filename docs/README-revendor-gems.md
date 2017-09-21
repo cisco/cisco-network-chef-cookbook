@@ -31,3 +31,11 @@ Guidelines for the maintainers of the cisco-network-chef-cookbook project to rev
     ```
     
 5. Repeat step 2 and 3 to remove `grpc` and `google-protobuf` if they were installed.
+
+6. Add an entry to CHANGELOG.md to highlight the update to the vendored gem.
+    ```
+    ## [1.2.1] - 2017-09-21
+
+    ### Added
+    - Update the cisco_node_utils vendored gem to version [1.7.0](https://github.com/cisco/cisco-network-node-utils/blob/develop/CHANGELOG.md#v170).
+    ```
