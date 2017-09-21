@@ -7,8 +7,6 @@ group :test do
   gem 'rubocop', '= 0.34'
 end
 
-gem 'test-kitchen', git: 'https://github.com/test-kitchen/test-kitchen', branch: 'v1.16.0'
-gem 'kitchen-vagrant'
 gem 'buff-extensions', '~> 1.0.0'
 gem 'nio4r', '~> 1.2.1'
 gem 'berkshelf'
