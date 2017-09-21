@@ -1,7 +1,7 @@
 sudo: false
 cache: bundler
 language: ruby
-bundler_args: --without kitchen_vagrant --verbose
+bundler_args: --without kitchen_vagrant test_kitchen
 rvm:
   - 2.1.2
 matrix:
