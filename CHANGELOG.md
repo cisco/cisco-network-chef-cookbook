@@ -80,6 +80,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Initial release of cisco-cookbook for chef, supporting Cisco NX-OS software release 7.0(3)I2(1) on Cisco Nexus switch platforms: N95xx, N93xx, N30xx and N31xx.
 - Please note: 0.9.0 is an EFT pre-release for a limited audience with access to NX-OS 7.0(3)I2(1). Additional code changes may occur in 0.9.x prior to the final 1.0.0 release.
 
+[1.2.1]: https://github.com/cisco/cisco-network-chef-cookbook/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/cisco/cisco-network-chef-cookbook/compare/v1.1.2...v1.2.0
 [1.1.2]: https://github.com/cisco/cisco-network-chef-cookbook/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/cisco/cisco-network-chef-cookbook/compare/v1.1.0...v1.1.1
