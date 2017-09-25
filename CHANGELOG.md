@@ -2,6 +2,25 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### New feature support
+*
+
+### Added
+*
+
+### Removed
+*
+
+## [1.2.1] - 2017-09-21
+
+### Added
+- Update the cisco_node_utils vendored gem to version [1.7.0](https://github.com/cisco/cisco-network-node-utils/blob/develop/CHANGELOG.md#v170).
+
+### Removed
+- `grpc` and `google_protobuf` vendored gems.
+
 ## [1.2.0] - 2017-04-04
 
 ### Added

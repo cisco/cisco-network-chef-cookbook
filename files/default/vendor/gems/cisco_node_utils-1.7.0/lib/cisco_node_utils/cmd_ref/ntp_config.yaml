@@ -1,0 +1,27 @@
+# ntp_config
+---
+_template:
+  get_command: "show running-config ntp"
+
+authenticate:
+  kind: boolean
+  default_value: false
+  nexus:
+    get_value: '/^ntp authenticate$/'
+    set_value: "<state> ntp authenticate"
+
+source_interface:
+  default_value: ~
+  nexus:
+    get_value: '/^ntp source-interface\s+(.*)$/'
+    set_value: '<state> ntp source-interface <source_interface>'
+  ios_xr:
+    context: ["ntp"]
+    get_value: '/source\s+(.*)$/'
+    set_value: '<state> source <source_interface>'
+
+trusted_key:
+  multiple:
+  nexus:
+    get_value: '/^ntp trusted-key\s+(\d+)$/'
+    set_value: "<state> ntp trusted-key <key>"
