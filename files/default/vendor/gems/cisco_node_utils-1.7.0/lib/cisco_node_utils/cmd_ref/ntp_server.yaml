@@ -1,0 +1,34 @@
+# ntp_server
+---
+_template:
+  ios_xr:
+    context: ["ntp"]
+    get_command: "show running-config ntp"
+
+key:
+  multiple: true
+  default_value: []
+  nexus:
+    get_command: "show running-config all | include 'ntp server(.*)(key)'"
+    get_value: '/ntp server (\S+)/'
+
+prefer:
+  multiple: true
+  default_value: []
+  nexus:
+    get_command: "show running-config all | include 'ntp server(.*)(prefer)'"
+    get_value: '/ntp server (\S+)/'
+  ios_xr:
+    get_value: '/server (?:ipv6 )?(\S+) prefer/'
+
+server:
+  multiple: true
+  default_value: []
+  nexus:
+    get_command: "show running-config all | include 'ntp server'"
+    # Returns <ip>, <prefer>, <vrf>, <key>, <minpoll>, <maxpoll>
+    get_value: '/^(?:ntp server )([^\s]+) (prefer )?(?:(?:use-vrf )([^\s]+))?(?:(?: key )(\d+))?(?:(?: minpoll )(\d+))?(?:(?: maxpoll )(\d+))?/'
+    set_value: '<state> ntp server <ip> <prefer> <vrf> <key> <minpoll> <maxpoll>'
+  ios_xr:
+    get_value: '/server (?:ipv6 )?(\S+)/'
+    set_value: '<state> server <ip> <prefer>'
