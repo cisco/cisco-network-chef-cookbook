@@ -2,17 +2,6 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
-
-### New feature support
-*
-
-### Added
-*
-
-### Removed
-*
-
 ## [1.2.1] - 2017-09-26
 
 ### Added
