@@ -35,12 +35,7 @@ Most of these are default for git-flow except for the `versiontag` setting.
 
 When we are considering publishing a new release, all of the following steps must be carried out (using the latest code base in `develop`):
 
-1. Ensure that [vendor gems](https://sethvargo.com/using-gems-with-chef/) included in the cookbook are up-to-date and reflect an official release version (development code in `develop` is OK, development code in a release candidate is not!). Do a new gem release first if needed!
-
-    ```
-    gem uninstall --install-dir files/default/vendor cisco_node_utils cisco_nxapi
-    gem install --install-dir files/default/vendor --no-document cisco_nxapi cisco_node_utils
-    ```
+1. Ensure that [vendor gems](https://sethvargo.com/using-gems-with-chef/) included in the cookbook are up-to-date and reflect an official release version (development code in `develop` is OK, development code in a release candidate is not!). Do a new gem release first if needed! Instructions for the revendoring process can be found [here](./README-revendor-gems.md).
 
 2. <a name="test-platforms">Run all tests (demo recipes, serverspec, kitchen, etc.) against the latest software release or release candidate for each supported platform:</a>
   * N3k

@@ -13,6 +13,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 *
 
+## [1.2.1] - 2017-09-26
+
+### Added
+- Update the cisco_node_utils vendored gem to version [1.7.0](https://github.com/cisco/cisco-network-node-utils/blob/develop/CHANGELOG.md#v170).
+
+### Removed
+- `grpc` and `google_protobuf` vendored gems.
+
 ## [1.2.0] - 2017-04-04
 
 ### Added
@@ -72,6 +80,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Initial release of cisco-cookbook for chef, supporting Cisco NX-OS software release 7.0(3)I2(1) on Cisco Nexus switch platforms: N95xx, N93xx, N30xx and N31xx.
 - Please note: 0.9.0 is an EFT pre-release for a limited audience with access to NX-OS 7.0(3)I2(1). Additional code changes may occur in 0.9.x prior to the final 1.0.0 release.
 
+[1.2.1]: https://github.com/cisco/cisco-network-chef-cookbook/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/cisco/cisco-network-chef-cookbook/compare/v1.1.2...v1.2.0
 [1.1.2]: https://github.com/cisco/cisco-network-chef-cookbook/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/cisco/cisco-network-chef-cookbook/compare/v1.1.0...v1.1.1
