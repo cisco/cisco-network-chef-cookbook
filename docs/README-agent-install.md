@@ -35,6 +35,9 @@ chef-client software.
 NX-OS supports three possible environments for running third party software:
 `bash-shell`, `guestshell` and the `open agent container (OAC)`.
 
+**NOTE:** Starting in release `9.2(1)` and later, installing the chef-client into the `bash-shell` hosting environment is no longer supported.  Instead the chef-client software should be installed into the [`guestshell` hosting environment](#env-gs).
+
+
 |Environment                  | Supported Platforms       |
 |-----------------------------|---------------------------|
 |`bash-shell` or `guestshell` | Cisco Nexus N3k, N9k, N9k-F |
@@ -73,6 +76,9 @@ end
 ```
 
 ## <a name="env-bs">chef-client Environment: bash-shell</a>
+
+**NOTE:** Starting in release `9.2(1)` and later, installing the chef-client into the `bash-shell` hosting environment is no longer supported.  Instead the chef-client software should be installed into the [`guestshell` hosting environment](#env-gs).
+
 
 This section is only necessary if chef-client will run from the `bash-shell`.
 
