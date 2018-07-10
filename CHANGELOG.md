@@ -4,9 +4,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-**NOTE:** Starting in release `9.2(1)` and later, installing the Chef Client into the `bash-shell` hosting environment is no longer supported.
+**NOTE:** Starting in release `9.2(1)` and onward, installing the chef-client into the `bash-shell` hosting environment is no longer supported.
 
-The Chef Client software must be installed on a Cisco Nexus platform in the `Guestshell` (the Linux container environment running CentOS). This provides a secure, open execution environment that is decoupled from the host.
+The chef-client software must be installed on a Cisco Nexus platform in the `Guestshell` (the Linux container environment running CentOS). This provides a secure, open execution environment that is decoupled from the host.
 
 
 ### New feature support
@@ -16,7 +16,7 @@ The Chef Client software must be installed on a Cisco Nexus platform in the `Gue
 *
 
 ### Removed
-* Support for Chef Client install into the `bash-shell` hosting environment. This is the native WRL Linux environment underlying NX-OS.
+* Support for chef-client install into the `bash-shell` hosting environment. This is the native WRL Linux environment underlying NX-OS.
 
 ## [1.2.1] - 2017-09-26
 
