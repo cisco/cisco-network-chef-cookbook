@@ -35,7 +35,7 @@ chef-client software.
 NX-OS supports three possible environments for running third party software:
 `bash-shell`, `guestshell` and the `open agent container (OAC)`.
 
-**NOTE:** Starting in release `9.2(1)` and later, installing the chef-client into the `bash-shell` hosting environment is no longer supported.  Instead the chef-client software should be installed into the [`guestshell` hosting environment](#env-gs).
+**NOTE:** Starting in release `9.2(1)` and onward, installing the chef-client into the `bash-shell` hosting environment is no longer supported.  Instead the chef-client software should be installed into the [`guestshell` hosting environment](#env-gs).
 
 
 |Environment                  | Supported Platforms       |
@@ -77,7 +77,7 @@ end
 
 ## <a name="env-bs">chef-client Environment: bash-shell</a>
 
-**NOTE:** Starting in release `9.2(1)` and later, installing the chef-client into the `bash-shell` hosting environment is no longer supported.  Instead the chef-client software should be installed into the [`guestshell` hosting environment](#env-gs).
+**NOTE:** Starting in release `9.2(1)` and onward, installing the chef-client into the `bash-shell` hosting environment is no longer supported.  Instead the chef-client software should be installed into the [`guestshell` hosting environment](#env-gs).
 
 
 This section is only necessary if chef-client will run from the `bash-shell`.
@@ -134,7 +134,7 @@ The `guestshell` container environment is enabled by default on most platforms; 
 ##### Special notes about low footprint N3k switches:
   * Nexus 3xxx switches with 4 GB RAM and 1.6 GB bootflash are advised to use compacted images to reduce the storage resources consumed by the image. As part of the compaction process, the `guestshell.ova` is removed from the system image.  To make use of the guestshell on these systems, the guestshell.ova may be downloaded and used to install the guestshell.
 
-  * Starting in release `9.2(1)` and later, the .ova file can be copied to the `volatile:` directory which frees up more space on `bootflash:`.
+  * Starting in release `9.2(1)` and onward, the .ova file can be copied to the `volatile:` directory which frees up more space on `bootflash:`.
 
 Copy the `guestshell.ova` file to `volatile:` if supported, otherwise copy it to `bootflash:`
 
