@@ -108,7 +108,7 @@ with_chef_server 'https://chefserver.example.com/organizations/chef',
   :signing_key_filename => '/etc/chef/chefuser.pem'
 
 with_machine_options :transport_options => {
-  :ip_address => '10.100.100.1',
+  :ip_address => '192.168.55.1',
   :username => 'devops',
   :options => {
     # BASH-SHELL options - uncomment if installing to bash-shell
@@ -159,7 +159,7 @@ If you get an error like the following:
 ```
 RuntimeError
 ------------
-UNABLE to Connect to 10.100.100.1 using devops and {:user=>"devops", :password=>"devopspassword", :timeout=>30, :keys=>[]}
+UNABLE to Connect to 192.168.55.1 using devops and {:user=>"devops", :password=>"devopspassword", :timeout=>30, :keys=>[]}
 ```
 
 then you may have a stale SSH key in your `~/.ssh/known_hosts` - remove it and rerun.
